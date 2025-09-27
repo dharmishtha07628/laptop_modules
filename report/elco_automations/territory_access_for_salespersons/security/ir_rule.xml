@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="group_restrict_territory" model="res.groups">
+        <field name="name">Restrict Territory</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="salesperson_territory_rule" model="ir.rule">
+        <field name="name">Salesperson: Only access customers from allowed states</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="domain_force">
+            ['|',
+                '&amp;',
+                    ('state_id', '!=', False),
+                    ('state_id', 'in', user.x_allowed_state_ids.ids),
+                '|',
+                    ('state_id', '=', False),
+                    ('id', '=', user.partner_id.id)
+            ]
+        </field>
+        <field name="groups" eval="[(4, ref('territory_access_for_salespersons.group_restrict_territory'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+</odoo>
