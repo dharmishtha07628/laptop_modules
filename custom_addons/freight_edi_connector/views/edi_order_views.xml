@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_edi_order_tree" model="ir.ui.view">
+        <field name="name">edi.order.tree</field>
+        <field name="model">edi.order</field>
+        <field name="arch" type="xml">
+            <tree string="EDI Orders">
+                <field name="transaction_set_identifier_code"/>
+                <field name="transaction_set_control_number"/>
+                <field name="standard_carrier_alpha_code"/>
+                <field name="shipment_identification_number"/>
+                <field name="shipment_method_of_payment"/>
+                <field name="transaction_set_purpose_code"/>
+                <field name="date"/>
+                <field name="time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_edi_order_form" model="ir.ui.view">
+        <field name="name">edi.order.form</field>
+        <field name="model">edi.order</field>
+        <field name="arch" type="xml">
+            <form string="EDI Order">
+                <sheet>
+                    <group>
+                        <group name="ST" string="ST">
+                            <field name="transaction_set_identifier_code"/>
+                            <field name="transaction_set_control_number"/>
+                        </group>
+                        <group string="B2">
+                            <field name="standard_carrier_alpha_code"/>
+                            <field name="shipment_identification_number"/>
+                            <field name="shipment_method_of_payment"/>
+                        </group>
+
+                        <group string="B2A">
+                            <field name="transaction_set_purpose_code"/>
+                            <field name="application_type"/>
+                        </group>
+                        <group string="G62H">
+                            <field name="date_time_qualifier"/>
+                            <field name="date"/>
+                            <field name="time_qualifier"/>
+                            <field name="time"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Stops Tab -->
+                        <page string="Order Stops">
+                            <field name="edi_order_stop_ids">
+                                <tree string="Order Stops">
+                                    <field name="stop_sequence_number"/>
+                                    <field name="stop_reason_code"/>
+                                    <field name="weight"/>
+                                    <field name="weight_unit_code"/>
+                                    <field name="number_of_units_shipped"/>
+                                    <field name="volume"/>
+                                    <field name="volume_unit_qualifier"/>
+                                    <field name="reference_identification"/>
+                                    <field name="quantity_of_pallet_ship"/>
+                                    <field name="earliest_date"/>
+                                    <field name="earliest_time"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- References Tab -->
+                        <page string="Order References">
+                            <field name="edi_order_reference_ids">
+                                <tree string="Order References">
+                                    <field name="reference_identification"/>
+                                    <field name="reference_ident_qualifier"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <!-- Notes Tab -->
+                        <page string="Order Notes">
+                            <field name="edi_order_note_ids">
+                                <tree string="Order Notes">
+                                    <field name="entity_identifier_code"/>
+                                    <field name="name"/>
+                                    <field name="identification_code"/>
+                                    <field name="city_name"/>
+                                    <field name="state_province_code"/>
+                                    <field name="postal_code"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_edi_order" model="ir.actions.act_window">
+        <field name="name">EDI Orders</field>
+        <field name="res_model">edi.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_edi_order_tree"/>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_edi_root" name="EDI" parent="freight_brokerage.brokerage_menu_main" sequence="10" />
+    <menuitem id="menu_edi_load_tender" name="Load Tender" parent="menu_edi_root" sequence="10" />
+    <menuitem id="menu_edi_order" name="EDI Orders" parent="menu_edi_load_tender" action="action_edi_order" sequence="10" />
+
+</odoo>

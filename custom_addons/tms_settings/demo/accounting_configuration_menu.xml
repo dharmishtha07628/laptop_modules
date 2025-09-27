@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- tag for filter data based on action context -->
+    <record id="tms_tag_accounting_configuration" model="tms.setting.tag">
+        <field name="name">Accounting Configuration</field>
+        <field name="tag_value">accounting_configuration</field>
+    </record>
+
+    <!-- =======================================================================================  -->
+
+    <!-- Section : Accounting -->
+    <record id="tms_setting_accounting" model="tms.setting">
+        <field name="name">Accounting</field>
+        <field name="tag_id" ref="tms_tag_accounting_configuration"/>
+    </record>
+
+    <record id="tms_setting_menu_account_tags" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_accounting"/>
+    </record>
+
+    <!-- <record id="tms_setting_menu_chart_of_accounts" model="tms.setting.menu">
+        <field name="action_id" ref="account.action_account_form"/>
+        <field name="tms_setting_id" ref="tms_setting_accounting"/>
+    </record> -->
+
+    <record id="tms_setting_menu_custom_fascal_year" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_accounting"/>
+    </record>
+
+    <record id="tms_setting_menu_taxes" model="tms.setting.menu">
+        <field name="action_id" ref="account.action_tax_form"/>
+        <field name="tms_setting_id" ref="tms_setting_accounting"/>
+    </record>
+
+    <record id="tms_setting_menu_journals" model="tms.setting.menu">
+        <field name="action_id" ref="account.action_account_journal_form"/>
+        <field name="tms_setting_id" ref="tms_setting_accounting"/>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Archive Invoicing / Configuration menu -->
+    <record id="account.menu_finance_configuration" model="ir.ui.menu">
+        <field name="active">False</field>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Section : Analytic Accounting -->
+    <record id="tms_setting_analytic_accounting" model="tms.setting">
+        <field name="name">Analytic Accounting</field>
+        <field name="tag_id" ref="tms_tag_accounting_configuration"/>
+    </record>
+
+    <record id="tms_setting_menu_default_class_rules" model="tms.setting.menu">
+        <field name="action_id" ref="analytic.action_analytic_distribution_model"/>
+        <field name="tms_setting_id" ref="tms_setting_analytic_accounting"/>
+    </record>
+
+    <record id="tms_setting_menu_reporting_class" model="tms.setting.menu">
+        <field name="action_id" ref="analytic.action_account_analytic_account_form"/>
+        <field name="tms_setting_id" ref="tms_setting_analytic_accounting"/>
+    </record>
+
+    <record id="tms_setting_menu_reporting_class_group" model="tms.setting.menu">
+        <field name="action_id" ref="analytic.account_analytic_plan_action"/>
+        <field name="tms_setting_id" ref="tms_setting_analytic_accounting"/>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Section : Banking -->
+    <record id="tms_setting_banking" model="tms.setting">
+        <field name="name">Banking</field>
+        <field name="tag_id" ref="tms_tag_accounting_configuration"/>
+    </record>
+
+    <record id="tms_setting_menu_bank_accounts" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_banking"/>
+    </record>
+
+    <record id="tms_setting_menu_cash" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_banking"/>
+    </record>
+
+    <record id="tms_setting_menu_credit_card" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_banking"/>
+    </record>
+
+    <record id="tms_setting_menu_account_reconcile_model" model="tms.setting.menu">
+        <field name="action_id" ref="account.action_account_reconcile_model"/>
+        <field name="tms_setting_id" ref="tms_setting_banking"/>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Section : Check -->
+    <record id="tms_setting_check" model="tms.setting">
+        <field name="name">Check Setup</field>
+        <field name="tag_id" ref="tms_tag_accounting_configuration"/>
+    </record>
+
+    <record id="tms_setting_menu_check_attributes" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_check"/>
+    </record>
+
+    <record id="tms_setting_menu_banks" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_check"/>
+    </record>
+
+    <record id="tms_setting_menu_check_register" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_check"/>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Section : Invoicing -->
+    <record id="tms_setting_invoicing" model="tms.setting">
+        <field name="name">Customer Invoicing</field>
+        <field name="tag_id" ref="tms_tag_accounting_configuration"/>
+    </record>
+
+    <record id="tms_setting_menu_invoicing_payment_term" model="tms.setting.menu">
+        <field name="action_id" ref="account.action_payment_term_form"/>
+        <field name="tms_setting_id" ref="tms_setting_invoicing"/>
+    </record>
+
+    <record id="tms_setting_menu_follow_up_levels" model="tms.setting.menu">
+        <field name="tms_setting_id" ref="tms_setting_invoicing"/>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!--    &lt;!&ndash; Section : Management &ndash;&gt;-->
+<!--    <record id="tms_setting_management" model="tms.setting">-->
+<!--        <field name="name">Management</field>-->
+<!--        <field name="tag_id" ref="tms_tag_accounting_configuration"/>-->
+<!--    </record>-->
+
+    <record id="tms_setting_menu_product_categories" model="tms.setting.menu">
+        <field name="action_id" ref="product.product_category_action_form"/>
+        <field name="tms_setting_id" ref="tms_setting_accounting"/>
+    </record>
+
+    <record id="product.product_category_action_form" model="ir.actions.act_window">
+        <field name="name">Reporting Categories</field>
+    </record>
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!--    &lt;!&ndash; Section : Follow-Up &ndash;&gt;-->
+    <!--    <record id="tms_setting_follow_up" model="tms.setting">-->
+    <!--        <field name="name">Follow Up</field>-->
+    <!--        <field name="tag_id" ref="tms_tag_accounting_configuration"/>-->
+    <!--    </record>-->
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Section : Recurring payment -->
+    <!--    <record id="tms_setting_recurring_payment" model="tms.setting">-->
+    <!--        <field name="name">Recurring payment</field>-->
+    <!--        <field name="tag_id" ref="tms_tag_accounting_configuration"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_setting_menu_reciving_recurring_payment" model="tms.setting.menu">-->
+    <!--        <field name="tms_setting_id" ref="tms_setting_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_setting_menu_send_recurring_payment" model="tms.setting.menu">-->
+    <!--        <field name="tms_setting_id" ref="tms_setting_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_setting_menu_recurring_payment" model="tms.setting.menu">-->
+    <!--        <field name="tms_setting_id" ref="tms_setting_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_setting_menu_recurring_template" model="tms.setting.menu">-->
+    <!--        <field name="tms_setting_id" ref="tms_setting_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Section : Settings -->
+    <record id="tms_setting_setting" model="tms.setting">
+        <field name="name">Settings</field>
+        <field name="tag_id" ref="tms_tag_accounting_configuration"/>
+    </record>
+
+    <record id="tms_setting_menu_settings" model="tms.setting.menu">
+        <field name="action_id" ref="account.action_account_config"/>
+        <field name="tms_setting_id" ref="tms_setting_setting"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <t t-name="module.stock.ListView.Buttons" t-inherit="web.ListRenderer" t-inherit-mode="primary">
+        <xpath expr="//div[contains(@class, 'o_list_renderer')]" position="before">
+                    <div class="container-fluid filterbutton py-2 border-bottom bg-view">
+                        <div class="row justify-content-between gap-3 gap-lg-0">
+                            <div class="col-12">
+                              <button type="button" class="btn btn-primary" style="margin-right: 20px;"
+                                      t-on-click="OnClickJournalEntry">
+                          Create
+                            </button>
+                            </div>
+                </div>
+            </div>
+      </xpath>
+  </t>
+</templates>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="sh_web_extended.ChatterTemplate">
+        <t t-if="sh_has_chatter">
+            <a t-attf-class="btn btn-secondary" data-hotkey="shift+m" t-on-click="onClickChatter" role="button" title="Audit Log" href="#">
+                <i class="fw-light fa fa-comments"/>
+            </a>
+        </t>
+    </t>
+
+    <!-- <t t-name="sh_web_extended.ControlPanel.chatter" t-inherit="web.ControlPanel" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='pagerProps and pagerProps.total > 0']" position="after">
+            <ChatterControlPanel />
+        </xpath>
+    </t> -->
+
+</templates>

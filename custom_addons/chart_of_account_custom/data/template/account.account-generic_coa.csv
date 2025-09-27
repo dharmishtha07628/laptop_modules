@@ -1,0 +1,10 @@
+id,name,code,account_type,tag_ids,reconcile
+chart_of_account_custom.receivable,Account Receivable,121000,asset_receivable,,True
+chart_of_account_custom.payable,Account Payable,211000,liability_payable,,True
+chart_of_account_custom.income,Income,400000,income,,False
+chart_of_account_custom.expense,Expenses,600000,expense,,False
+chart_of_account_custom.bank_account,Bank Account,101001,asset_cash,,False
+chart_of_account_custom.bank_suspense_account,Bank Suspense Account,131100,asset_current,,False
+chart_of_account_custom.cash,Cash,102000,asset_cash,,False
+"chart_of_account_custom.tax_paid","Tax Paid","131000","liability_current","","False"
+"chart_of_account_custom.tax_receivable","Tax Received","221000","asset_current","","True"

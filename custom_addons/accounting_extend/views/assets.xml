@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<data>
+
+        <record id="view_account_asset_asset_form_inherit" model="ir.ui.view">
+            <field name="name">account.asset.asset.select.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="om_account_asset.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="replace"/>
+<!--                <xpath expr="//sheet/group" position="inside">-->
+<!--                    <group>-->
+<!--                        <field name="method" widget="radio" invisible="type == 'sale'" readonly="state != 'draft'"/>-->
+<!--                        <field name="method_progress_factor" readonly="state != 'draft'" invisible="method == 'linear'" required="method == 'degressive'"/>-->
+<!--                        <field name="method_time" string="Time Method Based On" widget="radio" readonly="state != 'draft'" invisible="type != 'purchase'"/>-->
+<!--                        <field name="prorata" invisible="method_time == 'end'" readonly="state != 'draft'"/>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <field name="method_number" readonly="state != 'draft'" invisible="method_time == 'end'" required="method_time == 'number'"/>-->
+<!--                        <field name="method_period" readonly="state != 'draft'"/>-->
+<!--                        <field name="method_end" readonly="state != 'draft'" invisible="method_time == 'end'" required="method_time == 'number'"/>-->
+<!--                    </group>-->
+<!--                </xpath>-->
+<!--                -->
+<!--                <xpath expr="//notebook/page[2]" position="replace"/>-->
+<!--                -->
+            </field>
+        </record>
+
+	</data>
+</odoo>

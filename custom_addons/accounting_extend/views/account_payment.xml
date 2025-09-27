@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_account_internal_payment_tree" model="ir.ui.view">
+            <field name="name">account.internal.payment.tree</field>
+            <field name="model">account.payment</field>
+            <field name="arch" type="xml">
+                <tree edit="false" sample="1" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+<!--                    <header>-->
+<!--                        <button name="action_post" type="object" string="Confirm"/>-->
+<!--                    </header>-->
+                    <field name="company_currency_id" column_invisible="True"/>
+                    <field name="suitable_journal_ids" column_invisible="True"/>
+                    <field name="available_payment_method_line_ids" column_invisible="True"/>
+                    <field name="date" readonly="state in ['cancel', 'posted']"/>
+                    <field name="name" string="Journal No."/>
+                    <field name="journal_id" string="Account In"/>
+                    <field name="destination_journal_id" string="Account Out"/>
+                    <field name="amount_signed" string="Amount"/>
+                    <field name="company_id" optional="hide" groups="base.group_multi_company"/>
+                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'posted'"/>
+                </tree>
+            </field>
+        </record>
+    
+    	<record id="view_account_payment_form_inherit" model="ir.ui.view">
+    		<field name="name">account.payment.form.inherit</field>
+    		<field name="model">account.payment</field>
+    		<field name="inherit_id" ref="account.view_account_payment_form" />
+    		<field name="arch" type="xml">
+    		    <field name="journal_id" position="attributes">
+    		        <attribute name="invisible">is_internal_transfer == True</attribute>
+    		    </field>
+    		    <field name="destination_journal_id" position="attributes">
+    		        <attribute name="string">Account Out</attribute>
+    		    </field>
+    		    <field name="journal_id" position="after">
+    		        <field name="journal_id" domain="[('id', 'in', available_journal_ids)]" readonly="state != 'draft'" invisible="is_internal_transfer == False" string="Account In"/>
+    		    </field>
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='partner_bank_id'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+    			<xpath expr="//label[@for='is_internal_transfer']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='group1']/div[1]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+    			<xpath expr="//field[@name='payment_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id'][1]" position="attributes">
+                    <attribute name="domain">[('is_customer','=',True)]</attribute>
+                </xpath><xpath expr="//field[@name='partner_id'][2]" position="attributes">
+                    <attribute name="domain">[('is_supplier','=',True)]</attribute>
+                </xpath>
+<!--                <xpath expr="//notebook" position="atttributes">-->
+<!--                    <attribute name="invisible">is_internal_transfer</attribute>-->
+<!--                </xpath>-->
+                
+    		</field>
+		</record>
+		<record id="view_account_payment_tree_inherit" model="ir.ui.view">
+			<field name="name">account.payment.tree.inherit</field>
+			<field name="model">account.payment</field>
+			<field name="inherit_id" ref="account.view_account_payment_tree"/>
+			<field name="arch" type="xml">
+				<!-- Rename the journal_id field to Payment Method -->
+				<field name="journal_id" position="attributes">
+					<attribute name="string">Payment Account</attribute>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

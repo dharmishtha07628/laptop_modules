@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="sh_list_view_advance_search">
+        <t t-if="props.sh_field_type == 'date' || props.sh_field_type == 'datetime'">
+                
+            <!-- <div t-att-id="'reportrange_' + props.sh_field_id" class="custom-control-searchbar-advance o_input text-dark bg-light cursor-pointer" style="margin-bottom: 2px;">
+                <i class="fa fa-calendar me-2 ms-2"/>
+                <span> </span> <i class="fa fa-caret-down"></i>
+                <i class="o_facet_remove sh_remove_popup oi oi-close btn btn-link py-0 px-1 text-danger" t-on-click.stop.prevent="props.sh_remove_search"></i>
+            </div> -->
+
+            <div class="sh_search sh_input_search_list" id="start_date">
+                <t t-foreach="Object.keys(props.sh_field_search_info)" t-as="field" t-key="field_index">
+                    <t t-if="field === props.sh_field_id">
+                        <t t-foreach="props.sh_field_search_info[field]" t-as="search_field"
+                           t-key="search_field_index">
+                            <div t-if="search_field_index === 0" class="o_facet_values sh_inner_search position-relative d-flex  align-items-center rounded-2 text-wrap"
+                                 t-att-id="props.sh_field_id+ '_value' + search_field_index">
+                                <small class="sh_advance_chip sh_advance_chip_ellipsis"
+                                      t-att-id="props.sh_field_id+ '_sh_span' + search_field_index">
+                                    <t t-esc="search_field"/>
+                                </small>
+                                <i class="o_facet_remove  sh_remove_popup oi oi-close btn btn-link py-0 px-1 text-danger" t-on-click="props.sh_remove_search"></i>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+
+                <div t-att-id="'reportrange_' + props.sh_field_id" class="custom-control-searchbar-advance o_input text-dark bg-light cursor-pointer w-100" style="margin-bottom: 2px;">
+                    <i class="fa fa-calendar"/>
+                    <span> </span> <i class="fa fa-caret-down"></i>
+                </div>
+
+                <!-- <t t-if="props.sh_field_type == 'date'">
+                    <DateTimeInput
+                            value="state.startdate"
+                            type="'date'"
+                            id="'input_start_val'"
+                            placeholder="'Start date...'"
+                            onApply="(date)=>this.sh_on_start_date_filter_change(date,1)"/>
+                </t>
+                <t t-else="">
+                    <DateTimeInput
+                            value="state.startdate"
+                            type="'datetime'"
+                            id="'input_start_val'"
+                            placeholder="'Start date...'"
+                            onApply="(date)=>this.sh_on_start_date_filter_change(date,1)"/>
+                </t> -->
+            </div>
+            <th class="sh_advance_search_row sh_fix_width sh_date_inner d-none">
+                <div class="sh_search sh_input_search_list d-none" id="end_date">
+                    <t t-foreach="Object.keys(props.sh_field_search_info)" t-as="field" t-key="field_index">
+                        <t t-if="field === props.sh_field_id">
+                            <t t-foreach="props.sh_field_search_info[field]" t-as="search_field"
+                               t-key="search_field_index">
+                                <div t-if="search_field_index === 1" class="o_facet_values sh_inner_search position-relative d-flex  align-items-center rounded-2 text-wrap"
+                                     t-att-id="props.sh_field_id+ '_value' + search_field_index">
+                                    <small class="sh_advance_chip sh_advance_chip_ellipsis"
+                                          t-att-id="props.sh_field_id+ '_sh_span' + search_field_index">
+                                        <t t-esc="search_field"/>
+                                    </small>
+                                    <i class="o_facet_remove sh_remove_popup oi oi-close btn btn-link py-0 px-1 text-danger" t-on-click="props.sh_remove_search"></i>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+                    <t t-if="props.sh_field_type == 'date'">
+                        <DateTimeInput
+                                value="state.enddate"
+                                type="'date'"
+                                id="'input_end_val'"
+                                placeholder="'End date'"
+                                onApply="(date)=>this.sh_on_start_date_filter_change(date,2)"/>
+                    </t>
+                    <t t-else="">
+                        <DateTimeInput
+                                value="state.enddate"
+                                type="'datetime'"
+                                id="'input_end_val'"
+                                placeholder="'End date...'"
+                                onApply="(date)=>this.sh_on_start_date_filter_change(date,2)"/>
+                    </t>
+                </div>
+            </th>
+
+        </t>
+
+        <t t-elif="props.sh_field_type == 'selection'">
+            <div class="sh_search_1 sh_input_search_list_1">
+                <t t-foreach="Object.keys(props.sh_field_search_info)" class="o_input" t-as="field" t-key="field_index">
+                    <t t-if="field === props.sh_field_id">
+                        <t t-foreach="props.sh_field_search_info[field]" t-as="search_field" t-key="search_field_index">
+                            <div class="o_facet_values sh_inner_search position-relative d-flex  align-items-center rounded-2 text-wrap" t-att-id="props.sh_field_id+ '_value' + search_field_index">
+                                <small class="sh_advance_chip sh_advance_chip_ellipsis"
+                                      t-att-id="props.sh_field_id+ '_sh_span' + search_field_index">
+                                    <t t-foreach="props.sh_selection_values" t-as="selection" t-key="selection_index">
+                                        <t t-if="selection[0] == search_field">
+                                            <t t-esc="selection[1]"/>
+                                        </t>
+                                    </t>
+
+                                </small>
+                                <i class="o_facet_remove sh_remove_popup oi oi-close btn btn-link py-0 px-1 text-danger" t-on-click="props.sh_remove_search"></i>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+                <select class="custom-control-searchbar-change o_input mb-0" t-att-data-field-type="props.sh_type"
+                        t-att-data-name="props.sh_field_id"
+                        t-att-data-sh-field="props.sh_description" t-on-change="sh_change_event" t-att-value="value">
+                    <option></option>
+                    <t t-foreach="props.sh_selection_values" t-as="selection" t-key="selection_index">
+                        <option>
+                            <t t-esc="selection[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+        </t>
+
+        <t t-elif="props.sh_field_type == 'boolean'">
+            <div class="sh_search_1 sh_input_search_list_1">
+                <t t-foreach="Object.keys(props.sh_field_search_info)" class="o_input" t-as="field" t-key="field_index">
+                    <t t-if="field === props.sh_field_id">
+                        <t t-foreach="props.sh_field_search_info[field]" t-as="search_field" t-key="search_field_index">
+                            <div class="o_facet_values sh_inner_search position-relative d-flex  align-items-center rounded-2 text-wrap" t-att-id="props.sh_field_id+ '_value' + search_field_index">
+                                <small class="sh_advance_chip sh_advance_chip_ellipsis"
+                                    t-att-id="props.sh_field_id+ '_sh_span' + search_field_index">
+                                    <span class="text-capitalize" t-esc="search_field"/>
+                                </small>
+                                <i class="o_facet_remove sh_remove_popup oi oi-close btn btn-link py-0 px-1 text-danger" t-on-click="props.sh_remove_search"></i>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+                <select class="custom-control-searchbar-change o_input mb-0" t-att-data-field-type="props.sh_type"
+                        t-att-data-name="props.sh_field_id"
+                        t-att-data-sh-field="props.sh_description" t-on-change="sh_change_event" t-att-value="value">
+                    <option></option>
+                    <t t-foreach="props.sh_selection_values" t-as="selection" t-key="selection_index">
+                        <option>
+                            <t t-esc="selection[1]"/>
+                        </option>
+                    </t>
+                </select>
+            </div>
+        </t>
+
+        <t t-else="">
+            <t t-if="props.sh_field_id !== 'color'">
+                <div class="sh_search sh_input_search_list" t-ref="root">
+                    <t t-foreach="Object.keys(props.sh_field_search_info)" t-as="field" t-key="field_index">
+                        <t t-if="field === props.sh_field_id">
+                            <t t-foreach="props.sh_field_search_info[field]" t-as="search_field"
+                               t-key="search_field_index">
+                                <div class="o_facet_values sh_inner_search position-relative d-flex  align-items-center rounded-2 text-wrap"
+                                     t-att-id="props.sh_field_id+ '_value' + search_field_index">
+                                    <small class="sh_advance_chip sh_advance_chip_ellipsis"
+                                          t-att-id="props.sh_field_id+ '_sh_span' + search_field_index">
+                                        <t t-if="props.sh_field_type == 'monetary' || props.sh_field_type == 'integer' || props.sh_field_type == 'float'">
+                                            <t t-set="number_value" t-value="format_text(search_field)"/>
+                                            <t t-esc="number_value"/>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="search_field"/>
+                                        </t>
+                                    </small>
+                                    <i class="o_facet_remove sh_remove_popup oi oi-close btn btn-link py-0 px-1 text-danger" t-on-click="props.sh_remove_search"></i>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+                    <input type="text" class="custom-control-searchbar-advance o_input"
+                           t-att-data-field-type="props.sh_field_type"
+                           t-att-data-field-identity="props.sh_field_identifier"
+                           t-att-data-name="props.sh_field_id" t-att-data-sh-field="props.sh_description"
+                           t-att-placeholder="placeholder" t-att-value="value" t-on-keyup="sh_advance_searchbar">
+                    </input>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</templates>
+

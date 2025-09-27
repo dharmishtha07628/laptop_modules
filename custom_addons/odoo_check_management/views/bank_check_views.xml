@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : https://store.webkul.com/license.html/ -->
+<odoo>
+    <data>
+        <!-- views and menus -->
+        <record id="bank_check_view_form" model="ir.ui.view">
+            <field name="name">bank.check.form.view</field>
+            <field name="model">res.bank</field>
+            <field name="inherit_id" ref="base.view_res_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[2]" position="after">
+                    <group>
+                        <group name="bank_check" string="Bank Check">
+                            <field name="check_measure_unit"/>
+                            <field name="check_height"/>
+                            <field name="check_width"/>
+                            <field name="max_char_in_line1"/>
+                        </group>
+                        <group name="check_image">
+                            <div class="">
+                                <div class="">
+                                    <label for="check_image" style="font-weight: bold;"/>
+                                </div>
+                                <field name="check_image" widget='image' class="" nolabel="1"/>
+                            </div>
+                        </group>
+                        <label for="check_attribute_line_ids" style="font-weight: bold;"/>
+                        <button name="redirect_to_bank_check_page" type="object" string="Configure Attributes"
+                                style="float:right" icon="fa-cog fa-spin" class="oe_highlight"/>
+                        <br/>
+                    </group>
+                    <field name="check_attribute_line_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="font_size"/>
+                            <field name="letter_spacing"/>
+                            <field name="top_displacement"/>
+                            <field name="left_displacement"/>
+                            <field name="height"/>
+                            <field name="width"/>
+                            <button name="reset_values" string="Reset" class="fa fa-undo" type="object"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group col="4" string="CSS Attributes">
+                                <field name="font_size"/>
+                                <field name="letter_spacing"/>
+                                <field name="top_displacement"/>
+                                <field name="left_displacement"/>
+                                <field name="bottom_displacement"/>
+                                <field name="right_displacement"/>
+                                <field name="height"/>
+                                <field name="width"/>
+                            </group>
+                            <button name="reset_values" string="Reset" icon="fa-undo" class="oe_highlight" type="object"
+                                    title="Reset Values"/>
+                        </form>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="bank_check_attribute_view_form" model="ir.ui.view">
+            <field name="name">bank.check.attribute.form.view</field>
+            <field name="model">bank.check.attribute</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="attribute"/>
+                                <field name="date_format" invisible="attribute != 'check_date'"
+                                       required="attribute == 'check_date'"/>
+                            </group>
+                            <group>
+                                <field name="demo_data" invisible="attribute == 'check_date'"/>
+                                <field name="demo_data_date" invisible="attribute == 'check_date'"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bank_check_template_view_form" model="ir.ui.view">
+            <field name="name">bank.check.book.form.view</field>
+            <field name="model">bank.check.book</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="bank_check_id"/>
+                                <field name="account_number"/>
+                                <!-- <field name="currency_id"/> -->
+                            </group>
+                            <!-- <group>
+                                <field name="check_book_leaves" readonly="issued_check_history_ids"/>
+                                <label for="initial_check_number" string="Check Numbers"/>
+                                <div>
+                                    <b>From: </b>
+                                    <field name="initial_check_number" class="oe_inline" readonly="issued_check_history_ids"/>
+                                    <br/>
+                                    <b>To: </b>
+                                    <field name="last_check_number" readonly="issued_check_history_ids" class="oe_inline"/>
+                                    <button name="btn_create_check_leaves" type="object" string="Create check Leaves" class="btn-xs btn-primary" invisible="not id or issued_check_history_ids != []" />
+                                </div>
+                            </group> -->
+                        </group>
+                        <label for="issued_check_history_ids"/>
+                        <field name="issued_check_history_ids">
+                            <tree editable="bottom" decoration-danger="state == 'cancelled'" create="0" delete="0">
+                                <field name="id" invisible="1"/>
+                                <!-- <field name="name" readonly="1"/> -->
+                                <field name="bank_check_book_id" invisible="1"/>
+                                <field name="state" readonly="1" invisible="0"/>
+                                <field name="check_number" readonly="issued" required="1"/>
+                                <field name="paid_to" readonly="issued" required="1"/>
+                                <field name="issue_date" readonly="issued" required="1"/>
+                                <field name="amount" widget="monetary" readonly="issued" required="1"/>
+                                <field name="currency_id" invisible="1" readonly="issued"/>
+                                <field name="issued" readonly="1" invisible="1"/>
+
+                                <button name="print_check" string="Print Check" icon="fa-print" type="object"
+                                        invisible="state in ['cancelled', 'printed']"/>
+                                <!-- <button name="re_print_check" string="Re-Print Check" icon="fa-print" type="object"  invisible="state in ['cancelled']"/> -->
+                                <button name="do_cancel_check" string="Cancel now" icon="fa-times" type="object"
+                                        invisible="state == 'cancelled'"/>
+                            </tree>
+                            <form>
+                                <field name="id" invisible="1"/>
+                                <header>
+                                    <field name="state" widget="statusbar"/>
+                                </header>
+                                <group>
+                                    <group>
+                                        <field name="bank_check_book_id" invisible="1"/>
+                                        <field name="check_number" readonly="issued"/>
+                                        <field name="paid_to" readonly="issued"/>
+                                        <field name="customer_id" readonly="issued"/>
+                                    </group>
+                                    <group>
+                                        <field name="issue_date" readonly="issued"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="issued" readonly="1"/>
+                                    </group>
+                                </group>
+                                <button name="print_check" string=" Print Check" icon="fa-print" type="object"
+                                        title="Print Check"/>
+                                <button name="do_cancel_check" string=" Cancel Now" icon="fa fa-times" type="object"
+                                        invisible="state == 'cancelled'" class="btn-danger"/>
+                            </form>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bank_check_attribute_view_tree" model="ir.ui.view">
+            <field name="name">bank.check.attribute.view.tree</field>
+            <field name="model">bank.check.attribute</field>
+            <field name="arch" type="xml">
+                <tree string="Bank Check Attributes">
+                    <field name="name"/>
+                    <field name="attribute"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bank_check_template_view_tree" model="ir.ui.view">
+            <field name="name">bank.check.book.view.tree</field>
+            <field name="model">bank.check.book</field>
+            <field name="arch" type="xml">
+                <tree string="Bank Check Template">
+                    <field name="name"/>
+                    <field name="bank_check_id"/>
+                    <field name="check_book_leaves"/>
+                    <field name="initial_check_number"/>
+                    <field name="last_check_number"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bank_check_attribute_action" model="ir.actions.act_window">
+            <field name="name">Check Attributes</field>
+            <field name="res_model">bank.check.attribute</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- actions -->
+        <record id="bank_check_action" model="ir.actions.act_window">
+            <field name="name">Check Setup</field>
+            <field name="res_model">res.bank</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="bank_check_book_action" model="ir.actions.act_window">
+            <field name="name">Check Register</field>
+            <field name="res_model">bank.check.book</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="wk_bank_check_management_menu" name="Bank Check" parent="account.menu_finance_configuration"
+                  sequence="4" groups="account.group_account_manager"/>
+
+        <menuitem id="bank_check_template_menu" name="Check Books" parent="wk_bank_check_management_menu"
+                  action="bank_check_book_action" sequence="1"/>
+
+        <menuitem id="bank_check_menu" name="Banks" parent="wk_bank_check_management_menu" action="bank_check_action"
+                  sequence="2"/>
+        <menuitem id="bank_check_attribute_menu" name="Check Attributes" parent="wk_bank_check_management_menu"
+                  action="bank_check_attribute_action" sequence="3"/>
+    </data>
+
+</odoo>

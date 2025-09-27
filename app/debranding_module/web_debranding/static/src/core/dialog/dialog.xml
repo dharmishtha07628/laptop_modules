@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+	<t
+		t-name="rel_debranding.Dialog.header"
+		t-inherit="web.Dialog.header"
+		t-inherit-mode="extension"
+	>
+	    <xpath expr="//h4[hasclass('modal-title')]" position="replace">
+            <h4 class="modal-title text-break" t-att-class="{ 'me-auto': fullscreen }">
+<!--            <t t-esc="props.title"/>-->
+                Werafood
+        </h4>
+	    </xpath>
+
+	</t>
+
+</templates>

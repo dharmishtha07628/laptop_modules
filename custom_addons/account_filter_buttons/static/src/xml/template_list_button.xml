@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+
+    <t t-name="account_filter_buttons.filterbutton">
+        <div class="container-fluid filterbutton py-2 border-bottom bg-view">
+            <div class="row justify-content-between gap-3 gap-lg-0">
+                <div class="col-12">
+                    <button type="button" class="btn btn-secondary me-2" t-on-click="setSearchContext" title="Draft" filter_name="draft">
+                        Draft
+                    </button>
+                    <button type="button" class="btn btn-secondary me-2" t-on-click="setSearchContext" t-att-title="'Open ' + label" filter_name="open_invoice">
+                        Open <t t-esc="label"/>
+                    </button>
+                    <button type="button" class="btn btn-secondary" t-on-click="setSearchContext" t-att-title="'Closed ' + label" filter_name="closed_invoice">
+                        Closed <t t-esc="label"/>
+                    </button>
+                    <button type="button" class="btn btn-secondary me-2" style="margin-left: 8px;" t-on-click="setSearchContext" t-att-title="'Closed ' + label" filter_name="recurring_invoice">
+                        Recurring <t t-esc="label"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="account_filter_buttons.ListView.filterbutton" t-inherit="account.ListRenderer" t-inherit-mode="extension">
+        <xpath expr="//AccountDropZone" position="before">
+            <ApplyFilterController/>
+        </xpath>
+        <!-- TODO/MUB: ne need this for now -->
+        <!-- <xpath expr="//i[@t-att-class='getSortableIconClass(column)']" position="after">
+            <i class="fa fa-lg fa-search opacity-0 opacity-75-hover ms-2" t-on-click="() => this.onClickSearchColumn(column)"/>
+        </xpath> -->
+    </t>
+
+</templates>

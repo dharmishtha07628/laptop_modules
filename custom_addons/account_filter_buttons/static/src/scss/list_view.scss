@@ -1,0 +1,27 @@
+// With backmate theme (do not remove this may be useful later)
+// .o_account_tree_view {
+//     .o_content {
+//         overflow: hidden !important;
+//         .o_list_renderer {
+//             overflow: auto;
+//         }
+
+//         .o_list_footer {
+//             height: 100px !important;
+//         }
+
+//     }
+// }
+
+// without theme
+.o_account_tree_view {
+    .o_content {
+        scrollbar-width: none;
+        overflow: hidden !important;
+
+        .filterbutton {
+            scrollbar-width: none;
+            overflow: hidden;
+        }
+    }
+}

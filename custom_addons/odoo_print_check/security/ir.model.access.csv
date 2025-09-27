@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_check_format_user,access.check.format.user,model_check_format,base.group_user,1,1,1,1
+access_check_types_user,access.check_types_user,model_check_types,base.group_user,1,1,1,1

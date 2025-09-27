@@ -1,0 +1,30 @@
+<!-- views/closing_entry_menu.xml -->
+<odoo>
+    <record id="view_closing_entry_tree" model="ir.ui.view">
+        <field name="name">account.move.closing.tree</field>
+        <field name="model">account.move</field>
+        <field name="arch" type="xml">
+            <tree string="Closing Entries" create="false" js_class="button_in_list">
+                <!-- Tree fields -->
+                <field name="date"/>
+                <field name="ref"/>
+                <field name="journal_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_closing_entries" model="ir.actions.act_window">
+        <field name="name">Closing Entries</field>
+        <field name="res_model">account.move</field>
+         <field name="view_id" ref="auto_retained_earnings_closing.view_closing_entry_tree"/>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('journal_id.is_closing_journal','=',True)]</field>
+    </record>
+    <menuitem
+        id="menu_closing_entry"
+        name="Closing Entry"
+        parent="account.menu_finance_entries_management"
+        action="action_closing_entries"
+        sequence="56"
+    />
+</odoo>

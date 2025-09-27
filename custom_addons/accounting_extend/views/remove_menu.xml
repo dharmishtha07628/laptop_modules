@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--    <menuitem name="Reporting"-->
+    <!--              id="account.menu_finance_reports"-->
+    <!--              groups="base.group_no_one"-->
+    <!--    />-->
+    <!--    <record model="ir.ui.menu" id="l10n_fr.account_reports_fr_statements_menu">-->
+    <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    <!--    </record>-->
+
+    <!--    <record model="ir.ui.menu" id="l10n_ar.account_reports_ar_statements_menu">-->
+    <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    <!--    </record>-->
+
+    <record model="ir.ui.menu" id="accounting_pdf_reports.menu_finance_legal_statement">
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+        <field name="active" eval="False"/>
+    </record>
+
+    <record model="ir.ui.menu" id="accounting_pdf_reports.menu_account_report_bs">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="accounting_pdf_reports.menu_finance_partner_reports">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <!--    <record model="ir.ui.menu" id="l10n_hu_edi.menu_finance_reports_hu">-->
+    <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    <!--    </record>-->
+
+    <record model="ir.ui.menu" id="account.account_reports_management_menu">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_finance_reports">
+        <field name="active" eval="True"/>
+    </record>
+
+    <record model="ir.ui.menu" id="accounting_pdf_reports.menu_finance_reports_settings">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_currency_form">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_account_fiscal_position_form">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_account_journal_group_list">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_tax_group">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="om_account_accountant.menu_account_group">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_incoterm_open">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_action_account_bank_journal_form">
+        <field name="active" eval="False"/>
+        <!--        <field name="groups_id" eval="[(6,0,[ref('accounting_extend.make_invisible_menuitem')])]"/>-->
+    </record>
+
+    <record model="ir.ui.menu" id="account.account_banks_menu">
+        <field name="name">Banking</field>
+    </record>
+
+    <record id="accounting_extend_inherited_view_account_journal_tree_credit_card" model="ir.ui.view">
+        <field name="name">Journal</field>
+        <field name="model">account.journal</field>
+        <field name="arch" type="xml">
+            <tree string="Account Journal">
+                <field name="sequence" widget="handle"/>
+                <field name="name" string="Credit Card Name"/>
+<!--                <field name="type"/>-->
+                <!--                <field name="journal_group_ids" widget="many2many_tags" readonly="1" optional="show"/>-->
+                <field name="currency_id" groups="base.group_multi_currency" optional="hide"/>
+                <field name="code" optional="show"/>
+                <field name="default_account_id" optional="show"/>
+                <field name="active" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="company_id" groups="!base.group_multi_company" column_invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="accounting_extend_inherited_view_account_journal_tree_bank" model="ir.ui.view">
+        <field name="name">Journal</field>
+        <field name="model">account.journal</field>
+        <field name="arch" type="xml">
+            <tree string="Account Journal">
+                <field name="sequence" widget="handle"/>
+                <field name="name" string="Bank Account Name"/>
+                <field name="type"/>
+                <!--                <field name="journal_group_ids" widget="many2many_tags" readonly="1" optional="show"/>-->
+                <field name="currency_id" groups="base.group_multi_currency" optional="hide"/>
+                <field name="code" optional="show"/>
+                <field name="default_account_id" optional="show"/>
+                <field name="active" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="company_id" groups="!base.group_multi_company" column_invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="accounting_extend_inherited_view_account_journal_tree_cash" model="ir.ui.view">
+        <field name="name">Journal</field>
+        <field name="model">account.journal</field>
+        <field name="arch" type="xml">
+            <tree string="Account Journal">
+                <field name="sequence" widget="handle"/>
+                <field name="name" string="Cash"/>
+                <field name="type"/>
+                <!--                <field name="journal_group_ids" widget="many2many_tags" readonly="1" optional="show"/>-->
+                <field name="currency_id" groups="base.group_multi_currency" optional="hide"/>
+                <field name="code" optional="show"/>
+                <field name="default_account_id" optional="show"/>
+                <field name="active" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="company_id" groups="!base.group_multi_company" column_invisible="True"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_account_journal_form_credit_card" model="ir.actions.act_window">
+        <field name="name">Credit Cards</field>
+        <field name="res_model">account.journal</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="domain">[('is_credit_card', '=', True)]</field>
+        <field name="view_id"
+               ref="accounting_extend.accounting_extend_inherited_view_account_journal_tree_credit_card"/>
+        <field name="context">{
+            'default_is_credit_card': 1,
+            'search_default_is_credit_card': 1,
+            }
+        </field>
+    </record>
+
+    <menuitem id="menu_credit_cards" parent="account.account_banks_menu"
+              name="Credit Cards"
+              sequence="3"
+              groups="base.group_system"
+              action="action_account_journal_form_credit_card"/>
+
+    <record id="action_account_journal_form_bank_accounts" model="ir.actions.act_window">
+        <field name="name">Bank Accounts</field>
+        <field name="res_model">account.journal</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="accounting_extend.accounting_extend_inherited_view_account_journal_tree_bank"/>
+        <field name="domain">[('is_credit_card', '=', False),'|', ('type','=','bank'), ('type','=',False)]</field>
+        <field name="context">{
+            'default_type':'bank',
+            'search_default_type': 'bank',
+            }
+        </field>
+    </record>
+
+    <menuitem id="menu_bank_accounts" parent="account.account_banks_menu"
+              name="Bank Accounts"
+              sequence="4"
+              groups="base.group_system"
+              action="action_account_journal_form_bank_accounts"/>
+
+    <record id="action_account_journal_form_cash" model="ir.actions.act_window">
+        <field name="name">Cash</field>
+        <field name="res_model">account.journal</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="accounting_extend.accounting_extend_inherited_view_account_journal_tree_cash"/>
+        <field name="domain">['|', ('type','=','cash'), ('type','=',False)]</field>
+        <field name="context">{
+            'default_type':'cash',
+            'search_default_type': 'cash',
+            }
+        </field>
+    </record>
+
+    <menuitem id="menu_cash_accounts" parent="account.account_banks_menu"
+              name="Cash"
+              sequence="5"
+              groups="base.group_system"
+              action="action_account_journal_form_cash"/>
+
+    <record id="accounting_extend_inherited_account_tag_view_tree" model="ir.ui.view">
+        <field name="name">Tags</field>
+        <field name="model">account.account.tag</field>
+        <field name="inherit_id" ref="account.account_tag_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="replace"/>
+        </field>
+    </record>
+
+    <record id="accounting_extend_inherited_account_tag_view_form" model="ir.ui.view">
+        <field name="name">Tags</field>
+        <field name="model">account.account.tag</field>
+        <field name="inherit_id" ref="account.account_tag_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="analytic.action_analytic_distribution_model" model="ir.actions.act_window">
+        <field name="name">Default Class Rules</field>
+    </record>
+
+    <record model="ir.ui.menu" id="account.menu_analytic__distribution_model">
+        <field name="name">Default Class Rules</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="analytic.action_account_analytic_account_form" model="ir.actions.act_window">
+        <field name="name">Reporting Classes</field>
+    </record>
+
+    <record model="ir.ui.menu" id="account.account_analytic_def_account">
+        <field name="name">Reporting Classes</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="analytic.account_analytic_plan_action" model="ir.actions.act_window">
+        <field name="name">Reporting Class groups</field>
+    </record>
+
+    <record model="ir.ui.menu" id="account.account_analytic_plan_menu">
+        <field name="name">Reporting Class groups</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="account.action_account_reconcile_model" model="ir.actions.act_window">
+        <field name="name">Reconciliation Rules</field>
+    </record>
+
+    <record model="ir.ui.menu" id="account.action_account_reconcile_model_menu">
+        <field name="name">Reconciliation Rules</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_plaid_sync_form" model="ir.ui.view">
+        <field name="name">Plaid Bank Details</field>
+        <field name="model">plaid.bank</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field widget="statusbar" name="status" readonly="1"/>
+                    <div id="link-button" onclick="getLinktoken()" class="btn btn-primary o_form_button_edit"  invisible="status == 'connected'">Connect to Plaid</div>
+                    <button type="object" name="disconnect_accounts" string="Disconnect accounts" invisible="status == 'not_connected'"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <span class="o_form_label">
+                            <label for="name">Name</label>
+                        </span>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                
+                    <group>
+                        <field name="account_ids" readonly="1">
+                            <tree>
+                                <field name="name" />
+                                <field name="account_type" />
+                                <field name="account_subtype" />
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_plaid_sync_tree" model="ir.ui.view">
+        <field name="name">Plaid Banks</field>
+        <field name="model">plaid.bank</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

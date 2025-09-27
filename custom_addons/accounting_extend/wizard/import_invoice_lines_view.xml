@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="view_import_invoice_lines_form" model="ir.ui.view">
+            <field name="name">Import Invoice Lines</field>
+            <field name="model">import.invoice.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="file_to_import" filename="file_name" widget="binary"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Import" name="process_import_inv_line" class="oe_highlight" type="object"/>
+                        or
+                        <button name="cancel" string="Cancel" class="oe_link" special="cancel"/>
+                        <div style="margin-left: auto;margin-right: 0;"
+                             invisible="context.get('default_move_type') == 'out_invoice'">
+                            <strong>Download Sample:</strong>
+
+                            <a role="button"
+                               href="/accounting_extend/static/imports_functionality/Vendor_Bill_LineDetailsOnly.xlsx"
+                               class="btn-primary"
+                               style="font-size: 12px; line-height: 1.5; border-radius: 3px; padding: 8px 10px; color: #ffffff;">
+                                <i class="fa fa-download"/>
+                                Excel file
+                            </a>
+
+                        </div>
+
+                        <div style="margin-left: auto;margin-right: 0;"
+                             invisible="context.get('default_move_type') == 'in_invoice'">
+                            <strong>Download Sample:</strong>
+
+                            <a invisible="context.get('default_move_type') == 'in_invoice'" role="button"
+                               href="/accounting_extend/static/imports_functionality/Customer_Invoice_LineDetailsOnly.xlsx"
+                               class="btn-primary"
+                               style="font-size: 12px; line-height: 1.5; border-radius: 3px; padding: 8px 10px; color: #ffffff;">
+                                <i class="fa fa-download"/>
+                                Excel file
+                            </a>
+                        </div>
+
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

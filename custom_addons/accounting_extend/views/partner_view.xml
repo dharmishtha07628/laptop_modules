@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <delete id="portal.partner_wizard_action_create_and_open" model="ir.actions.server"/>
+    </data>
+    <data>
+        <record id="view_partner_form_inherit_customer_code" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//span[@name='address_name']/b" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//span[@name='address_name']/field[@name='type']" position="after">
+                    <p invisible="not is_company">Address</p>
+                </xpath>
+                <xpath expr="//button[@name='action_view_partner_invoices']" position="attributes">
+                    <attribute name="invisible">not is_customer</attribute>
+                </xpath>
+                <div name="button_box" position="inside">
+                    <button type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                            name="action_view_vendor_bills"
+                            groups="account.group_account_invoice,account.group_account_readonly"
+                            context="{'default_partner_id': id}" invisible='not is_supplier'>
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="currency_id" invisible="1"/>
+                                <field name="total_bill" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </span>
+                            <span class="o_stat_text">Bills</span>
+                        </div>
+                    </button>
+                </div>
+                <xpath expr="//div[@name='warning_tax']" position="before">
+                    <div class="alert alert-warning oe_edit_only" role="alert" name="warning_legal_name"
+                         invisible="not same_name_partner_id">
+                        A Customer / Vendor with the same
+                        <span>
+                            <span class="o_vat_label">name</span>
+                        </span>
+                        already exists (<field name="same_name_partner_id"
+                                               context="{'show_address': 0, 'show_vat': False}" readonly="1"/>), are
+                        you sure to create a new one?
+                    </div>
+                </xpath>
+                <xpath expr="//span[@name='address_name']" position="before">
+                    <field id="company" options="{'line_breaks': False}" widget="text" class="text-break" name="name"
+                           default_focus="1" placeholder="Legal Name - e.g. Lumber Inc" invisible="not is_company"
+                           required="type == 'contact'" string="Legal Name"/>
+                    <field id="individual" options="{'line_breaks': False}" widget="text" class="text-break" name="name"
+                           default_focus="1" placeholder="Legal Name - e.g. Brandom Freeman" invisible="is_company"
+                           required="type == 'contact'" string="Legal Name"/>
+                    <field name="doing_business" placeholder="Doing Business as"/>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_title')]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="name" position="attributes">
+                    <attribute name="placeholder">Legal Name - e.g. Lumber Inc</attribute>
+                </field>
+                <xpath expr="//field[@name='bank_ids']/tree/field[@name='allow_out_payment']" position='after'>
+                    <field name="routing_number"/>
+                    <field name="void_check_att_ids" widget="many2many_binary"/>
+                </xpath>
+                <!--			    <field name="street" position="attributes">-->
+                <!--			        <attribute name="widget">at_address_auto_complete</attribute>-->
+                <!--			    </field>-->
+                <xpath expr="//div[hasclass('o_row')]" position="inside">
+                    <field name="same_name_partner_id" invisible="1"/>
+                    <field name="doing_business" placeholder="Doing Business as"/>
+                </xpath>
+                <field name="vat" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <page name="sales_purchases" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </page>
+                <group name="credit_limits" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </group>
+                <page name="sales_purchases" position="after">
+                    <page name="sale_purchase_management" string="Sales &amp; Purchase">
+                        <group name="container_row_2">
+                            <group>
+                                <field name="is_customer"/>
+                                <!--                                <field name="revenue_code_id" invisible="not is_customer"/>-->
+                            </group>
+                            <group>
+                                <field name="is_supplier"/>
+                                <!--                                <field name="expense_code_id" invisible="not is_supplier"/>-->
+                            </group>
+                            <group string="Sales" name="sale" priority="1" invisible="not is_customer">
+                                <field name="user_id" widget="many2one_avatar_user" domain="[('share', '=', False)]"
+                                       invisible="not is_customer"/>
+                                <field string="Payment Terms" name="property_payment_term_id"
+                                       options="{'no_open': True, 'no_create': True}"
+                                       groups="account.group_account_invoice,account.group_account_readonly"
+                                       invisible="not is_customer"/>
+<!--                                <field name="property_sale_payment_method_id"/>-->
+                                <field name="credit"/>
+                                <field name="days_sales_outstanding"/>
+                                <label for="use_partner_credit_limit" string="Credit Limit"/>
+                                <div class="o_row">
+                                    <field name="use_partner_credit_limit"
+                                           groups="!accounting_extend.group_manage_credit_limit" readonly="1"/>
+                                    <field name="credit_limit" class="oe_inline"
+                                           invisible="not use_partner_credit_limit"
+                                           groups="!accounting_extend.group_manage_credit_limit" readonly="1"/>
+                                    <field name="use_partner_credit_limit"
+                                           groups="accounting_extend.group_manage_credit_limit" readonly="0"/>
+                                    <field name="credit_limit" class="oe_inline"
+                                           invisible="not use_partner_credit_limit"
+                                           groups="accounting_extend.group_manage_credit_limit" readonly="0"/>
+                                </div>
+                                <!--	                            <field name="po_ref" required="is_customer"></field>-->
+                                <field name="is_po_ref_req"/>
+                            </group>
+                            <group string="Purchase" name="purchase" priority="2" invisible="not is_supplier">
+                                <field name="vendor_acc"
+                                       help="Enter your Account Number or Reference number to print on Remittance Statements"/>
+                                <field string="Payment Terms" name="property_supplier_payment_term_id"
+                                       options="{'no_open': True, 'no_create': True}"
+                                       groups="account.group_account_invoice,account.group_account_readonly"
+                                       invisible="not is_supplier"/>
+                                <!--                                <field name="property_payment_method_id" options="{'no_open': True, 'no_create': True}" groups="account.group_account_invoice,account.group_account_readonly" invisible="not is_supplier"/>-->
+
+                            </group>
+                            <group string="Attachment Configuration" invisible="not is_customer"
+                                   name="attachment_configuration">
+                                <field name='is_attachment_required'/>
+                                <field name="require_merged_attachment"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="Revenue Code" invisible="not is_customer">
+                        <field name="revenue_code_ids">
+                            <tree editable="bottom" no_open="1">
+                                <field name="product_id"/>
+                                <field name="price"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="Expense Code" invisible="not is_supplier">
+                        <field name="expense_code_ids">
+                            <tree editable="bottom" no_open="1">
+                                <field name="product_id"/>
+                                <field name="price"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+                <notebook position="inside">
+                    <page string="W-9" invisible="not is_supplier">
+                        <group>
+                            <field name="form_1099"/>
+                            <field name="vendor_type" required="0" invisible="1"/>
+                            <field name="federal_tax_classification"/>
+                            <field name="vat" placeholder="123-45-6789" string="SSN"
+                                   invisible="federal_tax_classification not in ['individual','sole_properietor']"/>
+                            <field name="vat" placeholder="12-3456789" string="EIN"
+                                   invisible="federal_tax_classification in ['individual','sole_properietor']"/>
+                            <field name="llc_tax_classification" invisible="federal_tax_classification != 'llc'"
+                                   required="federal_tax_classification == 'llc'"/>
+                            <field name="other_tax_classification" invisible="federal_tax_classification != 'other'"
+                                   required="federal_tax_classification == 'other'"/>
+                            <field name="foreign_partner"
+                                   invisible="federal_tax_classification in ['c_corporation','s_corporation','partnership',False] or (federal_tax_classification == 'llc' and llc_tax_classification != 'p')"/>
+                            <field name="exemption_payee_code"/>
+                            <field name="fatca_code"/>
+                            <field name="w9_attachments" widget="many2many_binary"/>
+                            <!--                            <field name="w9_att" filename="w9_file_name" widget="pdf_viewer"-->
+                            <!--                                   options="{'accept': '.pdf'}"/>-->
+                            <field name="last_update_w9" readonly="1"/>
+                            <field name="w9_file_name" invisible="1"/>
+                        </group>
+                    </page>
+                </notebook>
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//group[@name='sale']/field[@name='user_id']" position="before">
+                    <field name="is_customer"/>
+                </xpath>
+                <xpath expr="//group[@name='purchase']/field[@name='property_supplier_payment_term_id']"
+                       position="before">
+                    <field name="is_supplier"/>
+                </xpath>
+                <field name="child_ids" position="replace">
+                    <field name="child_ids"
+                           context="{'default_parent_id': id, 'default_street': street, 'default_street2': street2, 'default_city': city, 'default_state_id': state_id, 'default_zip': zip, 'default_country_id': country_id, 'default_lang': lang, 'default_user_id': user_id, 'default_type': 'other'}">
+                        <tree>
+                            <field name="type" string="Type"/>
+                            <field name="name"/>
+                            <field name="title"/>
+                            <field name="contact_address"/>
+                            <field name="email"/>
+                            <field name='phone'/>
+                        </tree>
+                        <form string="Contact / Address">
+                            <sheet>
+                                <field name="type" required="1" widget="radio" options="{'horizontal': true}"/>
+                                <field name="parent_id" invisible="1"/>
+                                <div class="text-muted oe_edit_only">
+                                    <p class="mb-0" invisible="type != 'contact'">
+                                        <span>Use this to organize the contact details of employees of a given company
+                                            (e.g. CEO, CFO, ...).
+                                        </span>
+                                    </p>
+                                    <p class="mb-0" invisible="type != 'invoice'">
+                                        <span>Preferred address for all invoices. Selected by default when you invoice
+                                            an order that belongs to this company.
+                                        </span>
+                                    </p>
+                                    <p class="mb-0" invisible="type != 'delivery'">
+                                        <span>Preferred address for all deliveries. Selected by default when you deliver
+                                            an order that belongs to this company.
+                                        </span>
+                                    </p>
+                                    <p class="mb-0" invisible="type != 'other'">
+                                        <span>Other address for the company (e.g. subsidiary, ...)</span>
+                                    </p>
+                                </div>
+                                <hr/>
+                                <group>
+                                    <group>
+                                        <field name="name" string="Contact Name" required="type == 'contact'"/>
+                                        <field name="title" options="{'no_open': True}" placeholder="e.g. Mr."
+                                               invisible="type != 'contact'"/>
+                                        <field name="function" placeholder="e.g. Sales Director"
+                                               invisible="type != 'contact'"/>
+                                        <label for="street" string="Address" invisible="type == 'contact'"/>
+                                        <div invisible="type == 'contact'">
+                                            <div class="o_address_format" name="div_address">
+                                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                                <field name="street2" placeholder="Street 2..."
+                                                       class="o_address_street"/>
+                                                <field name="city" placeholder="City" class="o_address_city"/>
+                                                <field name="state_id" class="o_address_state" placeholder="State"
+                                                       options="{'no_open': True, 'no_quick_create': True}"
+                                                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                <field name="country_id" placeholder="Country" class="o_address_country"
+                                                       options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                            </div>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        <field name="email" widget="email"/>
+                                        <field name="phone" widget="phone"/>
+                                        <field name="mobile" widget="phone"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="comment" placeholder="Internal notes..." nolabel="1" colspan="2"/>
+                                </group>
+                                <field name="lang" invisible="True"/>
+                                <field name="user_id" invisible="True"/>
+                            </sheet>
+                        </form>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_partner_property_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_edi_ubl_cii.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <group name="electronic_invoicing" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </group>
+            </field>
+        </record>
+
+        <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{
+                'res_partner_search_mode': 'customer',
+                'default_is_company': True,
+                'default_customer_rank': 1,
+                'default_is_customer':True,
+                'import_template_label': 'Import Template For Customers',
+                'import_template_template': '/accounting_extend/static/imports_functionality/Customer_Masterfile.xlsx',
+                'allow_fields': ['name', 'doing_business', 'country_id', 'state_id', 'zip', 'city', 'street', 'street2',
+                'phone', 'mobile', 'email', 'user_id', 'property_payment_term_id',
+                'is_po_ref_req', 'send_email_statement', 'statement_email', 'is_supplier', 'is_attachment_required'],
+                }
+            </field>
+            <field name="domain">[('customer_rank','>', 0),('parent_id','=',False),('is_customer','=',True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new customer in your address book
+                </p>
+                <p>
+                    We helps you easily track all activities related to a customer.
+                </p>
+            </field>
+        </record>
+
+        <record id="account.res_partner_action_supplier" model="ir.actions.act_window">
+            <field name="name">Vendors</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{
+                'res_partner_search_mode': 'supplier',
+                'default_is_company': True,
+                'default_supplier_rank': 1,
+                'default_is_supplier':True,
+                'import_template_label': 'Import Template For Vendors',
+                'import_template_template': '/accounting_extend/static/imports_functionality/Vendor_Masterfile.xlsx',
+                'allow_fields': ['name', 'doing_business', 'country_id', 'state_id', 'zip', 'city', 'street', 'street2',
+                'phone', 'mobile', 'email', 'vendor_acc', 'property_supplier_payment_term_id', 'form_1099',
+                'federal_tax_classification', 'vat', 'exemption_payee_code', 'foreign_partner', 'fatca_code',
+                'w9_attachments'],
+                }
+                }
+            </field>
+            <field name="domain">[('supplier_rank','>', 0),('parent_id','=',False),('is_supplier','=',True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new supplier in your address book
+                </p>
+                <p>
+                    We helps you easily track all activities related to a supplier.
+                </p>
+            </field>
+        </record>
+
+        <record id="view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <field name="property_account_receivable_id" position="after">
+                    <field name="partner_type" invisible="1"/>
+                </field>
+                <field name="property_account_receivable_id" position="attributes">
+                    <attribute name="invisible">partner_type == 'supplier'</attribute>
+                </field>
+                <field name="property_account_payable_id" position="attributes">
+                    <attribute name="invisible">partner_type == 'customer'</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="sms.res_partner_act_window_sms_composer_multi" model="ir.actions.act_window">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+
+        <!-- Inherit and modify the second action -->
+        <record id="sms.res_partner_act_window_sms_composer_single" model="ir.actions.act_window">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+
+        <record id="web.download_contact" model="ir.actions.server">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+        <record id="privacy_lookup.ir_action_server_action_privacy_lookup_partner" model="ir.actions.server">
+            <field name="binding_model_id" eval="False"/>
+        </record>
+
+    </data>
+
+</odoo>

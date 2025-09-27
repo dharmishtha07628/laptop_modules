@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xml:space="preserve">
+    <t t-name="sh_ListView.buttons">
+<!--        <t t-if="sh_enable_list_view_manager">-->
+            <div id="sh_dropdown" class="sh_list_view_dropdown dropdown" t-if="env.config.noBreadcrumbs == false and this.props.resModel != 'res.company'">
+                 <!-- style="display:none;" -->
+                <button type="button" class="btn btn-secondary toggle_button dropdown-toggle o_button_lvm"
+                        data-bs-toggle="dropdown" title="Dynamic List Settings"
+                        aria-expanded="false">
+                    <span class="fa fa-lg fa fa-cog"/>
+                    <span class="caret"/>
+                </button>
+                <ul class="dropdown-menu sh_columns sh_list_view_dropdown_container">
+                        <div class="d-flex mb-2">
+                            <input type="text" id="myInput" placeholder="Search for Columns.." class="myinput o_input"
+                                   title="Search For Columns"
+                                   autocomplete="off" t-on-keyup="sh_searchBar"/>
+
+                            <button type="button" class="btn btn-secondary w-auto restore_button o_button_lvm"
+                                    title="Restore to Default View">
+                                <span class="fa fa-lg fa fa-undo" t-on-click="sh_confirm_restoreData"/>
+                            </button>
+                        </div>
+                    <t t-call="sh_list_view_fields_selection_list"/>
+                    </ul>
+            </div>
+<!--        </t>-->
+    </t>
+</template>

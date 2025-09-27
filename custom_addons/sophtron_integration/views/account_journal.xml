@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+     <record id="action_setting_sophtron_synchronisation" model="ir.actions.client">
+        <field name="name">Bank Account</field>
+        <field name="tag">tms_sophtron_settings</field>
+        <field name="target">new</field>
+        <!--        <field name="context">{'edit': 0,'create': 0}</field>-->
+    </record>
+
+
+    <record id="view_sophtron_account_journal_dashboard_kanban_inherit" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.inherit.sophtron</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="js_class">accounting_dashboard_kanban</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_configure_bank_journal']" position="before">
+                <field name="sophtron_member_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//button[@name='action_configure_bank_journal']" position="attributes">
+                <attribute name="invisible">sophtron_member_id</attribute>
+            </xpath>
+            <xpath
+                    expr="//kanban/templates//div[@id='dashboard_bank_cash_right']"
+                    position="replace"
+            >
+                <div class="row">
+                    <div id="dashboard_bank_cash_balance" class="col overflow-hidden text-start">
+                        <span>GL Balance</span>
+                    </div>
+                    <div class="col-auto text-end">
+                        <span class="o_kanban_monetary">
+                            <t t-out="dashboard.account_balance"/>
+                        </span>
+                    </div>
+                </div>
+                <t t-if="dashboard.has_at_least_one_statement and dashboard.account_balance != dashboard.last_balance">
+                    <div class="row" name="latest_statement">
+                        <div class="col overflow-hidden text-start">
+                            <span title="Latest Statement">Last Statement</span>
+                        </div>
+                        <div class="col-auto text-end">
+                            <span class="o_kanban_monetary">
+                                <t t-out="dashboard.last_balance"/>
+                            </span>
+                        </div>
+                    </div>
+                </t>
+                <div class="row" t-if="dashboard.nb_lines_outstanding_pay_account_balance > 0">
+                    <div id="dashboard_bank_cash_outstanding_balance" class="col overflow-hidden text-start">
+                        <span title="Outstanding Payments/Receipts">Payments</span>
+                    </div>
+                    <div class="col-auto text-end">
+                        <span>
+                            <t t-out="dashboard.outstanding_pay_account_balance"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="dashboard_bank_cash_misc_total" class="col text-start">
+                        <span>Bank Balance
+                        </span>
+                    </div>
+                    <div class="col-auto text-end">
+                        <span>
+                            <t t-out="dashboard.bank_balance"/>
+                        </span>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sophtron_integration_inherited_account_view_account_journal_form" model="ir.ui.view">
+        <field name="name">account.journal.sophtron</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="action_fetch_account_transaction" string="Fetch Transactions" class="oe_stat_button"
+                            type="object"/>
+                </header>
+            </xpath>
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_transaction_line" type="object"
+                        class="oe_stat_button" icon="fa-book">
+                    Transactions Lines
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

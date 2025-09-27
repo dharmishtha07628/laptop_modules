@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_remittance_table_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+            <t t-set="values" t-value="o._get_payment_receipt_report_values()"/>
+            <div class="page">
+                <h3>
+                    <strong id="payment_title">Remittance:
+                        <span t-field="o.name">INV0001</span>
+                    </strong>
+                </h3>
+
+                <div class="mb-4 mt-3">
+                    <div name="date" class="row">
+                        <div class="col-6" t-if="o.date">
+                            Payment Date:
+                            <span t-field="o.date">2023-01-01</span>
+                        </div>
+
+                        <div name="payment_method"
+                             t-if="values['display_payment_method'] and o.payment_method_id"
+                             class="col-6">
+                            Payment Method:
+                            <span t-field="o.payment_method_id.name">Credit card</span>
+                        </div>
+                    </div>
+                </div>
+
+                <table name="invoices"
+                       t-if="o.payment_type in ['inbound']"
+                       class="table table-sm">
+                    <t t-set="invoices" t-value="o.bill_line_ids"/>
+                    <thead>
+                        <tr>
+                            <th>
+                                <span>Invoice Date</span>
+                            </th>
+                            <th>
+                                <span>Invoice Number</span>
+                            </th>
+                            <th>
+                                <span>Total Invoice Amt</span>
+                            </th>
+                            <th>
+                                <span>Amount Paid</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="invoices" t-as="inv">
+                            <!-- MOVE -->
+                            <!--                                t-if="inv.move_type != 'entry'"-->
+                            <tr>
+                                <td>
+                                    <span t-field="inv.invoice_date">2023-01-01</span>
+                                </td>
+                                <td>
+                                    <span t-field="inv.move_id.display_name">INV001</span>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="inv.amount_total">100.00 USD</span>
+                                </td>
+                                <td>
+                                    <span t-field="inv.payment_amount">50 USD</span>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="text-end">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <span t-esc="sum(invoices.mapped('payment_amount'))">50 USD</span>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <table name="bills"
+                       t-if="o.payment_type in ['outbound']"
+                       class="table table-sm">
+                    <t t-set="bills" t-value="o.bill_line_ids"/>
+                    <thead>
+                        <tr>
+                            <th>
+                                <span>Bill Date</span>
+                            </th>
+                            <th>
+                                <span>Bill Number</span>
+                            </th>
+                            <th>
+                                <span>Total Bill Amt</span>
+                            </th>
+                            <th>
+                                <span>Amount Paid</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="bills" t-as="bill">
+                            <tr>
+                                <td>
+                                    <span t-field="bill.invoice_date">2023-01-01</span>
+                                </td>
+                                <td>
+                                    <span t-field="bill.move_id.display_name">INV001</span>
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="bill.amount_total">100.00 USD</span>
+                                </td>
+                                <td>
+                                    <span t-field="bill.payment_amount">50 USD</span>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td class="text-end">
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <span t-esc="sum(bills.mapped('payment_amount'))">50 USD</span>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="oe_structure"></div>
+        </t>
+    </template>
+
+    <template id="report_remittance_table">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="lang" t-value="o.partner_id.lang or o.company_id.partner_id.lang"/>
+                <t t-call="tms_journal_checkbook.report_remittance_table_document" t-lang="lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

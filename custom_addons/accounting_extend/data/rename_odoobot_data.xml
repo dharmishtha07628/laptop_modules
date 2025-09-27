@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'base'), ('name', '=', 'partner_root')]"/>
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+
+    <record id="base.partner_root" model="res.partner">
+        <field name="name">OptimizeBot</field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'base'), ('name', '=', 'partner_root')]"/>
+        </function>
+        <value eval="{'noupdate': True}"/>
+    </function>
+
+
+    <record forcecreate="True" id="ir_cron_mail_scheduler_action_custom" model="ir.cron">
+        <field name="name">Mail: Email Queue Manager</field>
+        <field name="model_id" ref="mail.model_mail_mail"/>
+        <field name="state">code</field>
+        <field name="code">model.process_email_queue()</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field eval="False" name="doall"/>
+    </record>
+
+
+</odoo>

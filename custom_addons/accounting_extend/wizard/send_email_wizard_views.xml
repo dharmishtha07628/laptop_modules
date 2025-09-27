@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_send_email_wizard" model="ir.ui.view">
+        <field name="name">send.email.wizard.form</field>
+        <field name="model">send.email.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send Email">
+                <sheet>
+                    <group>
+                        <field name="account_move_ids" widget="many2many_tags" readonly="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_send_email" type="object" string="Send Email" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_send_email_wizard" model="ir.actions.act_window">
+        <field name="name">Send Email</field>
+        <field name="res_model">send.email.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_send_email_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="resend_email_server_action" model="ir.actions.act_window">
+        <field name="name">Resend Email</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">send.email.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_account_move"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

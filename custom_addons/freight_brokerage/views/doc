@@ -1,0 +1,127 @@
+- remove destination location from stops
+
+- remove DEPARTURE INFO group 
+
+- change Internal Order Number -> selection EX: stop 1, stop 2, (apply ascending order based on this)
+
+- add Is Appointment Required related from location to order lines.
+
+- add boolean appointment confirm in order line , based on Is Appointment Required , add worning appoint required but not confirm
+
+
+** DateTime Range
+
+- Scheduled Departure change label to Scheduled Date/Time.
+
+- Actual Departure change label to Actual Date/Time.
+
+- add one group for display selected location info (ex: opening hours, phone, address, rate confirmation comment)
+
+
+- add section in order line popup for display comments.
+
+- hot comment (red, bold) display in kanban card
+
+- Billing comments - display in related invoice
+
+- dispatch comments - 
+
+- Other Comment
+
+- change popup label to => Stop Details
+
+- stop_status add status bar in order line popup (ready, pending) brokerage.order.line
+
+
+===============================================
+
+
+- order_status (add in top popup) brokerage.order
+
+
+============================================
+
+
+- add new tab load information
+
+- add fields:
+
+- customer_load_no = text field
+
+- customer_bol_no = text field
+
+- original_bol = add multiple attachment for BOL (binary)
+
+- signed_bol = add multiple attachment for Signed BOL (binary)
+
+- planning_comment = text field
+
+- trailer_type_id = m2o (Need to discuss)
+
+
+** add new section (Load Board Posting)
+
+- load_board = boolean
+
+- DAT Models fields (Need to discuss)
+
+
+- new section (Load Contacts)
+
+- Load entered by: (defaule login user)
+
+- Operations User: User that assigned a movement along with the movement status (Need to discuss logic)
+
+- Sales Rep: From Sales Rep table (Need to discuss logic)
+
+- Entry Method: EDI or Manual (With date and time stamp) (Need to discuss logic)
+
+
+===================================================================
+
+
+- add new tab (Billing)
+
+- bill_customer_id = default main customer set, readonly
+
+- bill_distance = float field(KM)
+
+- Case/pieces count
+
+- Weight
+
+- UOM
+
+
+- Commodity = char field
+
+
+separate Section
+
+**One2many table
+
+- rate_method = selection (Distance / Flat / Weight / Other) ,
+
+- revenue_code = product
+
+- memo
+
+- qty
+
+- rate
+
+- total
+
+
+Note: add same fields from invoice lines.
+
+Total after table
+
+
+
+======================================================================
+
+
+- Add new TAB (Brocker Moves)
+
+

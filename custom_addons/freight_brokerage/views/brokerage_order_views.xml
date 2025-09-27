@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="brokerage_order_view_tree" model="ir.ui.view">
+         <field name="name">brokerage.order.view.tree</field>
+         <field name="model">brokerage.order</field>
+         <field name="arch" type="xml">
+             <tree string="Brokerage Order">
+                <field name="order_source"/>
+                <field name="shipment_id_number"/>
+                <field name="shipment_method_of_payment"/>
+                <field name="must_respond_by"/>
+                <field name="accepted_or_rejected"/>
+                <field name="order_status"/>
+                <field name="external_reference"/>
+                <field name="customer_order_no"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="brokerage_order_view_form" model="ir.ui.view">
+        <field name="name">brokerage.order.view.form</field>
+        <field name="model">brokerage.order</field>
+        <field name="arch" type="xml">
+            <form string="Brokerage Order">
+                <header>
+                    <field name="order_status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h1 style="font-size: 1.9rem;">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <label for="name" string="Order Number"/>
+                                    <div>
+                                        <field name="name" placeholder="Order Number" class="oe_inline"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="order_source"/>
+                            <field name="shipment_method_of_payment"/>
+                            <field name="must_respond_by"/>
+                        </group>
+
+                        <group>
+                            <field name="accepted_or_rejected"/>
+                            <field name="order_status"/>
+                            <field name="external_reference"/>
+                            <field name="customer_order_no"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Stops" name="stops" autofocus="autofocus">
+                            <field name="brokerage_order_stop_ids" mode="kanban" class="brokerage_order_stop_ids">
+                                <kanban default_order="stop_number ASC">
+                                    <field name="id"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="oe_kanban_details">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <strong>Stop Information</strong>
+                                                            <table class="table border-0">
+                                                                <tr>
+                                                                    <td>Stop Number: </td>
+                                                                    <td><field name="stop_number"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Driver Loading</td>
+                                                                    <td><field name="driver_loading"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Stop Type</td>
+                                                                    <td><field name="stop_type"/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <strong>Location</strong>
+                                                            <table class="table border-0">
+                                                                <tr>
+                                                                    <td>Location</td>
+                                                                    <td><field name="location_id"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Location Type: </td>
+                                                                    <td><field name="location_type"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Appointment Confirmed</td>
+                                                                    <td><field name="is_appointment_confirmed"/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            <strong>Timing Section</strong>
+                                                            <table class="table border-0">
+                                                                <tr>
+                                                                    <td>Scheduled Earliest</td>
+                                                                    <td><field name="scheduled_earliest"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Scheduled Latest: </td>
+                                                                    <td><field name="scheduled_latest"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Actual Check In Time</td>
+                                                                    <td><field name="actual_check_in_time"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Actual Check Out Time</td>
+                                                                    <td><field name="actual_check_out_time"/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            <strong>Shipment Information</strong>
+                                                            <table class="table border-0">
+                                                                <tr>
+                                                                    <td>No Of Pallets</td>
+                                                                    <td><field name="no_of_pallets"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Weight: </td>
+                                                                    <td><field name="weight"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Weight UOM</td>
+                                                                    <td><field name="weight_uom_id" options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True, 'no_open': True}"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>No Of Units</td>
+                                                                    <td><field name="no_of_units"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>No Of Units Description</td>
+                                                                    <td><field name="no_of_units_description_id" options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True, 'no_open': True}"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Volume</td>
+                                                                    <td><field name="volume"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Volume UOM</td>
+                                                                    <td><field name="volume_uom_id" options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True, 'no_open': True}"/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+
+                        <!-- <page string="Stops" name="stops">
+                            <field name="brokerage_order_stop_ids">
+                                <tree>
+                                    <field name="stop_number"/>
+                                    <field name="stop_type"/>
+                                    <field name="driver_loading"/>
+                                    <field name="location_type"/>
+                                    <field name="location_id"/>
+                                    <field name="is_appointment_confirmed"/>
+                                    <field name="scheduled_earliest"/>
+                                    <field name="scheduled_latest"/>
+                                    <field name="actual_check_in_time"/>
+                                    <field name="actual_check_out_time"/>
+                                    <field name="no_of_pallets"/>
+                                    <field name="weight"/>
+                                    <field name="weight_uom_id"/>
+                                    <field name="no_of_units"/>
+                                    <field name="no_of_units_description_id"/>
+                                    <field name="volume"/>
+                                    <field name="volume_uom_id"/>
+                                </tree>
+                            </field>
+                        </page> -->
+
+                        <page string="Order References" name="order_references">
+                            <field name="brokerage_order_reference_ids">
+                                <tree editable="bottom">
+                                    <field name="reference_identification_qualifier" options="{'no_create_edit': True,'no_create': True, 'no_quick_create': True, 'no_open': True}"/>
+                                    <field name="reference"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Comments" name="comments">
+                            <field name="brokerage_comment_ids">
+                                <tree editable="bottom">
+                                    <field name="comment_type"/>
+                                    <field name="comment_description"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+
+                    <!-- <notebook>
+                        <page string="Stops" name="stops" autofocus="autofocus">
+                            <field name="brokerage_order_stop_ids" mode="kanban" class="brokerage_order_stop_ids">
+                                <kanban default_order="name ASC">
+                                    <field name="id"/>
+                                    <field name="name"/>
+                                    <field name="stop_type_id"/>
+                                    <field name="driver_loading"/>
+                                    <field name="location_id"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="oe_kanban_details">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <h3><field name="name"/></h3>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <h5>
+                                                                <strong>Stop Type : </strong>    
+                                                                <field name="stop_type_id"/>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <h5>
+                                                                <strong>Driver Loading : </strong>    
+                                                                <field name="driver_loading"/>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>Location :</td>
+                                                                    <td><field name="location_id"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Address :</td>
+                                                                    <td><field name="address"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Phone :</td>
+                                                                    <td><field name="phone"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Opening Hours :</td>
+                                                                    <td><field name="location_opening_hours"/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <table>
+                                                                <tr>
+                                                                    <td>Scheduled Date/Time :</td>
+                                                                    <td><field name="scheduled_departure"/></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Actual Date/Time :</td>
+                                                                    <td><field name="actual_departure"/></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" t-if="record.hot_comment.value">
+                                                        <div class="col-12">
+                                                            <strong>Hot Comment : <span class="text-danger"><field name="hot_comment"/></span></strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+
+                        <page string="Load Information" name="load_information">
+                            <group>
+                                <group>
+                                    <field name="customer_load_no"/>
+                                    <field name="customer_bol_no"/>
+                                </group>
+                                <group>
+                                    <field name="original_bol" widget="many2many_binary"/>
+                                    <field name="signed_bol" widget="many2many_binary"/>
+                                </group>
+                                <group>
+                                    <field name="planning_comment"/>
+                                </group>
+                            </group>
+
+                            <group string="Load Board Posting">
+                                <field name="load_board"/>
+                            </group>
+
+                            <group string="Load Contacts">
+                                <field name="load_entered_by_id"/>
+                                <field name="operation_user_id"/>
+                            </group>
+                        </page>
+
+                        <page string="Biling" name="billing">
+                            <group>
+                                <group>
+                                    <field name="bill_customer_id"/>
+                                    <field name="bill_distance"/>
+                                    <field name="commodity"/>
+                                </group>
+                                <group>
+                                    <field name="case_pieces_count"/>
+                                    <field name="weight"/>
+                                    <field name="uom_id"/>
+                                </group>
+                            </group>
+
+                            <field name="bill_line_ids" nolabel="1">
+                                <tree editable="bottom">
+                                    <field name="rate_method"/>
+                                    <field name="revenue_product_id"/>
+                                    <field name="memo"/>
+                                    <field name="qty"/>
+                                    <field name="rate"/>
+                                    <field name="total"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook> -->
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_open_brokerage_order" model="ir.actions.act_window">
+        <field name="name">Brokerage Order</field>
+        <field name="res_model">brokerage.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="brokerage_menu_main" name="Brokerage"/>
+
+    <menuitem id="brokerage_menu" name="Brokerage" parent="freight_brokerage.brokerage_menu_main"/>
+
+    <menuitem id="brokerage_order_menu" name="Orders" parent="freight_brokerage.brokerage_menu" action="freight_brokerage.action_open_brokerage_order"/>
+
+</odoo>

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="inherited_account_payment_form_view_extened_add_fields">
+        <field name="name">inherited.account.payment.form.view.extened.add.fields</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <field name="higher_amount" invisible="1"/>
+                <div  class="alert alert-warning mb-0" role="alert"
+                     invisible="partner_payment_warning == ''">
+                    <field name="partner_payment_warning" invisible="higher_amount == False and  not is_internal_transfer"/>
+                </div>
+            </xpath>
+             <xpath expr="//button[@name='action_draft']" position="attributes">
+                 <attribute name="invisible">1</attribute>
+             </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="is_payment_done" invisible="1"/>
+<!--                <button name="validate_payment" string="Payment" type="object" class="oe_highlight"-->
+<!--                        invisible="is_payment_done != False or is_internal_transfer"/>-->
+                <button name="confirm_recurring_payment" string="Confirm Recurring Payment" type="object"
+                        class="oe_highlight"
+                        invisible="is_recurring_payment == False or recurring_payment_id != False"/>
+            </xpath>
+             <field name="journal_id" position="attributes">
+                 <attribute name="string">Payment Account</attribute>
+             </field>
+             <field name="amount" position="attributes">
+                 <attribute name="force_save">1</attribute>
+             </field>
+
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="button_open_recurring_payment" type="object" class="oe_stat_button" icon="fa-bars"
+                        invisible="recurring_payment_count == 0">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Recurring Payment</span>
+                    </div>
+                </button>
+            </xpath>
+            <field name="ref" position="after">
+                <!-- <field name="paired_internal_transfer_payment_id"/> -->
+                <field name="related_payment_id" invisible="1"/>
+                <!-- <field name="move_id"/> -->
+                <field name="rc_attachment_ids" widget="many2many_binary" string="Documents"/>
+            </field>
+            <xpath expr="//group[@name='main_group']" position="after">
+                <notebook invisible="is_internal_transfer">
+                    <page name="bill_details" string="Open Bills" invisible="payment_type not in ['outbound']">
+                        <field name="bill_line_ids" readonly="is_payment_done != False or state == 'posted'">
+                            <tree editable="bottom" create="0">
+                                <field name="move_id" readonly="1" store="True" force_save="1"/>
+                                <field name="ref" readonly="1" store="True" force_save="1" string="Bill Description"/>
+                                <field name="invoice_date" readonly="1" store="True" force_save="1"/>
+                                <field name="due_date" readonly="1" store="True" force_save="1"/>
+                                <field name="amount_total" readonly="1" store="True" force_save="1" sum="amount_total"/>
+                                <field name="previous_payment" readonly="1" store="True" force_save="1" sum="previous_payment"/>
+                                <field name="due_amount" readonly="1" store="True" force_save="1" sum="due_amount"/>
+                                <field name="is_paid" readonly="move_id == False" store="True" force_save="1"  context="{'is_paid_click': True}"/>
+                                <field name="payment_amount" readonly="move_id == False" store="True" force_save="1"
+                                       sum="payment_amount"/>
+                                <field name="remaining_balance"/>
+                                <!--                                <field name="write_off_amt" invisible="1"/>-->
+                                <field name="allowed_write_off" string="Write off"/>
+                                <field name="gl_acc" optional="hide"/>
+                                <field name="currency_id" optional="hide" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                     <page name="bill_details" string="Opening Invoice" invisible="payment_type not in ['inbound']">
+                        <field name="bill_line_ids" readonly="is_payment_done != False or state == 'posted'">
+                            <tree editable="bottom" create="0">
+                                <field name="move_id" readonly="1" store="True" force_save="1" string="Invoice No."/>
+                                <field name="invoice_date" readonly="1" store="True" force_save="1" string="Invoice Date"/>
+                                 <field name="due_date" readonly="1" store="True" force_save="1"/>
+                                <field name="amount_total" readonly="1" store="True" force_save="1" sum="amount_total"/>
+                                <field name="previous_payment" readonly="1" store="True" force_save="1" sum="previous_payment"/>
+                                <field name="due_amount" readonly="1" store="True" force_save="1" sum="due_amount"/>
+                                <field name="is_paid" store="True" force_save="1"/>
+                                <field name="payment_amount"  store="True" force_save="1" sum="payment_amount"/>
+                                 <field name="remaining_balance"/>
+                                <field name="allowed_write_off" string="Write off"/>
+<!--                                <field name="write_off_amt" invisible="1"/>-->
+                                <field name="gl_acc" optional="hide"/>
+                                <field name="currency_id" optional="hide" readonly="1"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="recurring_payments" string="Recurring Payments" invisible="payment_type not in ['inbound']">
+                        <group>
+                            <group>
+                                <field name="recurring_payment_id" invisible="1"/>
+                                <field name="recurring_payment_count" invisible="1"/>
+                                <field name="generate_from_recurring" invisible="1"/>
+                                <field name="is_recurring_payment"/>
+                                <field name="template_id" invisible="is_recurring_payment == False"
+                                       required="is_recurring_payment == True"/>
+                            </group>
+                            <group>
+                                <field name="date_begin" invisible="is_recurring_payment == False"
+                                       required="is_recurring_payment == True"/>
+                                <field name="date_end" invisible="is_recurring_payment == False"
+                                       required="is_recurring_payment == True"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_account_receiving_recurring_payment" model="ir.actions.act_window">
+        <field name="name">Receiving Recurring Payment</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">tree,kanban,form,graph,activity</field>
+        <field name="context">{
+            'default_payment_type': 'inbound',
+            'default_partner_type': 'customer',
+<!--            'default_is_internal_transfer': True,-->
+            'default_move_journal_types': ('bank', 'cash'),
+            }
+        </field>
+        <field name="domain">[('payment_type','=','inbound'), ('generate_from_recurring', '=', True)]</field>
+    </record>
+
+    <menuitem id="menu_account_receiving_recurring_payment" name="Receiving Recurring Payment"
+              parent="om_recurring_payments.menu_recurring_payments"
+              action="accounting_extend.action_account_receiving_recurring_payment" sequence="3"/>
+
+    <record id="action_account_send_recurring_payment" model="ir.actions.act_window">
+        <field name="name">Send Recurring Payment</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">tree,kanban,form,graph,activity</field>
+        <field name="context">{
+            'default_payment_type': 'outbound',
+            'default_partner_type': 'supplier',
+            'search_default_outbound_filter': 1,
+            'default_move_journal_types': ('bank', 'cash'),
+            'display_account_trust': True,
+            }
+        </field>
+        <field name="domain">[('payment_type','=','outbound'), ('generate_from_recurring', '=', True)]</field>
+    </record>
+
+    <menuitem id="menu_account_send_recurring_payment" name="Send Recurring Payment"
+              parent="om_recurring_payments.menu_recurring_payments"
+              action="accounting_extend.action_account_send_recurring_payment" sequence="4"/>
+
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="ir_config_sophtron_url" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_url</field>
+            <field name="value">https://sophtron.optimizeit.tech/widget</field>
+        </record>
+        <record id="ir_config_sophtron_uid" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_uid</field>
+            <field name="value">63b6c253-4841-4948-b224-77d553af5a01</field>
+        </record>
+    </data>
+    <data noupdate="0">
+        <record id="ir_config_sophtron_access_key" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_access_key</field>
+            <field name="value">MGViNjM2OWMtMDk2My00Nzg2LTlhZjctZDg1ZjQwYTUyMTBh</field>
+        </record>
+
+        <record id="ir_config_sophtron_sophtron_env" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_sophtron_env</field>
+            <field name="value">Production</field>
+        </record>
+
+        <record id="test_ir_config_sophtron_user_guid" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_user_guid</field>
+            <field name="value">277c43ed-3c94-47e1-ab9c-c6e9dc9f190a</field>
+        </record>
+
+        <record id="test_ir_config_sophtron_member_guid" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_member_guid</field>
+            <field name="value">5595968b-1562-4bb1-982b-036909a164d8</field>
+        </record>
+
+        <record id="test_ir_config_sophtron_access_key" model="ir.config_parameter">
+            <field name="key">sophtron_integration.sophtron_aggregator</field>
+            <field name="value">sophtron</field>
+        </record>
+
+    </data>
+</odoo>

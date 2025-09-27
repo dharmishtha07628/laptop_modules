@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_sophtron_api_client,access_sophtron_api_client,model_sophtron_api_client,base.group_user,1,1,1,1
+access_sophtron_api_member,access_sophtron_api_member,model_sophtron_api_member,base.group_user,1,1,1,1
+access_sophtron_api_transactions,access_sophtron_api_transactions,model_sophtron_api_transactions,base.group_user,1,1,1,1

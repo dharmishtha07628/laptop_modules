@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sophtron_integration.template_tms_settings" owl="1">
+        <div class="container-fluid p-4 overflow-y-scroll h-100">
+            <div class="row" id="iframe-container">
+
+            </div>
+            <div class="row" id="radiobtnContainer">
+
+            </div>
+            <button type="button" id="createJournal" class="btn btn-primary" t-on-click="onCreateJournalClick">Create Journal</button>
+        </div>
+    </t>
+
+</templates>

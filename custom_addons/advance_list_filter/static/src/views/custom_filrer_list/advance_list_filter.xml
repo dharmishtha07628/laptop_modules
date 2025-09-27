@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="web.ListRenderer.extended" t-inherit="web.ListRenderer" t-inherit-mode="extension">
+        <xpath expr="//i[@t-att-class='getSortableIconClass(column)']" position="after">
+            <i class="fa fa-lg fa-search opacity-0 opacity-75-hover ms-2" t-on-click="() => this.onClickSearchColumn(column)"/>
+        </xpath>
+    </t>
+
+</templates>

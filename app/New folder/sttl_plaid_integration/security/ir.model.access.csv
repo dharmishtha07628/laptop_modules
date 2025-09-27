@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_plaid_bank,sttl_plaid_integration.plaid_bank,model_plaid_bank,base.group_user,1,1,1,1
+access_plaid_account,sttl_plaid_integration.plaid_account,model_plaid_account,base.group_user,1,1,1,1
+access_plaid_transaction_wizard,sttl_plaid_integration.plaid_transaction_wizard,model_plaid_transaction_wizard,base.group_user,1,1,1,1

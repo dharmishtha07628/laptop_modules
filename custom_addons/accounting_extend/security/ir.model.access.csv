@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+import_invoice_wizard,import_invoice_wizard,model_import_invoice_wizard,,1,1,1,1
+access_bill_account_payment_line,access_bill_account_payment_line,model_bill_account_payment_line,base.group_user,1,1,1,1
+access_revenue_code,access_revenue_code,model_revenue_code,,1,1,1,1
+access_expense_code,access_expense_code,model_expense_code,,1,1,1,1
+base.access_res_company_group_erp_manager,res_company group_erp_manager,model_res_company,base.group_erp_manager,1,1,1,1

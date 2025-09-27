@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_bank_transaction_line_form">
+        <field name="name">Bank transaction line</field>
+        <field name="model">account.bank.transaction.line</field>
+        <field name="inherit_id" ref="tms_account_reconcile.view_bank_transaction_line_form"/>
+        <field name="arch" type="xml">
+             <field name="resolve" position="after">
+                 <field name="merchant_name" readonly="1"/>
+             </field>
+        </field>
+    </record>
+</odoo>

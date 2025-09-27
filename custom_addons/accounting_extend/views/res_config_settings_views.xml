@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.account</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//setting[@id='default_incoterm']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr=".//block[@id='product_general_settings']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        <record id="res_config_settings_view_form" model="ir.ui.view">-->
+        <!--            <field name="name">res.config.settings.view.form.inherit.accounting.extend</field>-->
+        <!--            <field name="model">res.config.settings</field>-->
+        <!--            <field name="inherit_id" ref="product.res_config_settings_view_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr=".//block[@id='product_general_settings']" position="attributes">-->
+        <!--                    <attribute name="invisible">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--        <record id="res_config_settings_view_form_hide_apps" model="ir.ui.view">-->
+        <!--            <field name="name">res.config.settings.inherit.accounting.extend</field>-->
+        <!--            <field name="model">res.config.settings</field>-->
+        <!--            <field name="inherit_id" ref="website.res_config_settings_view_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//app[@name='website']" position="attributes">-->
+        <!--                    <attribute name="invisible">1</attribute>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="res_config_settings_view_form_for_normal_users" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.accounting.extend</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="85"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app[@name='account']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//form" position="inside">
+                    <app data-string="Invoice Configuration" string="Invoice Configuration"
+                         name="invoice_template_configuration">
+                        <block title="Invoice Configuration" id="invoice_template_configuration">
+                              <setting id="document_layout_setting" string="Document Layout" help="Choose the layout of your documents" company_dependent="1">
+                                    <div class="content-group">
+                                        <div class="mt16" groups="base.group_no_one">
+                                            <label for="external_report_layout_id" string="Layout" class="col-3 col-lg-3 o_light_label"/>
+                                            <field name="external_report_layout_id" domain="[('type','=', 'qweb')]" class="oe_inline"/>
+                                        </div>
+                                            <button name="%(web.action_base_document_layout_configurator)d" string="Configure Document Layout" type="action" class="oe_link" icon="oi-arrow-right"/>
+                                            <br groups="base.group_no_one"/>
+                                            <button name="edit_external_header" string="Edit Layout" type="object" class="oe_link" groups="base.group_no_one" icon="oi-arrow-right"/>
+                                            <br groups="base.group_no_one"/>
+                                            <button name="%(web.action_report_externalpreview)d" string="Preview Document" type="action" class="oe_link" groups="base.group_no_one" icon="oi-arrow-right"/>
+                                    </div>
+                                </setting>
+                        </block>
+                    </app>
+                    <!-- <field name="has_chart_of_accounts" invisible="1"/>
+                    <field name="has_accounting_entries" invisible="1"/>
+                    <block title="Fiscal Localization" name="fiscal_localization_setting_container"
+                           invisible="not is_root_company">
+                        <setting string="Fiscal Localization" company_dependent="1"
+                                 help="Taxes, fiscal positions, chart of accounts &amp; legal statements for your country"
+                                 documentation="/applications/finance/fiscal_localizations.html">
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <div>
+                                        <label for="chart_template" string="Package" class="col-2 o_light_label"/>
+                                        <field name="chart_template" readonly="has_accounting_entries"
+                                               required="chart_template"/>
+                                    </div>
+                                    <div class="mt16">
+                                        <button name="reload_template" type="object" string="Reload"
+                                                class="btn-secondary ps-2 w-100" icon="fa-refresh"
+                                                title="Reload accounting data (taxes, accounts, ...) if you notice inconsistencies. This action is irreversible."
+                                                invisible="not has_accounting_entries or not chart_template"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </setting>
+
+<!-                <xpath expr="//app[@name='account']" position="replace">-->
+                    <app data-string="Accounting" string="Accounting" name="account"
+                         groups="account.group_account_manager">
+
+
+                        <block title="Financial period" id="fiscalyear">
+                            <setting id="fiscalyear" string="Financial Year">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="fiscalyear_last_month" string="Last Day"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="fiscalyear_last_month"
+                                               style="width: 100px; margin-right: 8px;"/>
+                                        <field name="fiscalyear_last_day" class="oe_inline"/>
+                                    </div>
+                                </div>
+                            </setting>
+
+                            <setting id="financial_period_closing" string="Financial Period Closing">
+                                <div class="content-group">
+                                    <div class="text-muted">
+                                        Lock your Financial period
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="fiscalyear_lock_date" class="col-md-5 o_light_label"/>
+                                            <field name="fiscalyear_lock_date"/>
+                                            <label for="period_lock_date" class="col-md-5 o_light_label"/>
+                                            <field name="period_lock_date"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+
+                            <!-- TODO MUB: do not remove may be we can use this later -->
+                            <!-- <setting id="setting_group_fiscal_year">
+                                <field name="group_fiscal_year"/>
+                                <div class="text-muted">
+                                    Define Financial years of more or less than one year
+                                </div>
+                                <button name="%(om_fiscal_year.actions_account_fiscal_year)d" icon="fa-arrow-right" type="action" string="Financial Years" class="btn-link" invisible="group_fiscal_year == False"/>
+                            </setting> -->
+
+                            <!-- Old code TODO-MUB: Remove this after successfully merged -->
+                            <!-- <setting class="col-12 col-lg-6" id="fiscalyear">
+                                <div class="col-12 col-lg-12 o_setting_box">
+                                    <div class="o_setting_left_pane"/>
+                                    <div class="o_setting_right_pane">
+                                        <separator string="Financial Year"/>
+                                        <div class="content-group">
+                                            <div class="row mt16">
+                                                <label for="fiscalyear_last_month" string="Last Day"
+                                                       class="col-lg-3 o_light_label"/>
+                                                <field name="fiscalyear_last_month"
+                                                       style="width: 100px; margin-right: 8px;"/>
+                                                <field name="fiscalyear_last_day" class="oe_inline"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-12 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="group_fiscal_year"/>
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="group_fiscal_year"/>
+                                        <div class="text-muted">
+                                            Define Financial years of more or less than one year
+                                        </div>
+                                        <div class="mt16">
+                                            <button name="%(om_fiscal_year.actions_account_fiscal_year)d" icon="fa-arrow-right" type="action" string="Financial Years"
+                                                    class="btn-link" invisible="group_fiscal_year == False"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting class="col-xs-12 col-md-6 o_setting_box" id="fiscalyear">
+                                <div class="o_setting_left_pane"/>
+                                <div class="o_setting_right_pane">
+                                    <separator string="Financial Period Closing"/>
+                                    <div class="text-muted">
+                                        Lock your Financial period
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="row mt16">
+                                            <label for="fiscalyear_lock_date" class="col-md-5 o_light_label"/>
+                                            <field name="fiscalyear_lock_date"/>
+                                            <label for="period_lock_date" class="col-md-5 o_light_label"/>
+                                            <field name="period_lock_date"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting> -->
+                        </block>
+
+                        <block title="Taxes" name="default_taxes_setting_container">
+                            <setting id="default_taxes" string="Default Taxes" company_dependent="1"
+                                     help="Default taxes applied to local transactions"
+                                     title="These taxes are set in any new product created."
+                                     documentation="/applications/finance/accounting/taxation/taxes/default_taxes.html">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Sales Tax" for="sale_tax_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sale_tax_id" domain="[('type_tax_use', 'in', ('sale', 'all'))]"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Purchase Tax" for="purchase_tax_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="purchase_tax_id"
+                                               domain="[('type_tax_use', 'in', ('purchase', 'all'))]"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <!--                            <setting id="taxcloud_settings" string="TaxCloud"-->
+                            <!--                                     help="Compute tax rates based on U.S. ZIP codes"-->
+                            <!--                                     documentation="/applications/finance/accounting/taxation/taxes/taxcloud.html">-->
+                            <!--                                <field name="module_account_taxcloud" widget="upgrade_boolean"/>-->
+                            <!--                            </setting>-->
+                            <!--                            <setting id="avatax_settings" string="AvaTax" help="Automatically compute tax rates"-->
+                            <!--                                     documentation="/applications/finance/accounting/taxation/taxes/avatax.html">-->
+                            <!--                                <field name="module_account_avatax" widget="upgrade_boolean"/>-->
+                            <!--                            </setting>-->
+                            <!--                            <setting id="eu_service"-->
+                            <!--                                     title="If you sell goods and services to customers in a foreign EU country, you must charge VAT based on the delivery address. This rule applies regardless of where you are located."-->
+                            <!--                                     documentation="/applications/finance/accounting/taxation/taxes/eu_distance_selling.html"-->
+                            <!--                                     help="Apply VAT of the EU country to which goods and services are delivered.">-->
+                            <!--                                <field name="module_l10n_eu_oss"/>-->
+                            <!--                            </setting>-->
+                            <setting id="tax_exigibility" company_dependent="1"
+                                     help="Allow to configure taxes using cash basis"
+                                     title="Select this if the taxes should use cash basis, which will create an entry for such taxes on a given account during reconciliation."
+                                     groups="account.group_account_user"
+                                     documentation="/applications/finance/accounting/taxation/taxes/cash_basis_taxes.html">
+                                <field name="tax_exigibility"/>
+                                <div class="content-group" invisible="not tax_exigibility">
+                                    <div class="row mt16">
+                                        <label for="tax_cash_basis_journal_id" class="col-lg-3 o_light_label"/>
+                                        <field name="tax_cash_basis_journal_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="account_cash_basis_base_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="account_cash_basis_base_account_id"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting id="tax_fiscal_country_234" string="Fiscal Country" company_dependent="1"
+                                     help="Domestic country of your accounting">
+                                <field name="account_fiscal_country_id" options="{'no_create': True, 'no_open': True}"/>
+                            </setting>
+                        </block>
+                        <block title="Customer Invoices" id="invoicing_settings">
+                            <setting title="Invoice Delivery Address" class="col-12 col-lg-12">
+                                <field name="show_invoice_delivery_address"/>
+                            </setting>
+                            <setting id="default_setting_options" string="Default Sending Options"
+                                     help="Those options will be selected by default when clicking &quot;Send &amp; Print&quot; on invoices">
+                                <div class="mt16">
+                                    <div class="content-group" id="send_default">
+                                        <div>
+                                            <field name="invoice_is_download"/>
+                                            <label for="invoice_is_download"/>
+                                            <span class="fa fa-lg fa-building-o"
+                                                  title="Values set here are company-specific."/>
+                                        </div>
+                                        <div>
+                                            <field name="invoice_is_email"/>
+                                            <label for="invoice_is_email"/>
+                                            <span class="fa fa-lg fa-building-o"
+                                                  title="Values set here are company-specific."/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <!--                            <setting id="send_invoices_followups" help="Send invoices and payment follow-ups by post"-->
+                            <!--                                     documentation="/applications/finance/accounting/receivables/customer_invoices/snailmail.html">-->
+                            <!--                                <field name="module_snailmail_account"/>-->
+                            <!--                            </setting>-->
+                            <setting id="invoice_delivery_addresses"
+                                     documentation="/applications/sales/sales/send_quotations/different_addresses.html"
+                                     help="Select specific invoice and delivery addresses">
+                                <field name="group_sale_delivery_address"/>
+                            </setting>
+                            <setting id="get_invoice_warnings" string="Invoicing Alerts"
+                                     help="Get Invoicing Alerts when invoicing specific customers">
+                                <field name="group_warning_account"/>
+                            </setting>
+                            <setting id="smallest_coinage_currency"
+                                     help="Define the smallest coinage of the currency used to pay by cash"
+                                     documentation="/applications/finance/accounting/receivables/customer_invoices/cash_rounding.html">
+                                <field name="group_cash_rounding"/>
+                                <div class="mt8">
+                                    <button name="%(account.rounding_list_action)d" icon="oi-arrow-right" type="action"
+                                            string="Cash Roundings"
+                                            class="btn-link" invisible="not group_cash_rounding"/>
+                                </div>
+                            </setting>
+                            <!--                            <setting id="show_sale_receipts" help="Activate to create sale receipt">-->
+                            <!--                                <field name="group_show_sale_receipts"/>-->
+                            <!--                            </setting>-->
+                            <setting id="use_invoice_terms" company_dependent="1"
+                                     help="Add your terms &amp; conditions at the bottom of invoices/orders/quotations">
+                                <field name="use_invoice_terms"/>
+                                <div class="content-group" invisible="not use_invoice_terms">
+                                    <div class="mt16">
+                                        <field name="terms_type" class="o_light_label" widget="radio"/>
+                                        <div>
+                                            <field name="invoice_terms" invisible="terms_type == 'html'"
+                                                   class="oe_account_terms mt-5 w-100"
+                                                   placeholder="Insert your terms &amp; conditions here..."/>
+                                        </div>
+                                        <div class="mt8" invisible="terms_type != 'html'">
+                                            <button name="action_update_terms" icon="oi-arrow-right" type="object"
+                                                    string="Update Terms" class="btn-link"/>
+                                        </div>
+                                        <field name="preview_ready" invisible="1"/>
+                                        <div class="mt4 ms-1" invisible="not preview_ready">
+                                            <a class="btn-link" href="/terms" role="button">
+                                                <i class="oi oi-arrow-right"/>
+                                                Preview
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting company_dependent="1"
+                                     help="Trigger alerts when creating Invoices and Sales Orders for Partners with a Total Receivable amount exceeding a limit.">
+                                <field name="account_use_credit_limit"/>
+                                <div class="content-group mt-2" invisible="not account_use_credit_limit">
+                                    <div class="row">
+                                        <label for="account_default_credit_limit" class="col-lg-4 o_light_label"/>
+                                        <field name="account_default_credit_limit"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting id="default_bank" string="Default Bank" company_dependent="1"
+                                     help="Default Bank applied to Invoices/ Bills"
+                                     title="These Bank are set in any new invoice created">
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Default Bank" for="bank_account_id" class="col-lg-3 o_light_label"/>
+                                        <field name="bank_account_id"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <!--                            <setting id="total_amount_words" help="Display the total amount of an invoice in letters">-->
+                            <!--                                <field name="display_invoice_amount_total_words"/>-->
+                            <!--                            </setting>-->
+                        </block>
+                        <!--                        <block title="Invoice Delivery Address" name="invoice_delivery_address">-->
+                        <!--                            <setting>-->
+                        <!--                                <field name="show_invoice_delivery_address"/>-->
+                        <!--                            </setting>-->
+                        <!--                        </block>-->
+
+                        <!--                        <block title="Vendor Payments" id="print_vendor_checks_setting_container">-->
+                        <!--                            <setting id="print_checks" groups="account.group_account_user" string="Checks"-->
+                        <!--                                     company_dependent="1" help="Print checks to pay your vendors"-->
+                        <!--                                     documentation="/applications/finance/accounting/payables/pay/check.html">-->
+                        <!--                                <field name="module_account_check_printing"/>-->
+                        <!--                                <div class="content-group" invisible="not module_account_check_printing">-->
+                        <!--                                    <div class="row mt16">-->
+                        <!--                                        <label for="account_check_printing_layout" class="col-lg-4 o_light_label"/>-->
+                        <!--                                        <field name="account_check_printing_layout" required="True"/>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="row">-->
+                        <!--                                        <label for="account_check_printing_multi_stub" class="col-lg-4 o_light_label"/>-->
+                        <!--                                        <field name="account_check_printing_multi_stub" class="w-50"/>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="row">-->
+                        <!--                                        <label for="account_check_printing_margin_top" class="col-lg-4 o_light_label"/>-->
+                        <!--                                        <field name="account_check_printing_margin_top"/>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="row">-->
+                        <!--                                        <label for="account_check_printing_margin_left" class="col-lg-4 o_light_label"/>-->
+                        <!--                                        <field name="account_check_printing_margin_left"/>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="row" invisible="country_code != 'CA'">-->
+                        <!--                                        <label for="account_check_printing_margin_right" class="col-lg-4 o_light_label"/>-->
+                        <!--                                        <field name="account_check_printing_margin_right"/>-->
+                        <!--                                    </div>-->
+                        <!--                                    <div class="row" invisible="country_code != 'CA'">-->
+                        <!--                                      <label for="account_check_printing_date_label" class="col-lg-4 o_light_label"/>-->
+                        <!--                                      <field name="account_check_printing_date_label"/>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </setting>-->
+                        <!--                        </block>-->
+
+                        <block title="Default Accounts" id="default_accounts">
+                            <!--                            invisible="not group_multi_currency"-->
+                            <setting string="Post Exchange difference entries in:"
+                                     groups="accounting_extend.default_account_visible"
+                            >
+                                <div class="content-group">
+                                    <div class="row mt8">
+                                        <label for="currency_exchange_journal_id" class="col-lg-4 o_light_label"
+                                               string="Journal"/>
+                                        <field name="currency_exchange_journal_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="income_currency_exchange_account_id" string="Gain"
+                                               class="col-lg-4 o_light_label"/>
+                                        <field name="income_currency_exchange_account_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="expense_currency_exchange_account_id" string="Loss"
+                                               class="col-lg-4 o_light_label"/>
+                                        <field name="expense_currency_exchange_account_id"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting id="post_bank_transactions_and_payments_setting"
+                                     string="Post bank transactions and payments in:"
+                                     groups="accounting_extend.default_account_visible"
+                            >
+                                <div class="content-group">
+                                    <div class="row mt8">
+                                        <label for="account_journal_suspense_account_id"
+                                               class="col-lg-5 o_light_label"/>
+                                        <field name="account_journal_suspense_account_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="account_journal_payment_debit_account_id"
+                                               class="col-lg-5 o_light_label"/>
+                                        <field name="account_journal_payment_debit_account_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="account_journal_payment_credit_account_id"
+                                               class="col-lg-5 o_light_label"/>
+                                        <field name="account_journal_payment_credit_account_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="transfer_account_id" class="col-lg-5 o_light_label"/>
+                                        <field name="transfer_account_id"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Separate discount accounts on invoices"
+                                     groups="accounting_extend.default_account_visible"
+                                     title="If empty, the discount will be discounted directly on the income/expense account. If set, discount on invoices will be realized in separate accounts.">
+                                <div class="content-group">
+                                    <div class="row mt8">
+                                        <label for="account_discount_expense_allocation_id"
+                                               class="col-lg-5 o_light_label" string="Customer Invoices"/>
+                                        <field name="account_discount_expense_allocation_id"
+                                               placeholder="Same Account"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="account_discount_income_allocation_id"
+                                               class="col-lg-5 o_light_label" string="Vendor Bills"/>
+                                        <field name="account_discount_income_allocation_id" placeholder="Same Account"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting string="Post discounts in:" groups="accounting_extend.default_account_visible">
+                                <div class="content-group">
+                                    <div class="row mt8">
+                                        <label for="account_journal_early_pay_discount_gain_account_id"
+                                               class="col-lg-5 o_light_label"/>
+                                        <field name="account_journal_early_pay_discount_gain_account_id"/>
+                                    </div>
+                                    <div class="row mt8">
+                                        <label for="account_journal_early_pay_discount_loss_account_id"
+                                               class="col-lg-5 o_light_label"/>
+                                        <field name="account_journal_early_pay_discount_loss_account_id"/>
+                                    </div>
+                                </div>
+                            </setting>
+                            <setting id="default_write_off_account" string="write-off  Account"
+                                     help="This account will be automatically used to balance discrepancies when write-off entries are created during payments or batch payment."
+                            >
+                                <div class="mt16">
+                                    <div class="content-group" id="set_default_write_off">
+                                        <div>
+                                            <label for="write_off_account_id"/>
+                                            <span class="fa fa-lg fa-building-o"
+                                                  title="Values set here are company-specific."/>
+                                            <field name="write_off_account_id"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </setting>
+                        </block>
+
+                        <!--                        <block title="Anglo-Saxon Accounting" id="anglo_saxon">-->
+                        <!--                            <div class="col-12 col-lg-6 o_setting_box" id="anglo_saxon">-->
+                        <!--                                <div class="o_setting_left_pane">-->
+                        <!--                                    <field name="anglo_saxon_accounting"/>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="o_setting_right_pane">-->
+                        <!--                                    <label string="Anglo-Saxon Accounting" for="anglo_saxon_accounting"/>-->
+                        <!--                                    <div class="text-muted">-->
+                        <!--                                        Record the cost of a good as an expense when this good is-->
+                        <!--                                        invoiced to a final customer (instead of recording the cost as soon-->
+                        <!--                                        as the product is received in stock).-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </block>-->
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_res_config_settings_form" model="ir.ui.view">
+            <field name="name">res.config.settings.form</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//app[@name='general_settings']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_config_settings_action_for_user" model="ir.actions.act_window">
+            <field name="name">Settings User</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="res_config_settings_view_form_for_normal_users"/>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'accounting_extend'}</field>
+        </record>
+
+        <!--        <record id="base.menu_administration" model="ir.ui.menu">-->
+        <!--            <field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>-->
+        <!--            3,ref('base.group_system')-->
+        <!--            (6,0,[ref('base.group_system')])-->
+        <!--        <field name="groups_id" eval="[(3,ref('my_new_group_id'))]"/>-->
+        <!--        </record>-->
+
+        <!--        <record id="base_setup.menu_config" model="ir.ui.menu">-->
+        <!--            <field name="groups_id" eval="[(6,0,[ref('base.group_system')])]"/>-->
+        <!--        </record>-->
+
+        <!--        <menuitem id="menu_configuration_for_user"-->
+        <!--                  name="Settings"-->
+        <!--                  sequence="551"-->
+        <!--                  web_icon="base,static/description/settings.png"-->
+        <!--                  groups="base.group_user,base.group_erp_manager"-->
+        <!--        />-->
+
+        <!--        <menuitem id="menu_for_general_setting_users"-->
+        <!--                  name="General Settings"-->
+        <!--                  action="hr_config_settings_action_for_user"-->
+        <!--                  parent="menu_configuration_for_user"-->
+        <!--                  sequence="1"-->
+        <!--        />-->
+
+        <!--        <menuitem id="menu_for_user_and_companies"-->
+        <!--                  name="Users &amp; Companies"-->
+        <!--                  parent="menu_configuration_for_user"-->
+        <!--                  sequence="2"-->
+        <!--        />-->
+
+        <!--        <menuitem id="menu_root_for_users"-->
+        <!--                  name="User"-->
+        <!--                  parent="menu_for_user_and_companies"-->
+        <!--                  action="base.action_res_users"-->
+        <!--                  sequence="1"-->
+        <!--        />-->
+
+        <!--        <menuitem id="menu_root_for_companies"-->
+        <!--                  name="Companies"-->
+        <!--                  parent="menu_for_user_and_companies"-->
+        <!--                  action="base.action_res_company_form"-->
+        <!--                  sequence="2"-->
+        <!--        />-->
+
+        <!--        <menuitem id="res_partner_menu_config_user"-->
+        <!--                  name="Contact Configuration"-->
+        <!--                  parent="menu_configuration_for_user"-->
+        <!--                  groups="base.group_user"-->
+        <!--                  sequence="200"/>-->
+
+
+        <!--        <menuitem id="menu_partner_category_form_user"-->
+        <!--                  action="base.action_partner_category_form"-->
+        <!--                  name="Contact Tags"-->
+        <!--                  sequence="1" parent="res_partner_menu_config_user"/>-->
+
+        <!--        <menuitem id="menu_partner_title_contact_user"-->
+        <!--                  action="base.action_partner_title_contact"-->
+        <!--                  name="Contact Titles" parent="res_partner_menu_config_user"-->
+        <!--                  sequence="3"/>-->
+
+    </data>
+</odoo>

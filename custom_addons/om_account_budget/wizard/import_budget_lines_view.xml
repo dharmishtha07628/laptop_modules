@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="view_import_budget_lines_form" model="ir.ui.view">
+            <field name="name">Import budget Lines</field>
+            <field name="model">import.budget.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="attachment_ids"  widget="many2many_binary" colspan="2" string="Select Files"/>
+                    </group>
+                    <notebook>
+                        <page string="Field Mapping" name="field_mapping">
+                            <group>
+                                <field name="mapping_ids" widget="one2many" nolabel="1" colspan="2">
+                                    <tree editable="bottom" create="0">
+                                        <field name="name" readonly="1"/>
+                                        <field name="field_id"/>
+                                        <field name="field_name" readonly="1" column_invisible="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Import" name="process_import_inv_line" class="oe_highlight process_button" type="object"/>
+                        or
+                        <button name="cancel" string="Cancel" class="oe_link" special="cancel"/>
+                        <div style="margin-left: auto;margin-right: 0;">
+                            <strong>Download Sample:</strong>
+
+                            <a role="button"
+                               class="btn-primary"
+                               href="/om_account_budget/static/description/Sample-XLS-File/budget_line.xlsx"
+                               style="font-size: 12px; line-height: 1.5; border-radius: 3px; padding: 8px 10px; color: #ffffff;">
+                                <i class="fa fa-download"/>
+                                Excel file
+                            </a>
+
+                        </div>
+
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_import_budget_lines" model="ir.actions.act_window">
+            <field name="name">Import Budget Lines</field>
+            <field name="res_model">import.budget.wizard</field>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    </data>
+</odoo>

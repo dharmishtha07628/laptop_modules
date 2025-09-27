@@ -1,0 +1,6 @@
+a[title="Documentation"] {
+    display: none !important;
+}
+a.o_doc_link {
+    display: none !important;
+}

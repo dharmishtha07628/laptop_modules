@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="tms_settings.tms_setting_menu_check_attributes" model="tms.setting.menu">
+        <field name="action_id" ref="odoo_check_management.bank_check_attribute_action"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_banks" model="tms.setting.menu">
+        <field name="action_id" ref="odoo_check_management.bank_check_action"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_check_register" model="tms.setting.menu">
+        <field name="action_id" ref="odoo_check_management.bank_check_book_action"/>
+    </record>
+
+</odoo>

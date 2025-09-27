@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <!-- <t t-name="sh_general_advance_search_view" t-inherit="web.ListRenderer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//table/thead/tr" position="after">
+            <t t-call="sh_general_template"/>
+        </xpath>
+    </t> -->
+    <t t-name="sh_general_template">
+        <t t-if="sh_enable_list_view_manager">
+            <tr class="hide-on-modal">
+                <t t-if="hasSelectors">
+                    <th></th>
+                </t>
+                <t t-if="sh_serial_number">
+                    <th></th>
+                </t>
+                <t t-foreach="state.columns" t-as="column" t-key="column_index">
+                    <!-- <t t-debug="pdb"/> -->
+                    <t t-if="(props.list.fields[column.name] !== undefined)">
+                        <t t-if="(props.list.fields[column.name].store === true and column.name != 'sequence' and props.list.fields[column.name].type != 'one2many')">
+                            <th class="sh_advance_search_row">
+                                <t t-if="props.list.fields[column.name].type != 'boolean'">
+                                    <SearchView
+                                            sh_field_id="props.list.fields[column.name].name"
+                                            sh_description="column.string || props.list.fields[column.name].string"
+                                            sh_field_type="props.list.fields[column.name].type"
+                                            sh_selection_values="props.list.fields[column.name].selection ? props.list.fields[column.name].selection :[]"
+                                            model="props.list.resModel"
+                                            sh_search_event="(options)=>this.sh_update_advance_search_controller(options)"
+                                            sh_field_search_info="sh_field_popup"
+                                            sh_remove_search="(ev)=>this.sh_remove_popup_domain_event(ev,props.list.fields[column.name].type)"
+                                    />
+                                </t>
+                                <t t-else="">
+                                    <SearchView
+                                            sh_field_id="props.list.fields[column.name].name"
+                                            sh_description="column.string || props.list.fields[column.name].string"
+                                            sh_field_type="props.list.fields[column.name].type"
+                                            sh_selection_values="[['true', 'True'], ['false', 'False']]"
+                                            model="props.list.resModel"
+                                            sh_search_event="(options)=>this.sh_update_advance_search_controller(options)"
+                                            sh_field_search_info="sh_field_popup"
+                                            sh_remove_search="(ev)=>this.sh_remove_popup_domain_event(ev,props.list.fields[column.name].type)"
+                                    />
+                                </t>
+
+                            </th>
+                        </t>
+                        <t t-else="">
+                            <th class="sh_advance_search_row">
+                            </th>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <th class="sh_advance_search_row">
+                        </th>
+                    </t>
+
+                </t>
+                <th></th>
+            </tr>
+        </t>
+    </t>
+</templates>

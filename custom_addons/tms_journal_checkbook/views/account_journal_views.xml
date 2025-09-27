@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- this view is for remove all the checkbook related fields from the bank -->
+    <record id="odoo_check_management.bank_check_view_form" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- this view is for remove print check button from account move form view -->
+    <record id="odoo_check_management.inherit_view_move_form" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <!-- this view is for remove print check button from account payment form view -->
+    <record id="odoo_check_management.inherit_account_payment_for_check_print_form" model="ir.ui.view">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="view_account_journal_form_inherit_journal_checkbook" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit.journal.checkbook</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='outbound_payment_settings']" position="after">
+                <page string="BANK CHECK CONFIGURATION" invisible="type != 'bank' or not is_visible_check_config">
+                    <group>
+                        <group name="bank_check" string="Bank Check">
+                            <field name="is_visible_check_config" invisible="1"/>
+                            <field name="check_measure_unit"/>
+                            <field name="check_height"/>
+                            <field name="check_width"/>
+                            <field name="max_char_in_line1"/>
+                        </group>
+                        <group name="check_image" string="Check Image">
+                            <div class="">
+                                <div class="">
+                                    <label for="check_image" style="font-weight: bold;"/>
+                                </div>
+                                <field name="check_image" widget='image' class="" nolabel="1"/>
+                            </div>
+                        </group>
+                    </group>
+
+                    <button name="redirect_to_bank_check_page" type="object" string="Configure Attributes" style="float:right" icon="fa-cog fa-spin" class="oe_highlight"/>
+                    <br/>
+
+                    <!-- <label for="check_attribute_line_ids" string="Check Attributes"/> -->
+                    <field name="check_attribute_line_ids">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="font_size"/>
+                            <field name="letter_spacing"/>
+                            <field name="top_displacement"/>
+                            <field name="left_displacement"/>
+                            <field name="height"/>
+                            <field name="width"/>
+                            <button name="reset_values" string="Reset" class="fa fa-undo" type="object"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group col="4" string="CSS Attributes">
+                                <field name="font_size"/>
+                                <field name="letter_spacing"/>
+                                <field name="top_displacement"/>
+                                <field name="left_displacement"/>
+                                <field name="bottom_displacement"/>
+                                <field name="right_displacement"/>
+                                <field name="height"/>
+                                <field name="width"/>
+                            </group>
+                            <button name="reset_values" string="Reset" icon="fa-undo" class="oe_highlight" type="object" title="Reset Values"/>
+                        </form>
+                    </field>
+                    <notebook>
+                        <page string="Check Register">
+                            <group>
+                                <group>
+                                    <field name="bank_check_book_id" readonly="1" context="{'default_bank_check_id': bank_id}" domain="[('bank_check_id', '=', bank_id)]"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                      <group string="Signature">
+                    <field name="signed_person"/>
+                    <field name="signed_time"/>
+                    <field name="signature" widget="image"/>
+                </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

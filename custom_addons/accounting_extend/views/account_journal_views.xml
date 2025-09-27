@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="accounting_extend_inherited_view_account_journal_form">
+        <field name="name">Journal</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="is_credit_card" invisible="1"/>
+            </field>
+            <field name="type" position="attributes">
+                <attribute name="invisible">context.get('default_is_credit_card') or context.get('default_type') in ('bank', 'cash')</attribute>
+            </field>
+            <xpath expr="//div[hasclass('oe_title')]" position="attributes">
+                <attribute name="invisible">context.get('default_is_credit_card') or context.get('default_type') in ('bank', 'cash')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='inbound_payment_method_line_ids']" position="attributes">
+                <attribute name="invisible">is_credit_card</attribute>
+            </xpath>
+             <xpath expr="//page[@id='inbound_payment_settings']" position="attributes">
+                    <attribute name="invisible">context.get('default_is_credit_card')</attribute>
+               </xpath>
+            <xpath expr="//page[@name='advanced_settings']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//group[@name='bank_account_number']" position="attributes">
+                <attribute name="invisible">is_credit_card == True or type != 'bank'</attribute>
+            </xpath>
+             <xpath expr="//field[@name='profit_account_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='loss_account_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <div class="oe_title" invisible="not is_credit_card">
+                    <label for="name" string="Credit Card Name"/>
+                    <h1>
+                        <field name="name" string="Transaction Name"
+                               invisible="not is_credit_card"
+                               />
+                    </h1>
+                </div>
+
+                <div class="oe_title" invisible="is_credit_card == True or type not in ['bank'] or context.get('default_type') not in ('bank', 'cash')">
+                    <label for="name" string="Bank Account Name"/>
+                    <h1>
+                        <field name="name" string="Bank Account Name"
+                               invisible="is_credit_card == True or type not in ['bank']"
+                               placeholder="e.g. Chase Bus Checking"/>
+                    </h1>
+                </div>
+
+                <div class="oe_title" invisible="is_credit_card == True or type not in ['cash'] or context.get('default_type') not in ('bank', 'cash')">
+                    <label for="name" string="Cash"/>
+                    <h1>
+                        <field name="name" string="Cash"
+                               invisible="is_credit_card == True or type not in ['cash']"
+                               placeholder="e.g. 52000"/>
+                    </h1>
+                </div>
+            </xpath>
+             <xpath expr="//field[@name='code']" position="attributes">
+                 <attribute name="invisible">1</attribute>
+             </xpath>
+              <xpath expr="//field[@name='type']" position="after">
+                    <field name="code" placeholder="e.g. INV"/>
+                </xpath>
+                <xpath expr="//label[@for='default_account_id'][1]" position="attributes">
+                <attribute name="string">GL Account</attribute>
+            </xpath>
+            <xpath expr="//field[@name='bank_account_id']" position="attributes">
+                <attribute name="string">Bank Account</attribute>
+            </xpath>
+<!--               <xpath expr="//div[@class='oe_title']" position="replace">-->
+<!--                   <label for="name" string="Transaction Name"/>-->
+<!--                   <h1>-->
+<!--                       <field name="name" placeholder="e.g. Customer Invoices"/>-->
+<!--                   </h1>-->
+<!--               </xpath>-->
+<!--            <xpath expr="//page[@name='bank_account']" position="attributes">-->
+<!--                <attribute name="string">Transaction Entries</attribute>-->
+<!--            </xpath>-->
+              <xpath expr="//sheet/div/button/div/span" position="replace">
+                   <span class="o_stat_text">Transaction Entries</span>
+            </xpath>
+<!--              <field name="//label[@for='name']" position="attributes">-->
+<!--                    <attribute name="string">Transaction Name</attribute>-->
+<!--              </field>-->
+
+        </field>
+    </record>
+
+      <record id="view_account_journal_tree" model="ir.ui.view">
+            <field name="name">account.journal.tree.inherit</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='journal_group_ids']" position="replace">
+                </xpath>
+                  <xpath expr="//field[@name='name']" position="attributes">
+                      <attribute name="string">Transaction</attribute>
+                  </xpath>
+            </field>
+        </record>
+      <record id="account.action_account_journal_form" model="ir.actions.act_window">
+            <field name="name">Transactions</field> <!-- New name for the action -->
+        </record>
+    <record id="account.menu_action_account_journal_form"  model="ir.ui.menu">
+        <field name="name">Transaction</field>
+    </record>
+
+    <record id="account_journal_dashboard_kanban_view_inherited" model="ir.ui.view">
+        <field name="name">account.journal.kanban.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//div[hasclass('o_primary')]/a[@name='open_action']/field[@name='name']" position="replace"/>-->
+            <!--            <t t-if="context.get('bank_credit_card_statement')">-->
+            <!--                <xpath expr="//div[hasclass('o_primary')]/a[@name='open_action']/field[@name='name']"-->
+            <!--                       position="replace"/>-->
+            <!--            </t>-->
+            <xpath expr="//div[hasclass('o_primary')]/a[@name='open_action']/field[@name='name']" position="attributes">
+                <attribute name="invisible">context.get('bank_credit_card_statement')</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('o_primary')]/a[@name='open_action']" position="before">
+                <field name="is_credit_card" invisible="1"/>
+                <div class="o_primary"
+                     invisible="type != 'bank' or not context.get('bank_credit_card_statement') or is_credit_card">
+                    <h3>Bank :
+                        <a type="object" name="open_action">
+                            <field name="name"/>
+                        </a>
+                    </h3>
+                </div>
+                <div class="o_primary"
+                     invisible="type != 'bank' or not context.get('bank_credit_card_statement') or not is_credit_card">
+                    <h3>Credit Card :
+                        <a type="object" name="open_action">
+                            <field name="name"/>
+                        </a>
+                    </h3>
+                </div>
+            </xpath>
+
+<!--            <xpath expr="//t[@t-call='JournalMiscelaneous']" position="replace">-->
+<!--                <t t-if="journal_type == 'general'" t-call="JournalEntryTemplate"/>-->
+<!--            </xpath>-->
+
+<!--            <xpath expr="//t[@t-name='JournalMiscelaneous']" position="after">-->
+<!--                <t t-name="JournalEntryTemplate">-->
+<!--                    <div class="col-12 col-sm-4 mb-3 mb-sm-0 o_kanban_primary_left">-->
+<!--                        <button id="new_misc_entry_button" type="object" name="action_create_new"-->
+<!--                                class="btn btn-primary" groups="account.group_account_invoice">-->
+<!--                            <span>New Entry</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <div class="col-12 col-sm-8 o_kanban_primary_right">-->
+<!--                        <field name="json_activity_data" widget="kanban_vat_activity"/>-->
+<!--                        <t t-if="dashboard.number_to_check > 0">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col overflow-hidden text-start">-->
+<!--                                    <a type="object" name="open_action"-->
+<!--                                       context="{'action_name': 'action_move_journal_line', 'search_default_to_check': True}">-->
+<!--                                        <t t-out="dashboard.number_to_check"/>-->
+<!--                                        to check-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div class="col-auto text-end">-->
+<!--                                    <span class="o_kanban_monetary">-->
+<!--                                        <t t-out="dashboard.to_check_balance"/>-->
+<!--                                    </span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </div>-->
+<!--                </t>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+
+</odoo>

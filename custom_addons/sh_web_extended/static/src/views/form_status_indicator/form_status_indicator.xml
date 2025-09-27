@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web.FormStatusIndicator.extended" t-inherit="web.FormStatusIndicator" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_form_status_indicator_buttons')]" position="replace">
+            <div class="o_form_status_indicator_buttons d-flex">
+                <!-- we remove this attribute for always visible following buttons -->
+                <!-- t-att-class="{ invisible: !(props.model.root.isNew or displayButtons) }" -->
+                <button
+                    type="button"
+                    class="o_form_button_save btn btn-primary"
+                    data-hotkey="s"
+                    t-on-click.stop="save"
+                    data-tooltip="Save manually"
+                    aria-label="Save manually"
+                    t-ref="save">
+                    <i class="fa fa-floppy-o fa-fw" />
+                </button>
+
+                <button
+                    type="button"
+                    class="ms-1 o_form_button_cancel btn btn-primary"
+                    data-hotkey="j"
+                    t-on-click.stop="discard"
+                    data-tooltip="Discard changes"
+                    aria-label="Discard changes">
+                    <i class="fa fa-undo fa-fw" />
+                </button>
+
+                <button
+                    type="button"
+                    class="o_form_button_save btn btn-primary ms-1"
+                    data-hotkey="e"
+                    t-on-click.stop="save_close"
+                    data-tooltip="Save &amp; Close"
+                    aria-label="Save &amp; Close">
+                    <i class="fa fa-times fa-fw" />
+                </button>
+
+            </div>
+        </xpath>
+    </t>
+
+    <!-- this is specially for contact form for remove space between form name and display name  -->
+    <!-- <t t-name="web.Breadcrumbs.extended" t-inherit="web.Breadcrumbs" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='collapsedBreadcrumbs.length || visiblePathBreadcrumbs.length']" position="attributes">
+            <attribute name="class" remove="align-self-stretch" separator=" "/>
+        </xpath>
+    </t> -->
+
+    <t t-name="web.CogMenu.extended" t-inherit="web.CogMenu" t-inherit-mode="extension">
+        <!-- <xpath expr="//i[@data-tooltip='Actions']" position="attributes">
+            <attribute name="class" remove="fa-cog" add="fa-bars btn btn-secondary" separator=" "/>
+        </xpath> -->
+        <xpath expr="//i[@data-tooltip='Actions']" position="replace">
+            <a class="btn btn-secondary">
+                <i class="fa fa-bars" data-hotkey="u" data-tooltip="Actions"/>
+            </a>
+        </xpath>
+    </t>
+
+</templates>

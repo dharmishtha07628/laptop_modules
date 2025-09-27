@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<data>
+		<record id="view_partner_bank_form_inherit_account" model="ir.ui.view">
+			<field name="name">res.partner.bank.form</field>
+			<field name="model">res.partner.bank</field>
+			<field name="inherit_id" ref="base.view_partner_bank_form"/>
+			<field name="arch" type="xml">
+				<field name="acc_number" position="attributes">
+					<attribute name="invisible">0</attribute>
+					<attribute name="required">1</attribute>
+					<attribute name="groups">base.group_system,!accounting_extend.group_restrict_accounting_details</attribute>
+				</field>
+				<field name="allow_out_payment" position="attributes">
+					<attribute name="string">Verified</attribute>
+					<attribute name="widget">boolean</attribute>
+				</field>
+<!--				<field name="aba_routing" position="attributes">-->
+<!--					<attribute name="invisible">1</attribute>-->
+<!--				</field>-->
+			    <field name="allow_out_payment" position="after">
+<!--					<field name="acc_number" required="payment_method_type == 'direct_deposit'"-->
+<!--						   invisible="payment_method_type != 'direct_deposit'"-->
+<!--						   groups="base.group_system,!accounting_extend.group_restrict_accounting_details"/>-->
+					<!-- <field name="acc_number"
+						   groups="base.group_system,!accounting_extend.group_restrict_accounting_details"/> -->
+					<field name="void_check_att_ids" widget="many2many_binary" string="Upload Attachments"/>
+					<field name="active_bank"  string="Active" required="1" force_save="1"/>
+				</field>
+<!--			    <field name="acc_number" position="attributes">-->
+<!--			    	<attribute name="required">payment_method_type == 'direct_deposit'</attribute>-->
+<!--			    	<attribute name="invisible">payment_method_type != 'direct_deposit'</attribute>-->
+<!--			    	<attribute name="groups">!accounting_extend.group_restrict_accounting_details</attribute>-->
+<!--			    </field>-->
+				<field name="bank_id" position="before">
+			        <field name="payment_method_type" required="context.get('res_partner_search_mode') in ['supplier','customer']" invisible="context.get('res_partner_search_mode') == 'supplier'"
+					/>
+<!--					<field name="routing_number" invisible="payment_method_type == 'credit_card'" required="payment_method_type != 'credit_card'"/>-->
+<!--			        <field name="acc_number" required="1" invisible="payment_method_type != 'credit_card'" groups="!accounting_extend.group_restrict_accounting_details" string="Credit Card Number"/>-->
+<!--			        <field name="credit_card_att" required="payment_method_type == 'credit_card'" invisible="payment_method_type != 'credit_card'"/>-->
+			        <field name="masked_acc_number" required="1" invisible="payment_method_type != 'direct_deposit'" groups="accounting_extend.group_restrict_accounting_details"/>
+			        <field name="masked_acc_number" required="1" invisible="payment_method_type != 'credit_card'" groups="accounting_extend.group_restrict_accounting_details" string="Credit Card Number"/>
+			    </field>
+<!--			    <field name="bank_id" position="attributes">-->
+<!--			    	<attribute name="invisible">payment_method_type != 'direct_deposit'</attribute>-->
+<!--			    </field>-->
+				<field name="bank_id" position="replace">
+					<field name="bank_name" required="1"/>
+					<field name="bank_id" invisible="1"/>
+				</field>
+				 <field name="partner_id" position="attributes">
+				 	<attribute name="required">1</attribute>
+					<attribute name="invisible">context.get('res_partner_search_mode') in ['supplier', 'customer'] or payment_method_type == 'credit_card'</attribute>
+				 </field>
+<!--				 <field name="bank_id" position="after">-->
+<!--					 <field name="routing_number" invisible="payment_method_type == 'credit_card'" readonly="1" required="payment_method_type != 'credit_card'"/>-->
+<!--				 </field>-->
+<!--				<field name="bank_id" position="after">-->
+<!--					 <field name="routing_number" invisible="payment_method_type == 'credit_card'" readonly="1" required="payment_method_type != 'credit_card'"/>-->
+<!--				 </field>-->
+				<field name="bank_id" position="after">
+					 <field name="routing_number" required="1"/>
+				 </field>
+				 <field name="acc_holder_name" position="attributes">
+					<!--  <attribute name="invisible">context.get('res_partner_search_mode') in ['supplier', 'customer'] or payment_method_type == 'credit_card'</attribute> -->
+					<attribute name="invisible">1</attribute>
+				 </field>
+<!--			    <xpath expr="//group[1]" position="after">-->
+<!--			    	<group>-->
+<!--                        <field name="authorize_signature" widget="signature" invisible="payment_method_type != 'credit_card'"/>-->
+<!--                    </group>-->
+<!--			    </xpath>-->
+				<field name="partner_id" position="after">
+						<label for="street" string="Bank Address"/>
+						<div class="o_address_format">
+							<field name="street" placeholder="Street..." class="o_address_street"/>
+							<field name="street2" placeholder="Street 2..." class="o_address_street"/>
+							<field name="city" placeholder="City" class="o_address_city"/>
+							<field name="state" class="o_address_state" placeholder="State"
+								   options="{&quot;no_open&quot;: True}"/>
+							<field name="zip" placeholder="ZIP" class="o_address_zip"/>
+							<field name="country" placeholder="Country" class="o_address_country"
+								   options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+						</div>
+				</field>
+			</field>
+		</record>
+		<record id="view_partner_property_form_inherit_account" model="ir.ui.view">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="account.view_partner_property_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='banks']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+<!--			    <xpath expr="//page[@name='accounting']" position="inside">-->
+<!--				         &lt;!&ndash; <xpath expr="//group[@name='banks']" position="move"/> &ndash;&gt;-->
+<!--						 <group string="Bank Accounts" name="banks_custom" groups="accounting_extend.group_restrict_accounting_details">-->
+<!--                        <field name="bank_ids" nolabel="1" colspan="2" context="{'default_partner_id': id}" widget="auto_save_res_partner" readonly="1">-->
+<!--                            <tree>-->
+<!--                                <field name="sequence" widget="handle"/>-->
+<!--                                <field name="masked_acc_number" />-->
+<!--                                <field name="bank_id"/>-->
+<!--                                <field name="allow_out_payment"/>-->
+<!--                                <field name="routing_number"/>-->
+<!--			        			<field name="void_check_att_ids" widget="many2many_binary"/>-->
+<!--                                <field name="acc_holder_name" column_invisible="True"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--                    <group string="Payment Method" name="banks_custom" groups="!accounting_extend.group_restrict_accounting_details">-->
+<!--                        <field name="bank_ids" nolabel="1" colspan="2" context="{'default_partner_id': id}" widget="auto_save_res_partner">-->
+<!--                            <tree>-->
+<!--                                <field name="sequence" widget="handle"/>-->
+<!--                                <field name="acc_number" groups="accounting_extend.group_restrict_accounting_details"/>-->
+<!--								<field name="payment_method_type"/>-->
+<!--&lt;!&ndash;								<field name="payment_method_id"/>&ndash;&gt;-->
+<!--                                <field name="bank_id"/>-->
+<!--                                <field name="allow_out_payment"  />-->
+<!--                                <field name="routing_number"/>-->
+<!--			        			<field name="void_check_att_ids" widget="many2many_binary"/>-->
+<!--                                <field name="acc_holder_name" column_invisible="True"/>-->
+<!--								<field name="active_bank" string="Active" force_save="1"/>-->
+<!--                            </tree>-->
+<!--                        </field>-->
+<!--                    </group>-->
+<!--				 </xpath>-->
+			</field>
+		</record>
+		   <record id="base.view_res_bank_tree" model="ir.ui.view">
+            <field name="name">res.bank.tree</field>
+            <field name="model">res.bank</field>
+            <field name="arch" type="xml">
+                <tree string="Banks">
+                    <field name="name"/>
+                    <field name="routing_number"/>
+<!--                    <field name="country" optional="hide"/>-->
+                </tree>
+            </field>
+        </record>
+
+		<record id="view_res_partner_bank_form" model="ir.ui.view">
+			<field name="name">res.bank.form</field>
+			<field name="model">res.bank</field>
+			<field name="inherit_id" ref="base.view_res_bank_form"/>
+			<field name="arch" type="xml">
+				<field name="bic" position="before">
+					<field name="routing_number"/>
+				</field>
+				<field name="bic" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+				<field name="email" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</field>
+			</field>
+		</record>
+		 <record id="base.action_res_bank_form" model="ir.actions.act_window">
+			  <field name="view_mode">tree,form</field>
+		 </record>
+		
+	</data>
+
+</odoo>

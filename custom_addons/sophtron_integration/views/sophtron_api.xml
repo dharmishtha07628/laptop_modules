@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data>
+
+        <record id="sophtron_view_form" model="ir.ui.view">
+            <field name="name">sophtron.api.clientk.view.form</field>
+            <field name="model">sophtron.api.client</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <header>
+                        <button type="object" string="Fetch Accounts" name="fetch_accounts" class="oe_highlight"/>
+                        <button name="fetch_all_transactions" type="object"
+                                string="Transactions"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="customer_id"/>
+                            <field name="member_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Accounts">
+                                <field name="sophtron_client_member_ids">
+                                    <tree>
+                                        <field name="account_name"/>
+                                        <field name="account_number"/>
+                                        <field name="account_type"/>
+                                        <field name="account_status"/>
+                                        <field name="account_sub_type"/>
+                                        <button name="fetch_transaction_from_wizard" type="object"
+                                                string="Transactions"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="sophtron_view_tree" model="ir.ui.view">
+            <field name="name">sophtron.api.clientk.view.tree</field>
+            <field name="model">sophtron.api.client</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="customer_id"/>
+                    <field name="member_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sophtron_action" model="ir.actions.act_window">
+            <field name="name">Shophtron Members</field>
+            <field name="res_model">sophtron.api.client</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="temporary_menu" name="Temp" parent="account.menu_finance" active="False"/>
+
+        <menuitem id="sophtron_action_menu" name="Shophtron Members" parent="temporary_menu"
+                  action="sophtron_action" sequence="1" active="False"/>
+
+    </data>
+</odoo>

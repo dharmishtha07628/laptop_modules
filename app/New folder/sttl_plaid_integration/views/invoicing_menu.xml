@@ -1,0 +1,43 @@
+<odoo>
+
+    <record id="action_plaid_banks_sync" model="ir.actions.act_window">
+        <field name="name">Plaid Banks</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">plaid.bank</field>
+        <field name="context">{}</field> 
+        <field name="domain"> []</field>
+        <field name="view_mode">tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No data yet! Enter your first record
+            </p>
+        </field>
+    </record>
+
+    <record id="action_plaid_transactions_wizard" model="ir.actions.act_window">
+        <field name="name">Fetch Transactions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">plaid.transaction.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+<!--    <menuitem id="menu_plaid_transaction_main"-->
+<!--        name="Plaid"-->
+<!--        parent="account.menu_finance"-->
+<!--        sequence="34"/>-->
+
+<!--    <menuitem id="menu_plaid_sync"-->
+<!--        name="Plaid Bank accounts"-->
+<!--        parent="menu_plaid_transaction_main"-->
+<!--        action="action_plaid_banks_sync"-->
+<!--        sequence="1"/>-->
+
+<!--    <menuitem id="menu_plaid_transactions"-->
+<!--        name="Fetch Plaid Transactions"-->
+<!--        parent="menu_plaid_transaction_main"-->
+<!--        action="action_plaid_transactions_wizard"-->
+<!--        sequence="2"/>-->
+
+</odoo>

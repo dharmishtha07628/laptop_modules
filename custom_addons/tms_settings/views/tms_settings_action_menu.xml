@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    transalation menu-->
+    <record id="base.menu_translation" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+    <!--    Groups-->
+    <record id="base.menu_action_res_groups" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="base.menu_custom" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="contacts.res_partner_menu_config" model="ir.ui.menu">
+        <field name="active" eval="False"/>
+    </record>
+
+	<record id="action_setting_accounting_configuration" model="ir.actions.client">
+        <field name="name">Accounting Configuration</field>
+        <field name="tag">tms_settings</field>
+        <field name="context" eval="{'tag': 'accounting_configuration'}" />
+    </record>
+
+    <menuitem id="tms_menu_finance_configuration" parent="account.menu_finance" name="Configuration" sequence="35" groups="account.group_account_manager"/>
+
+    <menuitem id="menu_tms_settings_accounting_configuration" name="Accounting Configuration" action="action_setting_accounting_configuration" parent="tms_menu_finance_configuration"/>
+
+</odoo>

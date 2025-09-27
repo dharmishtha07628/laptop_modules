@@ -1,0 +1,13 @@
+#radiobtnContainer {
+    padding: 10px;
+}
+
+.radio-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.radio-wrapper input {
+    margin-right: 8px;
+}

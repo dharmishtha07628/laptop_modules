@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Check print PDF format-->
+    <!--Paper format -->
+    <record id="paperformat_print_check" model="report.paperformat">
+        <field name="name">Print Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="header_line" eval="False"/>
+        <field name="margin_top">1</field>
+        <field name="margin_left">1</field>
+        <field name="header_spacing" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+    <!--check print action-->
+    <record id="print_check_action" model="ir.actions.report">
+        <field name="name">Check</field>
+        <field name="model">check.format</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">odoo_print_check.check_print</field>
+        <field name="report_file">odoo_print_check.check_print</field>
+        <field name="paperformat_id"
+               ref="odoo_print_check.paperformat_print_check"/>
+        <field name="binding_model_id" ref="model_check_format"/>
+        <field name="binding_type">report</field>
+    </record>
+    <!--Test check print PDF format-->
+    <!--Paper format -->
+    <record id="paperformat_print_test_check" model="report.paperformat">
+        <field name="name">Print Test Check</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="header_line" eval="False"/>
+        <field name="margin_top">1</field>
+        <field name="margin_left">1</field>
+        <field name="header_spacing" eval="False"/>
+        <field name="dpi">90</field>
+    </record>
+    <!--Print test check Action-->
+    <record id="test_check_action" model="ir.actions.report">
+        <field name="name">Test Print</field>
+        <field name="model">check.format</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">odoo_print_check.check_test_print</field>
+        <field name="report_file">odoo_print_check.check_test_print</field>
+        <field name="paperformat_id"
+               ref="odoo_print_check.paperformat_print_test_check"/>
+        <field name="binding_model_id" ref="model_check_format"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

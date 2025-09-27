@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="sh_list_view_fields_selection_list">
+        <div class="sh_columns_list ui-sortable">
+            <t t-if="sh_field_list">
+                <t  t-foreach="sh_field_list" t-as="sh_field" t-key="sh_field_index">
+                 <t t-if="sh_field.sh_tag == 'field'">
+                    <div class="sh_list_field_header ui-sortable-handle" t-att-data-sh_field_order="sh_field.sh_field_order"
+                         t-att-data-field_name="sh_field.field_name" t-att-data-sh_columns_name="sh_field.sh_columns_name">
+                        <div class="sh_list_field_container w-100">
+                            <span class="sh_list_field_info d-flex">
+                                <div class="sh_switch" t-att-data-field-id="sh_field.field_name">
+                                    <t t-if="sh_field.ShShowField">
+                                        <input type="checkbox" class="sh_hide_show_checkbox" checked="1"
+                                               t-att-data-field_name="sh_field.field_name" title="Hide/Show Columns" t-on-click=" _OnShFieldActiveClickrender">
+                                        </input>
+                                    </t>
+                                    <t t-else="">
+                                        <input type="checkbox" class="sh_hide_show_checkbox"
+                                               t-att-data-field_name="sh_field.field_name" title="Hide/Show Columns" t-on-click=" _OnShFieldActiveClickrender">
+                                        </input>
+                                    </t>
+                                    <span class="sh_slider sh_round"/>
+                                </div>
+                                <span class="sh_editable sh_editable_span" t-att-data-field-id="sh_field.field_name" type="text" t-on-click=" _OnShSpanFieldEditableClick">
+                                    <t t-esc="sh_field.sh_columns_name"/>
+                                </span>
+                                <input class="sh_editable sh_editable_input d-none" t-att-data-field-id="sh_field.field_name" type="text"  t-on-focusout=" _OnShInputFieldEditableFocusout"/>
+
+                                <img class="sh_order d-none d-lg-block" src="/sh_dynamic_list_view/static/src/img/move-arrows.svg"
+                                     title="Reorder Columns"/>
+                            </span>
+                        </div>
+                    </div>
+                 </t>
+            </t>
+            </t>
+        </div>
+        <div class="sh-text-center" style="margin-top:10px">
+            <button  type="button" class="btn btn-primary" title="Save Changes" t-on-click=" _OnShHideLvmDropDown" style="margin-right:5px;">save</button>
+            <button type="button" class="btn btn-secondary cancel_button d-none" title="Cancel Changes" t-on-click=" _OnShCancelButtonClick">
+                Cancel
+            </button>
+        </div>
+    </t>
+</templates>

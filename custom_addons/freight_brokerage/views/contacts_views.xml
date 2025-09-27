@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="brokerage_location_contact_view_tree" model="ir.ui.view">
+        <field name="name">brokerage.location.contact.view.tree</field>
+        <field name="model">brokerage.location.contact</field>
+        <field name="arch" type="xml">
+            <tree string="Brokerage Location Contact">
+                <field name="location_contact_type"/>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="references"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="brokerage_location_contact_view_form" model="ir.ui.view">
+        <field name="name">brokerage.location.contact.view.form</field>
+        <field name="model">brokerage.location.contact</field>
+        <field name="arch" type="xml">
+            <form string="Brokerage Location Contact">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <group>
+                            <field name="location_contact_type"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="references"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

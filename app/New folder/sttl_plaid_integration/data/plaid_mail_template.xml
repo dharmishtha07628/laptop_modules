@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="mail_template_plaid_reconnect" model="mail.template">
+        <field name="name">Plaid Fetch transaction Notification</field>
+        <field name="model_id" ref="account.model_account_journal"/>
+        <field name="subject">Plaid Reconnection: {{ object.name }}</field>
+        <field name="email_from">{{ user.email_formatted or '' }}</field>
+        <field name="email_to">{{ ctx.get('email_to') or '' }}</field>
+        <field name="auto_delete" eval="False"/>
+        <field name="body_html" type="html">
+            <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding:0px; background-color:white; color:#454748; border-collapse:separate;">
+                <tbody>
+                    <tr>
+                        <td align="center" style="min-width:590px;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width:590px; background-color:white; padding:0px; border-collapse:separate;">
+                                <tr>
+                                    <td valign="top" style="font-size:13px;">
+                                        <h1>Plaid Fetch Transaction Status</h1>
+
+                                        <t t-if="ctx.get('error_message')">
+                                            <p style="color:red;">
+                                                ⚠️ Plaid Fetch Transaction <b>failed</b> for journal:
+                                                <b><t t-out="ctx.get('journal_name')"/></b>.
+                                            </p>
+                                            <p><b>Error:</b> <t t-out="ctx.get('error_message')"/></p>
+                                        </t>
+                                        <br/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </field>
+    </record>
+
+</odoo>

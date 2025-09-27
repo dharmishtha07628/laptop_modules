@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="sh_expense_advance_search_view" t-inherit="hr_expense.ListRenderer" t-inherit-mode="extension" owl="1">
+            <xpath expr="//table/thead/tr" position="after">
+                <t t-call="sh_general_template"/>
+            </xpath>
+        </t>
+    <t t-name="sh_purchase_advance_search_view" t-inherit="purchase.PurchaseListView" t-inherit-mode="extension" owl="1">
+        <xpath expr="//table/thead/tr" position="after">
+            <t t-call="sh_general_template"/>
+        </xpath>
+    </t>
+    <t t-name="sh_expense_report_search_view" t-inherit="hr_expense.DashboardListRenderer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//table/thead/tr" position="after">
+            <t t-call="sh_general_template"/>
+        </xpath>
+    </t>
+
+   <t t-name="sh_account_new_advance_search_view" t-inherit="account.ListRenderer" t-inherit-mode="extension" owl="1">
+        <xpath expr="//table/thead/tr" position="after">
+            <t t-call="sh_general_template"/>
+        </xpath>
+    </t>
+</templates>

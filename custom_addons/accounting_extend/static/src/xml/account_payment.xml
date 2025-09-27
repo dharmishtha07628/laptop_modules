@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+    <t t-name="AccountPaymentField" t-inherit="account.AccountPaymentField" t-inherit-mode="extension" owl="1">
+        <xpath expr="//i[hasclass('o_payment_label')]" position="replace">
+<!--            <i class="o_field_widget text-start o_payment_label"><t t-out="line.ref"/> Paid on <t t-out="line.date"></t></i>-->
+        </xpath>
+        <xpath expr="//a[hasclass('js_payment_info')]" position="replace">
+            <a role="button" tabindex="0" class="js_payment_info o_payment_label" t-att-index="line_index" style="margin-right:50x;" aria-label="Info" title="Journal Entry Info" data-bs-toggle="tooltip" t-on-click="() => this.openMove(line.move_id)"><i class="o_field_widget text-start o_payment_label"><t t-out="line.ref"/> Paid on <t t-out="line.date"></t></i></a>
+        </xpath>
+    </t>
+</templates>

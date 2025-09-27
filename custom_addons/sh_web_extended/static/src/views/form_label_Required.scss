@@ -1,0 +1,5 @@
+.o_custom_required:not(:focus-within) {
+    &.o_input, > .o_input, &.o_form_label {
+        color: o-text-color('danger');
+    }
+}

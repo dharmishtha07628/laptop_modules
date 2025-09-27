@@ -1,0 +1,4 @@
+"Name","Internal Reference","Sales Price","Cost","Default Memo","Product Category","Expense Account"
+"Expense Name","EXP1","1.0","1000.0","Expense 1","All","600000 Expenses"
+"Fuel ","FUE12","0.0","0.0","","All","600000 Expenses"
+"Others","EXP_G","1.0","0.0","","All / Expenses",""

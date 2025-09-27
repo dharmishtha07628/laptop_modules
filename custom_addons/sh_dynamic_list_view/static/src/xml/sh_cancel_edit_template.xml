@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="sh_list_view_fields_selection_list_edit">
+        <div class="sh_columns_list">
+            <t t-foreach="sh_field_list.arch.children" t-as="sh_field">
+                <t t-if="sh_field.tag === 'field'">
+                    <div class="sh_list_field_header">
+                        <div class="sh_list_field_container w-100">
+                            <span class="sh_list_field_info d-flex">
+                                <t t-if="!sh_field.attrs.modifiers.ShShowField">
+                                    <label class="sh_switch" t-att-for="'inputid'+sh_field_index"
+                                           t-att-id="'labelid'+sh_field_index">
+                                        <input type="checkbox" class="sh_hide_show_checkbox" checked="true"
+                                               t-att-id="'inputid'+sh_field_index" title="Hide/Show Columns">
+                                        </input>
+                                        <span class="sh_slider sh_round"/>
+                                    </label>
+                                    <span class="sh_editable" t-att-data-field-id="sh_field_index" type="text"
+                                          contenteditable="true">
+                                        <t t-if="sh_field.attrs.widget">
+                                            <t t-if="sh_field_list.state.fieldsInfo.list[sh_field.attrs.name].Widget.prototype.description">
+                                                <t t-esc="sh_field_list.state.fieldsInfo.list[sh_field.attrs.name].Widget.prototype.description"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="sh_field.attrs.string || sh_field_list.state.fields[sh_field.attrs.name].string"/>
+                                            </t>
+
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="sh_field.attrs.string || sh_field_list.state.fields[sh_field.attrs.name].string "/>
+                                        </t>
+                                    </span>
+                                    <input class="sh_editable d-none" t-att-data-field-id="sh_field_index" type="text"/>
+
+                                    <img class="sh_order  d-none d-lg-block" src="/sh_dynamic_list_view/static/src/img/move-arrows.svg"
+                                         title="Reorder Columns"/>
+                                </t>
+                                <t t-else="">
+                                    <label class="sh_switch" t-att-for="'inputid'+sh_field_index"
+                                           t-att-id="'labelid'+sh_field_index">
+                                        <input type="checkbox" t-att-id="'inputid'+sh_field_index"
+                                               class="sh_hide_show_checkbox" title="Hide/Show Columns">
+                                        </input>
+                                        <span class="sh_slider sh_round" t-on-click="sh_update_field_data"/>
+                                    </label>
+                                    <span class="sh_editable" t-att-data-field-id="sh_field_index" type="text"
+                                          contenteditable="true">
+                                        <t t-if="sh_field.attrs.widget">
+                                            <t t-if="sh_field_list.state.fieldsInfo.list[sh_field.attrs.name].Widget.prototype.description">
+                                                <t t-esc="sh_field_list.state.fieldsInfo.list[sh_field.attrs.name].Widget.prototype.description"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="sh_field.attrs.string || sh_field_list.state.fields[sh_field.attrs.name].string"/>
+                                            </t>
+
+                                        </t>
+                                        <t t-else="">
+                                            <t t-esc="sh_field.attrs.string || sh_field_list.state.fields[sh_field.attrs.name].string "/>
+                                        </t>
+                                    </span>
+                                    <input class="sh_editable d-none" t-att-data-field-id="sh_field_index" type="text"/>
+                                    <img class="sh_order  d-none d-lg-block" src="/sh_dynamic_list_view/static/src/img/move-arrows.svg"
+                                         title="Reorder Columns"/>
+                                </t>
+                            </span>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </t>
+</templates>

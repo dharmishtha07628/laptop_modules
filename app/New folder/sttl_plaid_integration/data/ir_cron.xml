@@ -1,0 +1,22 @@
+<odoo>
+<!--    <record id="ir_cron_plaid_reconnect" model="ir.cron">-->
+<!--        <field name="name">Plaid Auto Reconnect</field>-->
+<!--        <field name="model_id" ref="account.model_account_journal"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">model.cron_plaid_reconnect()</field>-->
+<!--        <field name="active">True</field>-->
+<!--        <field name="interval_number">24</field>-->
+<!--        <field name="interval_type">hours</field>-->
+<!--        <field name="numbercall">-1</field>-->
+<!--    </record>-->
+     <record id="ir_cron_fetch_transaction_auto" model="ir.cron">
+            <field name="name">Auto Fetch Transaction</field>
+            <field name="model_id" ref="model_plaid_transaction_wizard"/>
+            <field name="state">code</field>
+            <field name="code">model.auto_fetch_transaction()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="nextcall" eval="DateTime.now().replace(hour=11, minute=0)"/>
+        </record>
+</odoo>

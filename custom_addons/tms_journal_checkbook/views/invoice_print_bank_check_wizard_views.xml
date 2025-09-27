@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- TODO: MUB - now we use only list view so no need of this form view -->
+    <record id="tms_inherit_invoice_bank_check_print_form_view" model="ir.ui.view">
+        <field name="name">invoice.print.bank.check.wizard.check.number</field>
+        <field name="model">invoice.print.bank.check.wizard</field>
+        <field name="inherit_id" ref="odoo_check_management.invoice_bank_check_print_form_view"/>
+        <field name="arch" type="xml">
+            <field name="check_history_id" position="after">
+                <field name="check_number"/>
+            </field>
+            <field name="check_history_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="string">Vendor</attribute>
+            </field>
+            <field name="date" position="attributes">
+                <attribute name="string">Date</attribute>
+            </field>
+
+            <field name="check_book_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="required">0</attribute>
+            </field>
+
+            <field name="check_history_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="date" position="attributes">
+                <attribute name="required">0</attribute>
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="currency_id" position="attributes">
+                <attribute name="required">0</attribute>
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="pay_name_line1" position="attributes">
+                <attribute name="required">0</attribute>
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="pay_name_line2" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="amount" position="attributes">
+                <attribute name="required">0</attribute>
+                <attribute name="readonly">1</attribute>
+            </field>
+
+            <field name="amount_in_words" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="required">0</attribute>
+            </field>
+
+            <field name="amount_in_words_line2" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+
+        </field>
+    </record>
+
+    <record id="invoice_bank_check_print_tree_view" model="ir.ui.view">
+        <field name="name">Invoice Bank Check Print</field>
+        <field name="model">invoice.print.bank.check.wizard</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" import="0" create="0">
+                <header>
+                    <button name="print_all_checks" type="object" string="Print All Checks" class="btn-primary"/>
+                </header>
+                <field name="check_book_id" required="1" readonly="1"/>
+                <field name="check_number" required="1"/>
+                <field name="partner_id" readonly="1"/>
+                <field name="date" required="1" readonly="1"/>
+                <field name="amount" required="1" widget="monetary" readonly="1"/>
+                <button name="print_check" type="object" string="Print Check" class="btn-primary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="odoo_check_management.invoice_bank_check_print_action" model="ir.actions.act_window">
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="tms_journal_checkbook.invoice_bank_check_print_tree_view"/>
+    </record>
+
+</odoo>

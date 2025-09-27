@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_edi_order_notes_tree" model="ir.ui.view">
+        <field name="name">edi.order.notes.tree</field>
+        <field name="model">edi.order.notes</field>
+        <field name="arch" type="xml">
+            <tree string="EDI Order Notes">
+                <field name="entity_identifier_code"/>
+                <field name="name"/>
+                <field name="identification_code"/>
+                <field name="city_name"/>
+                <field name="state_province_code"/>
+                <field name="postal_code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_edi_order_notes_form" model="ir.ui.view">
+        <field name="name">edi.order.notes.form</field>
+        <field name="model">edi.order.notes</field>
+        <field name="arch" type="xml">
+            <form string="EDI Order Notes">
+                <sheet>
+                    <group>
+                        <group string="N1">
+                            <field name="entity_identifier_code"/>
+                            <field name="name"/>
+                            <field name="identification_code_structure"/>
+                            <field name="identification_code"/>
+                        </group>
+                        <group string="N2">
+                            <field name="name_1"/>
+                            <field name="name_2"/>
+                        </group>
+                        <group string="N3">
+                            <field name="address_1"/>
+                            <field name="address_2"/>
+                        </group>
+                        <group string="N4">
+                            <field name="city_name"/>
+                            <field name="state_province_code"/>
+                            <field name="postal_code"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

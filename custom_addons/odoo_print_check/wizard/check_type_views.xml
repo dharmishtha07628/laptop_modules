@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Print check by selecting check format   -->
+    <record id="check_types_view_form" model="ir.ui.view">
+        <field name="name">check.types.view.form</field>
+        <field name="model">check.types</field>
+        <field name="arch" type="xml">
+            <form string="Check Print wizard">
+                <group>
+                    <field name="check_format_id"/>
+                </group>
+                <footer>
+                    <button string="Print" name="action_print_selected_check"
+                            type="object"
+                            class="oe_highlight" data-hotkey="q"
+                            help="Select a format"/>
+                    <button string="Cancel" class="btn btn-secondary"
+                            special="cancel" help="Cancel Print"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

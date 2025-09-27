@@ -1,0 +1,33 @@
+result = []
+Account = self.env['account.account']
+CustomAccount = self.env['custom.account']
+
+accounts = self.env['account.account'].sudo().search([])
+result.append(len(accounts))
+account_dict = {}
+for rec in accounts:
+    if rec.code not in account_dict:
+        account_dict[rec.code] = []
+    account_dict[rec.code].append(rec)
+
+result.append(account_dict)
+CustomAccount = self.env['custom.account']  # Replace with your actual model name
+for code, recs in account_dict.items():
+    # Use first record for name/account_type or customize this logic
+    sample = recs[0]
+    company_ids = [r.company_id.id for r in recs]
+    account_ids = [r.id for r in recs]
+
+    # Check if already created (optional, avoid duplicates)
+    existing = CustomAccount.search([('code', '=', code)], limit=1)
+    if existing:
+        continue
+
+    custom_account = CustomAccount.create({
+        'name': sample.name,
+        'code': code,
+        'default_account':True,
+        'account_type': sample.account_type,
+        'company_ids': [(6, 0, company_ids)],
+        'account_ids': [(6, 0, account_ids)],
+    })

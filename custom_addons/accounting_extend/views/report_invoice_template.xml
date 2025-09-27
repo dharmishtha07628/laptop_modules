@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="stock_account_report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@name='payment_communication']" position="replace">
+                <t>Payment Reference:</t>
+                <span class="fw-bold" t-field="o.payment_reference">INV/2023/00001</span>
+                <t t-if="o.partner_bank_id">
+                    <br/>
+                    Pay To:
+                    <span t-field="o.partner_bank_id" class="fw-bold"/>
+                </t>
+                <div id="payment_details" class="clearfix" style="padding-top:40px;">
+                    <t t-if="o.sudo().invoice_payments_widget">
+                        <h5>Payment Details</h5>
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Payment Date</th>
+                                    <th>Payment Method</th>
+                                    <th>Memo</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.sudo().invoice_payments_widget['content'] if o.sudo().invoice_payments_widget else []"
+                                   t-as="payment">
+    <!--                                <t t-esc="payment"/>-->
+                                    <tr>
+                                        <td>
+                                            <t t-esc="payment['date']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="payment['payment_method_name']"/>
+                                        </td>
+                                         <td>
+                                            <span t-esc="payment.get('memo')"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <t t-esc="payment['amount']"
+                                               t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+        </xpath>
+    </template>
+</odoo>

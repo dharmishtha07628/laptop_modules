@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_account_invoice_filter_buttons" model="ir.ui.view">
+        <field name="name">account.invoice.filter.buttons</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='posted']" position="after">
+                <filter string="Draft" name="draft" domain="[('state', 'not in', ['posted', 'cancel'])]"/>
+                <filter string="Open Invoices" name="open_invoice"  domain="[('state', '=', 'posted'), ('payment_state', 'in', ['not_paid', 'partial'])]"/>
+                <filter string="Closed Invoices" name="closed_invoice" domain="[('state', '=', 'posted'), ('payment_state', 'in', ['paid', 'cleared', 'reconciled'])]"/>
+                <filter string="Recurring Invoices" name="recurring_invoice"  domain="['|',('recurring','=',True),('recurring_invoice','!=','no')]"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

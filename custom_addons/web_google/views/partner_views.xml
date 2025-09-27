@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- partner view inherit to place google fields-->
+	<record id="at_contact_address_google_form_view_inherit" model="ir.ui.view">
+		<field name="name">sh.contact.address.google.form.view.inherit</field>
+		<field name="model">res.partner</field>
+		<field name="inherit_id" ref="base.view_partner_form" />
+		<field name="arch" type="xml">
+		    <field name="street" position="attributes">
+		        <attribute name="widget">at_address_auto_complete</attribute>
+		    </field>
+			<xpath expr='//field[@name="street"]' position='before'>
+					<field name="at_contact_google_location"
+						placeholder="Enter Location" widget="at_address_auto_complete" class="o_address_street" invisible="1"/>
+			</xpath>
+			<field name="country_id" position="after">
+				<field name="at_contact_place_text" placeholder="Enter text" style="visibility: hidden;"/>
+				<field name="at_contact_place_text_main_string" placeholder="Enter text" style="visibility: hidden;"/>
+			</field>
+		</field>
+	</record>
+</odoo>

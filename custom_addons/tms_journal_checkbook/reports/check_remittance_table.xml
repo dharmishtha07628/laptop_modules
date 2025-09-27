@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="bank_check_history_print_pdf_report_inherit" inherit_id="odoo_check_management.bank_check_history_print_pdf_report">
+        <xpath expr="//t[@t-set='account_number']" position="after">
+            <style type="text/css">
+            @font-face {
+                font-family: 'MICR';
+                src: url('/tms_journal_checkbook/static/micr.ttf') format('truetype');
+            }
+            .micr-font {
+                font-family: 'MICR';
+                letter-spacing: 2px;
+                font-size: 20px;
+            }
+        </style>
+            <t t-set="remittance_table_ids" t-value="o.remittance_table_ids"/>
+            <t t-set="check_number" t-value="o.check_number"/>
+            <t t-set="company_id" t-value="o.env.company"/>
+           <t t-set="signature"  t-value="o.check_history_id.payment_id.journal_id.signature"/>
+            <t t-set="company_address" t-value="', '.join(filter(None, [company_id.street, company_id.street2, company_id.city, company_id.state_id.name,  company_id.country_id.name,company_id.zip]))"/>
+            <t t-set="address" t-value="o.address"/>
+<!--            <t t-set="account_number">-->
+<!--                <span style="font-family: 'MICR'; font-size: 20pt;" class="micr"><t t-esc="o.check_book_id.bank_check_id.name"/>-->
+<!--                </span>-->
+<!--            </t>-->
+            <t t-set="account_number">
+                <span style="font-family: 'MICR'; font-size: 20pt;" class="micr-font">
+                    C<t t-esc="o.check_number"/>C
+                    A<t t-esc="o.check_history_id.payment_id.journal_id.bank_account_id.routing_number"/>A
+                    <t t-esc="o.check_history_id.payment_id.journal_id.bank_account_id.acc_number"/>C
+                </span>
+            </t>
+        </xpath>
+
+        <xpath expr="//t[@t-esc='account_number']" position="after">
+            <t t-if="bank_check_line_obj.name.attribute == 'signature'">
+                <t t-if="signature">
+                       <div class="offset-3">
+                    <img t-att-src="image_data_uri(signature)" style="max-height: 4cm; max-width: 8cm;"/>
+                </div>
+                </t>
+            </t>
+            <t t-if="bank_check_line_obj.name.attribute == 'company_address'" t-esc="company_address"/>
+            <t t-if="bank_check_line_obj.name.attribute == 'company_name'" t-esc="company_id.name"/>
+            <t t-if="bank_check_line_obj.name.attribute == 'ac_pay'">
+                Pay
+            </t>
+             <t t-if="bank_check_line_obj.name.attribute == 'underline'">
+                <div style="border-bottom: 2px solid black; width: 100%; height: 1px;"/>
+             </t>
+            <t t-if="bank_check_line_obj.name.attribute == 'address_line_1'">
+                <t t-esc="o.check_history_id.customer_id.remittance_street"/>
+            </t>
+            <t t-if="bank_check_line_obj.name.attribute == 'address_line_2'">
+                <t t-esc="o.check_history_id.customer_id.remittance_street2"/>
+            </t>
+            <t t-if="bank_check_line_obj.name.attribute == 'address_line_3'">
+                <t t-esc="o.check_history_id.customer_id.remittance_city"/>
+                <t t-if="o.check_history_id.customer_id.remittance_state_id">
+                    ,
+                    <t t-esc="o.check_history_id.customer_id.remittance_state_id.name"/>
+                </t>
+                 <t t-esc="o.check_history_id.customer_id.remittance_zip"/>
+                <t t-if="o.check_history_id.customer_id.remittance_country_id">
+                    <t t-esc="o.check_history_id.customer_id.remittance_country_id.name"/>
+                </t>
+            </t>
+            <t t-if="bank_check_line_obj.name.attribute == 'order_label'">
+                To the Order of
+            </t>
+            <t t-if="bank_check_line_obj.name.attribute == 'remittance_table_ids'">
+                <table name="invoices" class="table table-sm w-100">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span>Reference</span>
+                            </th>
+                            <th>
+                                <span>Date</span>
+                            </th>
+<!--                            <th>-->
+<!--                                <span>Voucher</span>-->
+<!--                            </th>-->
+                            <th>
+                                <span>Comments</span>
+                            </th>
+                            <th>
+                                <span>Amount</span>
+                            </th>
+<!--                             <th>-->
+<!--                                <span>Discount</span>-->
+<!--                            </th>-->
+                            <th>
+                                <span>Net Payment</span>
+                            </th>
+                        </tr>
+                    </thead>
+                     <tbody>
+                        <t t-foreach="remittance_table_ids" t-as="r">
+                            <tr>
+                                <td style="text-align: center;">
+                                     <span t-field="r.move_id.display_name"/>
+<!--                                     <t t-esc="r.payment_id.ref"/>-->
+
+                                </td>
+                                  <td style="text-align: center;">
+                                    <span t-field="r.invoice_date"/>
+                                </td>
+<!--                                <td>-->
+<!--                                    <span t-field="r.move_id.display_name"/>-->
+<!--                                </td>-->
+                                <td style="text-align: center;">
+                                  <span t-field="r.move_id.ref"/>
+                                </td>
+                                <td style="text-align: center;">
+                                     <span t-esc="'{:.2f}'.format(r.amount_total or 0.0)"/>
+<!--                                    <span t-field="r.amount_total"/>-->
+                                </td>
+<!--                                <td>-->
+
+<!--                                </td>-->
+                                <td style="text-align: center;">
+                                    <span t-esc="'{:.2f}'.format(r.payment_amount or 0.0)"/>
+<!--                                    <span t-field="r.payment_amount"/>-->
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </t>
+        </xpath>
+    </template>
+
+</odoo>

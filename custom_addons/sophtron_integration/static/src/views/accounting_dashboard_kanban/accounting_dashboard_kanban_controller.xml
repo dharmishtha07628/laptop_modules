@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="account.AccountingDashboardKanbanView.Buttons" t-inherit="web.KanbanView.Buttons"
+       t-inherit-mode="primary">
+        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
+            <button type="button" class="btn btn-primary" style="margin-left: 10px;" t-on-click="OnFetchClick">
+                Fetch
+            </button>
+        </xpath>
+    </t>
+</templates>

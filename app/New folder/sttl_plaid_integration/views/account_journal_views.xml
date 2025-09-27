@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="accounting_extend_inherited_view_account_journal_form">
+        <field name="name">Journal</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.view_account_journal_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="access_token" invisible="1"/>
+                    <field name="plaid_reconnect"/>
+                    <div id="link-button" onclick="getLinktoken()" invisible="access_token != False and plaid_reconnect == False"
+                         class="btn btn-primary o_form_button_edit">Connect to Plaid
+                    </div>
+                    <div id="link-button" onclick="getLinktoken()" invisible="plaid_reconnect != False"
+                         class="btn btn-primary o_form_button_edit">Re-Connect to Plaid
+                    </div>
+                </header>
+                <!--                remove the bank feed from the required -->
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <header>
+                    <field name="access_token" invisible="1"/>
+                    <field name="plaid_reconnect"/>
+                    <div id="link-button" onclick="getLinktoken()" invisible="access_token != False and plaid_reconnect == False"
+                         class="btn btn-primary o_form_button_edit">Connect to Plaid
+                    </div>
+                    <div id="link-button" onclick="getLinktoken()" invisible="plaid_reconnect != False"
+                         class="btn btn-primary o_form_button_edit">Re-Connect to Plaid
+                    </div>
+                </header>
+                <!--                remove the bank feed from the required -->
+            </xpath>
+            <field name="bank_statements_source" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
+            <xpath expr="//notebook/page[@name='bank_account']/group/group[@name='bank_account_number']/field[@name='bank_statements_source']"
+                   position="attributes">
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//group[@name='bank_account_number']" position="after">
+                <group string="Plaid Details">
+                    <field name="access_token" readonly="1"/>
+                    <field name="account_id" readonly="1"/>
+                    <field name="plaid_status" readonly="1"/>
+                    <field name="plaid_response" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_account_journal_dashboard_kanban_inherit_plaid" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.plaid.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="tms_account_reconcile.view_account_journal_kanban_custom"/>
+        <field name="arch" type="xml">
+            <xpath expr="//t[@t-name='JournalBodyBankCash']//div[@name='updated_date']" position="replace">
+                <div class="row" name="updated_date">
+                    <div name="updated_date_string" class="col overflow-hidden text-start">
+                        <span title="Updated Date">Updated Date</span>
+                    </div>
+                    <div class="col-auto text-end">
+                        <span class="o_kanban_monetary">
+                            <t t-esc="dashboard.end_date"/>
+                        </span>
+                    </div>
+                </div>
+            </xpath>
+            <xpath expr="//t[@t-name='JournalBodyBankCash']//button[@id='reconcile_btn']" position="after">
+                <button id="fetch_btn" class="ms-2 btn btn-primary oe_kanban_action oe_kanban_action_button"
+                        name="find_transactions_records" type="object"
+                        groups="account.group_account_invoice">Fetch
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

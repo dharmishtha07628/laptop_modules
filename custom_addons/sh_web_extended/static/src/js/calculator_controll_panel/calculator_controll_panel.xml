@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="sh_backmate_theme_adv.Calculator">
+        <div id="ec_calculator" class="ec_calculator">
+            <input type="text" id="result" class="form-control quantity text-center p-3" t-att-value="state.calculate_result" t-on-keypress="_onKeydown" t-ref="CalcInput" t-att-autofocus="true"/>
+            <div class="ec_buttons pt-4">
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="C" t-on-click="_ec_btn_click">C</a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="√" t-on-click="_ec_btn_click">√</a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="x^2" t-on-click="_ec_btn_click">x<sup>2</sup></a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="/" t-on-click="_ec_btn_click">÷</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="7" t-on-click="_ec_btn_click">7</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="8" t-on-click="_ec_btn_click">8</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="9" t-on-click="_ec_btn_click">9</a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="+" t-on-click="_ec_btn_click">+</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="4" t-on-click="_ec_btn_click">4</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="5" t-on-click="_ec_btn_click">5</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="6" t-on-click="_ec_btn_click">6</a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="-" t-on-click="_ec_btn_click">-</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="1" t-on-click="_ec_btn_click">1</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="2" t-on-click="_ec_btn_click">2</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="3" t-on-click="_ec_btn_click">3</a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="*" t-on-click="_ec_btn_click">*</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="%" t-on-click="_ec_btn_click">%</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="0" t-on-click="_ec_btn_click">0</a>
+                <a href="#" class="ec_calculator_btn  btn btn-secondary" data-key="." t-on-click="_ec_btn_click">.</a>
+                <a href="#" class="ec_calculator_btn  btn btn-primary" data-key="=" t-on-click="_ec_btn_click">=</a>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="sh_backmate_theme_adv.CalcDialog" t-inherit="web.ConfirmationDialog" t-inherit-mode="primary">
+        <xpath expr="//Dialog" position="replace">
+            <Dialog size="'sm'" contentClass="'o_calc_popup_content'" title="props.title" modalRef="modalRef" footer="false" withBodyPadding="false">
+                <t t-call="sh_backmate_theme_adv.Calculator"/>
+            </Dialog>
+        </xpath>
+    </t>
+
+    <t t-name="sh_backmate_theme_adv.CalculatorCPTemplate">
+        <!-- <t t-if="sh_enable_calculator_mode"> -->
+        <a t-attf-class="btn btn-secondary" data-hotkey="shift+k" id="o_calc_popup" t-on-click="onClickCalculator" role="button" title="Calculator" href="#">
+            <i class="fw-light fa fa-calculator"/>
+        </a>
+        <!-- </t> -->
+    </t>
+
+    <!-- add calculator component in the standard controll panel -->
+    <t t-name="sh_backmate_theme_adv.ControlPanel.calculator" t-inherit="web.ControlPanel" t-inherit-mode="extension">
+        <xpath expr="//div[@t-if='pagerProps and pagerProps.total > 0']" position="after">
+            <span name="ControlPanelAddons" class="btn-group" aria-atomic="true">
+                <CalculaterSh />
+                <ChatterControlPanel />
+            </span>
+        </xpath>
+    </t>
+    
+</templates>

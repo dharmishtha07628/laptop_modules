@@ -1,0 +1,84 @@
+<odoo>
+    <record id="res_config_settings_view_form_plaid" model="ir.ui.view">
+        <field name="name">res.config.settings.view.plaid</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="accounting_extend.res_config_settings_view_form_for_normal_users"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='fiscalyear']" position="after">
+                <!--                <setting class="app_settings_block" data-string="Plaid Integration">-->
+                <!--                    <h2>Plaid Auto Connect</h2>-->
+                <!--                    <div class="row mt16 o_settings_container">-->
+                <!--                        <div class="col-xs-12 col-md-6 o_setting_box" id="sms">-->
+                <!--                            <div class="o_setting_right_pane">-->
+                <!--                                   <field name="plaid_auto_connect"/>-->
+                <!--                                <div class="content-group">-->
+                <!--                                       <div class="mt16">-->
+                <!--                                    Enable Plaid Auto Connect-->
+                <!--                                       </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div invisible="not plaid_auto_connect">-->
+                <!--                        <div class="row mt16 o_settings_container">-->
+                <!--                            <div class="col-xs-12 col-md-6 o_setting_box" id="sms">-->
+                <!--                                <div class="o_setting_right_pane">-->
+                <!--                                    <div class="o_form_label">-->
+                <!--                                    Notification Email-->
+                <!--                                </div>-->
+                <!--                                    <field name="plaid_email"/>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="row mt16 o_settings_container">-->
+                <!--                            <div class="col-xs-12 col-md-6 o_setting_box" id="sms">-->
+                <!--                                <div class="o_setting_right_pane">-->
+                <!--                                    <div class="o_form_label">-->
+                <!--                                    Cron Interval Time (hours)-->
+                <!--                                </div>-->
+                <!--                                    <field name="plaid_time" widget="float_time"/>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </setting>-->
+
+                <block title="Plaid Configuration" name="default_taxes_setting_container">
+                    <setting>
+                        <!-- Enable Plaid Auto Connect -->
+                        <field name="plaid_auto_connect"/>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <div class="text-muted">
+                                    Enable automatic Fetch Transaction with Plaid.
+                                </div>
+                                <div invisible="not plaid_auto_connect">
+                                    <div class="o_form_label">
+                                        Notification Email
+                                    </div>
+                                    <field name="plaid_email"/>
+                                    <div>
+                                        <div class="o_form_label">
+                                            Cron Interval Time (hours)
+                                        </div>
+                                        <!-- <div class="d-flex" style="margin-top: 10px;">
+                                            <field name="plaid_hour" class="o_input" style="width: 50px; margin-right: 5px;"/>
+                                            :
+                                            <field name="plaid_minute" class="o_input" style="width: 50px; margin-right: 5px;"/>
+                                            :
+                                            <field name="plaid_second" class="o_input" style="width: 50px;"/>
+                                        </div> -->
+                                        <!-- <field name="plaid_time" widget="timepicker"/> -->
+                                        <field name="plaid_time" widget="easy_timepicker"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

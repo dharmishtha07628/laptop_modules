@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="tms_settings.tms_setting_menu_bank_accounts" model="tms.setting.menu">
+        <field name="action_id" ref="accounting_extend.action_account_journal_form_bank_accounts"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_cash" model="tms.setting.menu">
+        <field name="action_id" ref="accounting_extend.action_account_journal_form_cash"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_credit_card" model="tms.setting.menu">
+        <field name="action_id" ref="accounting_extend.action_account_journal_form_credit_card"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_account_tags" model="tms.setting.menu">
+        <field name="action_id" ref="om_account_accountant.action_account_account_tag"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_custom_fascal_year" model="tms.setting.menu">
+        <field name="action_id" ref="om_fiscal_year.actions_account_fiscal_year"/>
+    </record>
+
+    <record id="tms_settings.tms_setting_menu_follow_up_levels" model="tms.setting.menu">
+        <field name="action_id" ref="om_account_followup.action_om_account_followup_definition_form"/>
+    </record>
+
+    <!-- ==============================================================================================================   -->
+
+    <!--  Recurring Payment Menus  -->
+
+    <!--    <record id="tms_settings.tms_setting_menu_reciving_recurring_payment" model="tms.setting.menu">-->
+    <!--        <field name="action_id" ref="accounting_extend.action_account_receiving_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_settings.tms_setting_menu_send_recurring_payment" model="tms.setting.menu">-->
+    <!--        <field name="action_id" ref="accounting_extend.action_account_send_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_settings.tms_setting_menu_recurring_payment" model="tms.setting.menu">-->
+    <!--        <field name="action_id" ref="om_recurring_payments.action_account_recurring_payment"/>-->
+    <!--    </record>-->
+
+    <!--    <record id="tms_settings.tms_setting_menu_recurring_template" model="tms.setting.menu">-->
+    <!--        <field name="action_id" ref="om_recurring_payments.action_account_recurring_template"/>-->
+    <!--    </record>-->
+
+</odoo>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : https://store.webkul.com/license.html/ -->
+<odoo>
+    <data>
+
+        <record id="bank_check_template_view_inherit_form" model="ir.ui.view">
+            <field name="name">bank.check.form.view.inherit</field>
+            <field name="model">bank.check.book</field>
+            <field name="inherit_id" ref="odoo_check_management.bank_check_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+                <field name="name" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="bank_check_id" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="account_number" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="issued_check_history_ids" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='id']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='bank_check_book_id']"
+                       position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='check_number']"
+                       position="replace">
+                </xpath>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='bank_check_book_id']"
+                       position="after">
+                    <field name="check_number" readonly="issued" required="1"/>
+                </xpath>
+
+                <xpath expr="//form/header/field[@name='state']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='currency_id']"
+                       position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='issued']"
+                       position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/field[@name='issued']"
+                       position="after">
+                    <field name="payment_id" readonly="0" class="text-info p-1"/>
+                    <button name="open_payment" type="object" title="View Payment" icon="fa-arrow-circle-right" invisible="payment_id == False"/>
+
+                    <field name="batch_id" readonly="1" class="text-info p-1"/>
+                    <button name="open_batch_payment" title="View Batch Payment" type="object" icon="fa-arrow-circle-right" invisible="batch_id == False"/>
+                </xpath>
+
+                <xpath expr="//field[@name='issued_check_history_ids']/tree/button[@name='print_check']" position="after">
+                    <button name="re_print_check" string="Re-Print Check" icon="fa-print" type="object"  invisible="state in ['cancelled']"/>
+                </xpath>
+
+                <!-- <xpath expr="//form/group[2]/field[@name='bank_check_book_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath> -->
+
+                <field name="account_number" position="after">
+                    <field name="current_check_number" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="tms_journal_checkbook_inherited_bank_check_template_view_tree" model="ir.ui.view">
+            <field name="name">bank.check.book.view.tree</field>
+            <field name="model">bank.check.book</field>
+            <field name="inherit_id" ref="odoo_check_management.bank_check_template_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="string">Check Register Template</attribute>
+                    <attribute name="create">false</attribute>
+                </xpath>
+                <field name="check_book_leaves" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+                <field name="initial_check_number" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+                <field name="last_check_number" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </field>
+                <field name="bank_check_id" position="after">
+                    <field name="current_check_number"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="odoo_check_management.bank_check_book_action" model="ir.actions.act_window">
+            <field name="name">Check Register</field>
+        </record>
+
+        <record model="ir.ui.menu" id="odoo_check_management.bank_check_template_menu">
+            <field name="name">Check Register</field>
+        </record>
+    </data>
+</odoo>

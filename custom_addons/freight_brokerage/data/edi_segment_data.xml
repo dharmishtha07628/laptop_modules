@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Model: reference.identification.qualifier.edi.segment -->
+        <record id="reference_identification_qualifier_edi_segment_il" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">IL</field>
+            <field name="label">Internal Order Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_co" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">CO</field>
+            <field name="label">Customer Order Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_mi" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">MI</field>
+            <field name="label">Trip Mileage</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_ve" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">VE</field>
+            <field name="label">Vendor Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_kl" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">KL</field>
+            <field name="label">Contact Reference</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_mb" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">MB</field>
+            <field name="label">Bill of Lading</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_wt" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">WT</field>
+            <field name="label">Reference Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_qn" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">QN</field>
+            <field name="label">Carrier Multi Stop (Y/N)</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_si" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">SI</field>
+            <field name="label">Shipper ID Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_bm" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">BM</field>
+            <field name="label">Manifest # / DC BOL #</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_ev" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">EV</field>
+            <field name="label">Trailer ID Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_mci" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">MCI</field>
+            <field name="label">Manugistics Carrier ID</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_cmn" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">CMN</field>
+            <field name="label">Move Sequence Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_cn" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">CN</field>
+            <field name="label">Carrier PRO Number</field>
+        </record>
+        <record id="reference_identification_qualifier_edi_segment_kd" model="reference.identification.qualifier.edi.segment">
+            <field name="edi_id">KD</field>
+            <field name="label">Special Instructions</field>
+        </record>
+
+        <!-- Model: stop.type.edi.segment -->
+        <record id="stop_type_edi_segment_ld" model="stop.type.edi.segment">
+            <field name="edi_id">LD</field>
+            <field name="label">Live Load</field>
+        </record>
+        <record id="stop_type_edi_segment_ul" model="stop.type.edi.segment">
+            <field name="edi_id">UL</field>
+            <field name="label">Live Unload</field>
+        </record>
+        <record id="stop_type_edi_segment_cl" model="stop.type.edi.segment">
+            <field name="edi_id">CL</field>
+            <field name="label">Complete Load</field>
+        </record>
+        <record id="stop_type_edi_segment_cu" model="stop.type.edi.segment">
+            <field name="edi_id">CU</field>
+            <field name="label">Complete Unload</field>
+        </record>
+        <record id="stop_type_edi_segment_pl" model="stop.type.edi.segment">
+            <field name="edi_id">PL</field>
+            <field name="label">Part Load</field>
+        </record>
+        <record id="stop_type_edi_segment_pu" model="stop.type.edi.segment">
+            <field name="edi_id">PU</field>
+            <field name="label">Part Unload</field>
+        </record>
+        <record id="stop_type_edi_segment_pa" model="stop.type.edi.segment">
+            <field name="edi_id">PA</field>
+            <field name="label">Pickup Trailer</field>
+        </record>
+        <record id="stop_type_edi_segment_dt" model="stop.type.edi.segment">
+            <field name="edi_id">DT</field>
+            <field name="label">Drop Trailer</field>
+        </record>
+
+        <!-- Model: weight.uom.edi.segment -->
+        <record id="weight_uom_edi_segment_e" model="weight.uom.edi.segment">
+            <field name="edi_id">E</field>
+            <field name="label">Metric Ton</field>
+        </record>
+        <record id="weight_uom_edi_segment_g" model="weight.uom.edi.segment">
+            <field name="edi_id">G</field>
+            <field name="label">Grams</field>
+        </record>
+        <record id="weight_uom_edi_segment_k" model="weight.uom.edi.segment">
+            <field name="edi_id">K</field>
+            <field name="label">Kilograms</field>
+        </record>
+        <record id="weight_uom_edi_segment_l" model="weight.uom.edi.segment">
+            <field name="edi_id">L</field>
+            <field name="label">Pounds</field>
+        </record>
+        <record id="weight_uom_edi_segment_m" model="weight.uom.edi.segment">
+            <field name="edi_id">M</field>
+            <field name="label">Measurement Ton</field>
+        </record>
+        <record id="weight_uom_edi_segment_o" model="weight.uom.edi.segment">
+            <field name="edi_id">O</field>
+            <field name="label">Ounces</field>
+        </record>
+        <record id="weight_uom_edi_segment_s" model="weight.uom.edi.segment">
+            <field name="edi_id">S</field>
+            <field name="label">Short Ton</field>
+        </record>
+        <record id="weight_uom_edi_segment_t" model="weight.uom.edi.segment">
+            <field name="edi_id">T</field>
+            <field name="label">Long Ton</field>
+        </record>
+
+        <!-- Model: no.of.unit.description.edi.segment -->
+        <record id="no_of_unit_description_edi_segment_pl" model="no.of.unit.description.edi.segment">
+            <field name="edi_id">PL</field>
+            <field name="label">Pallet/Unit Load</field>
+        </record>
+        <record id="no_of_unit_description_edi_segment_sv" model="no.of.unit.description.edi.segment">
+            <field name="edi_id">SV</field>
+            <field name="label">Skid</field>
+        </record>
+        <record id="no_of_unit_description_edi_segment_te" model="no.of.unit.description.edi.segment">
+            <field name="edi_id">TE</field>
+            <field name="label">Tote</field>
+        </record>
+
+        <!-- Model: volume.uom.edi.segment -->
+        <record id="volume_uom_edi_segment_b" model="volume.uom.edi.segment">
+            <field name="edi_id">B</field>
+            <field name="label">Barge</field>
+        </record>
+        <record id="volume_uom_edi_segment_c" model="volume.uom.edi.segment">
+            <field name="edi_id">C</field>
+            <field name="label">Cubic Centimeters</field>
+        </record>
+        <record id="volume_uom_edi_segment_d" model="volume.uom.edi.segment">
+            <field name="edi_id">D</field>
+            <field name="label">Cord</field>
+        </record>
+        <record id="volume_uom_edi_segment_e" model="volume.uom.edi.segment">
+            <field name="edi_id">E</field>
+            <field name="label">Cubic Feet</field>
+        </record>
+        <record id="volume_uom_edi_segment_f" model="volume.uom.edi.segment">
+            <field name="edi_id">F</field>
+            <field name="label">100 Board Feet</field>
+        </record>
+        <record id="volume_uom_edi_segment_g" model="volume.uom.edi.segment">
+            <field name="edi_id">G</field>
+            <field name="label">Gallons</field>
+        </record>
+        <record id="volume_uom_edi_segment_h" model="volume.uom.edi.segment">
+            <field name="edi_id">H</field>
+            <field name="label">Hundreds of Measurement Tons</field>
+        </record>
+        <record id="volume_uom_edi_segment_l" model="volume.uom.edi.segment">
+            <field name="edi_id">L</field>
+            <field name="label">Load</field>
+        </record>
+        <record id="volume_uom_edi_segment_m" model="volume.uom.edi.segment">
+            <field name="edi_id">M</field>
+            <field name="label">Cubic Decimeters</field>
+        </record>
+        <record id="volume_uom_edi_segment_n" model="volume.uom.edi.segment">
+            <field name="edi_id">N</field>
+            <field name="label">Cubic Inches</field>
+        </record>
+        <record id="volume_uom_edi_segment_r" model="volume.uom.edi.segment">
+            <field name="edi_id">R</field>
+            <field name="label">Car</field>
+        </record>
+        <record id="volume_uom_edi_segment_s" model="volume.uom.edi.segment">
+            <field name="edi_id">S</field>
+            <field name="label">Measurement Ton</field>
+        </record>
+        <record id="volume_uom_edi_segment_t" model="volume.uom.edi.segment">
+            <field name="edi_id">T</field>
+            <field name="label">Container</field>
+        </record>
+        <record id="volume_uom_edi_segment_u" model="volume.uom.edi.segment">
+            <field name="edi_id">U</field>
+            <field name="label">Volumetric Unit</field>
+        </record>
+        <record id="volume_uom_edi_segment_v" model="volume.uom.edi.segment">
+            <field name="edi_id">V</field>
+            <field name="label">Liter</field>
+        </record>
+        <record id="volume_uom_edi_segment_x" model="volume.uom.edi.segment">
+            <field name="edi_id">X</field>
+            <field name="label">Cubic Meters</field>
+        </record>
+
+        <!-- Model: location.code.edi.segment -->
+        <record id="location_code_edi_segment_sh" model="location.code.edi.segment">
+            <field name="edi_id">SH</field>
+            <field name="label">Shipper</field>
+        </record>
+        <record id="location_code_edi_segment_cn" model="location.code.edi.segment">
+            <field name="edi_id">CN</field>
+            <field name="label">Consignee</field>
+        </record>
+        <record id="location_code_edi_segment_st" model="location.code.edi.segment">
+            <field name="edi_id">ST</field>
+            <field name="label">Ship To</field>
+        </record>
+        <record id="location_code_edi_segment_sf" model="location.code.edi.segment">
+            <field name="edi_id">SF</field>
+            <field name="label">Ship From</field>
+        </record>
+
+        <!-- Model: location.contact.type.edi.segment -->
+        <record id="location_contact_type_edi_segment_re" model="location.contact.type.edi.segment">
+            <field name="edi_id">RE</field>
+            <field name="label">Receiving Contact</field>
+        </record>
+        <record id="location_contact_type_edi_segment_sd" model="location.contact.type.edi.segment">
+            <field name="edi_id">SD</field>
+            <field name="label">Shipping Department</field>
+        </record>
+        <record id="location_contact_type_edi_segment_sh" model="location.contact.type.edi.segment">
+            <field name="edi_id">SH</field>
+            <field name="label">Shipper Contact</field>
+        </record>
+        <record id="location_contact_type_edi_segment_zz" model="location.contact.type.edi.segment">
+            <field name="edi_id">ZZ</field>
+            <field name="label">Mutually Defined</field>
+        </record>
+
+        <!-- Model: unit.description.edi.segment -->
+        <record id="unit_description_edi_segment_AMM" model="unit.description.edi.segment">
+            <field name="edi_id">AMM</field>
+            <field name="label">Ammo Pack</field>
+        </record>
+        <record id="unit_description_edi_segment_BAG" model="unit.description.edi.segment">
+            <field name="edi_id">BAG</field>
+            <field name="label">Bag</field>
+        </record>
+        <record id="unit_description_edi_segment_BAL" model="unit.description.edi.segment">
+            <field name="edi_id">BAL</field>
+            <field name="label">Bale</field>
+        </record>
+        <record id="unit_description_edi_segment_BBL" model="unit.description.edi.segment">
+            <field name="edi_id">BBL</field>
+            <field name="label">Barrel</field>
+        </record>
+        <record id="unit_description_edi_segment_BDL" model="unit.description.edi.segment">
+            <field name="edi_id">BDL</field>
+            <field name="label">Bundle</field>
+        </record>
+        <record id="unit_description_edi_segment_BEM" model="unit.description.edi.segment">
+            <field name="edi_id">BEM</field>
+            <field name="label">Beam</field>
+        </record>
+        <record id="unit_description_edi_segment_BIC" model="unit.description.edi.segment">
+            <field name="edi_id">BIC</field>
+            <field name="label">Bing Chest</field>
+        </record>
+        <record id="unit_description_edi_segment_BIN" model="unit.description.edi.segment">
+            <field name="edi_id">BIN</field>
+            <field name="label">Bin</field>
+        </record>
+        <record id="unit_description_edi_segment_BKG" model="unit.description.edi.segment">
+            <field name="edi_id">BKG</field>
+            <field name="label">Bulk Bag - A large sized flexible, intermediate bulk container</field>
+        </record>
+        <record id="unit_description_edi_segment_BLK" model="unit.description.edi.segment">
+            <field name="edi_id">BLK</field>
+            <field name="label">Bulk</field>
+        </record>
+        <record id="unit_description_edi_segment_BOB" model="unit.description.edi.segment">
+            <field name="edi_id">BOB</field>
+            <field name="label">Bobbin</field>
+        </record>
+        <record id="unit_description_edi_segment_BOT" model="unit.description.edi.segment">
+            <field name="edi_id">BOT</field>
+            <field name="label">Bottle - A container with a round neck</field>
+        </record>
+        <record id="unit_description_edi_segment_BOX" model="unit.description.edi.segment">
+            <field name="edi_id">BOX</field>
+            <field name="label">Box</field>
+        </record>
+        <record id="unit_description_edi_segment_BRG" model="unit.description.edi.segment">
+            <field name="edi_id">BRG</field>
+            <field name="label">Barge</field>
+        </record>
+        <record id="unit_description_edi_segment_BSK" model="unit.description.edi.segment">
+            <field name="edi_id">BSK</field>
+            <field name="label">Basket or hamper</field>
+        </record>
+        <record id="unit_description_edi_segment_BXI" model="unit.description.edi.segment">
+            <field name="edi_id">BXI</field>
+            <field name="label">Box, with inner container</field>
+        </record>
+        <record id="unit_description_edi_segment_BXT" model="unit.description.edi.segment">
+            <field name="edi_id">BXT</field>
+            <field name="label">Bucket</field>
+        </record>
+        <record id="unit_description_edi_segment_CAB" model="unit.description.edi.segment">
+            <field name="edi_id">CAB</field>
+            <field name="label">Cabinet</field>
+        </record>
+        <record id="unit_description_edi_segment_CAG" model="unit.description.edi.segment">
+            <field name="edi_id">CAG</field>
+            <field name="label">Cage</field>
+        </record>
+        <record id="unit_description_edi_segment_CAN" model="unit.description.edi.segment">
+            <field name="edi_id">CAN</field>
+            <field name="label">Can</field>
+        </record>
+        <record id="unit_description_edi_segment_CAR" model="unit.description.edi.segment">
+            <field name="edi_id">CAR</field>
+            <field name="label">Carrier</field>
+        </record>
+        <record id="unit_description_edi_segment_CAS" model="unit.description.edi.segment">
+            <field name="edi_id">CAS</field>
+            <field name="label">Case</field>
+        </record>
+        <record id="unit_description_edi_segment_CBC" model="unit.description.edi.segment">
+            <field name="edi_id">CBC</field>
+            <field name="label">Containers of Bulk Cargo</field>
+        </record>
+        <record id="unit_description_edi_segment_CBY" model="unit.description.edi.segment">
+            <field name="edi_id">CBY</field>
+            <field name="label">Carboy</field>
+        </record>
+        <record id="unit_description_edi_segment_CCS" model="unit.description.edi.segment">
+            <field name="edi_id">CCS</field>
+            <field name="label">Can Case</field>
+        </record>
+        <record id="unit_description_edi_segment_CHE" model="unit.description.edi.segment">
+            <field name="edi_id">CHE</field>
+            <field name="label">Cheeses</field>
+        </record>
+        <record id="unit_description_edi_segment_CHS" model="unit.description.edi.segment">
+            <field name="edi_id">CHS</field>
+            <field name="label">Chest</field>
+        </record>
+        <record id="unit_description_edi_segment_CLD" model="unit.description.edi.segment">
+            <field name="edi_id">CLD</field>
+            <field name="label">Car Load, Rail</field>
+        </record>
+        <record id="unit_description_edi_segment_CNA" model="unit.description.edi.segment">
+            <field name="edi_id">CNA</field>
+            <field name="label">Household Goods Containers, Wood</field>
+        </record>
+        <record id="unit_description_edi_segment_CNB" model="unit.description.edi.segment">
+            <field name="edi_id">CNB</field>
+            <field name="label">Container, MAC-ISO (Military Airlift Container - International Standards Organization) Light Weight 8x8x20 Foot Air</field>
+        </record>
+        <record id="unit_description_edi_segment_CNC" model="unit.description.edi.segment">
+            <field name="edi_id">CNC</field>
+            <field name="label">Container, Navy Cargo Transporter</field>
+        </record>
+        <record id="unit_description_edi_segment_CND" model="unit.description.edi.segment">
+            <field name="edi_id">CND</field>
+            <field name="label">Container, Commercial Highway Lift</field>
+        </record>
+        <record id="unit_description_edi_segment_CNE" model="unit.description.edi.segment">
+            <field name="edi_id">CNE</field>
+            <field name="label">Engine Container</field>
+        </record>
+        <record id="unit_description_edi_segment_CNF" model="unit.description.edi.segment">
+            <field name="edi_id">CNF</field>
+            <field name="label">Multiwall Container Secured to Warehouse Pallet</field>
+        </record>
+        <record id="unit_description_edi_segment_CNT" model="unit.description.edi.segment">
+            <field name="edi_id">CNT</field>
+            <field name="label">Container</field>
+        </record>
+        <record id="unit_description_edi_segment_CNX" model="unit.description.edi.segment">
+            <field name="edi_id">CNX</field>
+            <field name="label">CONEX - Container Express (8x8x8-foot military container)</field>
+        </record>
+        <record id="unit_description_edi_segment_COL" model="unit.description.edi.segment">
+            <field name="edi_id">COL</field>
+            <field name="label">Coil</field>
+        </record>
+        <record id="unit_description_edi_segment_CON" model="unit.description.edi.segment">
+            <field name="edi_id">CON</field>
+            <field name="label">Cones</field>
+        </record>
+        <record id="unit_description_edi_segment_COR" model="unit.description.edi.segment">
+            <field name="edi_id">COR</field>
+            <field name="label">Core</field>
+        </record>
+        <record id="unit_description_edi_segment_CRD" model="unit.description.edi.segment">
+            <field name="edi_id">CRD</field>
+            <field name="label">Cradle</field>
+        </record>
+        <record id="unit_description_edi_segment_CRT" model="unit.description.edi.segment">
+            <field name="edi_id">CRT</field>
+            <field name="label">Crate</field>
+        </record>
+        <record id="unit_description_edi_segment_CSK" model="unit.description.edi.segment">
+            <field name="edi_id">CSK</field>
+            <field name="label">Cask</field>
+        </record>
+        <record id="unit_description_edi_segment_CTN" model="unit.description.edi.segment">
+            <field name="edi_id">CTN</field>
+            <field name="label">Carton</field>
+        </record>
+        <record id="unit_description_edi_segment_CUB" model="unit.description.edi.segment">
+            <field name="edi_id">CUB</field>
+            <field name="label">Cube - Box with a flexible bladder interior</field>
+        </record>
+        <record id="unit_description_edi_segment_CYL" model="unit.description.edi.segment">
+            <field name="edi_id">CYL</field>
+            <field name="label">Cylinder</field>
+        </record>
+        <record id="unit_description_edi_segment_DBK" model="unit.description.edi.segment">
+            <field name="edi_id">DBK</field>
+            <field name="label">Dry Bulk</field>
+        </record>
+        <record id="unit_description_edi_segment_DRK" model="unit.description.edi.segment">
+            <field name="edi_id">DRK</field>
+            <field name="label">Double-length Rack</field>
+        </record>
+        <record id="unit_description_edi_segment_DRM" model="unit.description.edi.segment">
+            <field name="edi_id">DRM</field>
+            <field name="label">Drum - Cylindrical large container with removable or sealed top</field>
+        </record>
+        <record id="unit_description_edi_segment_DSK" model="unit.description.edi.segment">
+            <field name="edi_id">DSK</field>
+            <field name="label">Double-length Skid</field>
+        </record>
+        <record id="unit_description_edi_segment_DTB" model="unit.description.edi.segment">
+            <field name="edi_id">DTB</field>
+            <field name="label">Double-length Tote Bin</field>
+        </record>
+        <record id="unit_description_edi_segment_DUF" model="unit.description.edi.segment">
+            <field name="edi_id">DUF</field>
+            <field name="label">Duffle Bag</field>
+        </record>
+        <record id="unit_description_edi_segment_ENV" model="unit.description.edi.segment">
+            <field name="edi_id">ENV</field>
+            <field name="label">Envelope</field>
+        </record>
+        <record id="unit_description_edi_segment_FIR" model="unit.description.edi.segment">
+            <field name="edi_id">FIR</field>
+            <field name="label">Firkin</field>
+        </record>
+        <record id="unit_description_edi_segment_FLO" model="unit.description.edi.segment">
+            <field name="edi_id">FLO</field>
+            <field name="label">Flo-bin</field>
+        </record>
+        <record id="unit_description_edi_segment_FLX" model="unit.description.edi.segment">
+            <field name="edi_id">FLX</field>
+            <field name="label">Liner Bag Liquid - A rubber liner used in a standard container for liquid material</field>
+        </record>
+        <record id="unit_description_edi_segment_FRM" model="unit.description.edi.segment">
+            <field name="edi_id">FRM</field>
+            <field name="label">Frame</field>
+        </record>
+        <record id="unit_description_edi_segment_FSK" model="unit.description.edi.segment">
+            <field name="edi_id">FSK</field>
+            <field name="label">Flask</field>
+        </record>
+        <record id="unit_description_edi_segment_FWR" model="unit.description.edi.segment">
+            <field name="edi_id">FWR</field>
+            <field name="label">Forward Reel</field>
+        </record>
+        <record id="unit_description_edi_segment_GOH" model="unit.description.edi.segment">
+            <field name="edi_id">GOH</field>
+            <field name="label">Garments on Hangers</field>
+        </record>
+        <record id="unit_description_edi_segment_HED" model="unit.description.edi.segment">
+            <field name="edi_id">HED</field>
+            <field name="label">Heads of Beef</field>
+        </record>
+        <record id="unit_description_edi_segment_HGH" model="unit.description.edi.segment">
+            <field name="edi_id">HGH</field>
+            <field name="label">Hogshead</field>
+        </record>
+        <record id="unit_description_edi_segment_HPR" model="unit.description.edi.segment">
+            <field name="edi_id">HPR</field>
+            <field name="label">Hamper</field>
+        </record>
+        <record id="unit_description_edi_segment_HPT" model="unit.description.edi.segment">
+            <field name="edi_id">HPT</field>
+            <field name="label">Hopper Truck</field>
+        </record>
+        <record id="unit_description_edi_segment_HRB" model="unit.description.edi.segment">
+            <field name="edi_id">HRB</field>
+            <field name="label">On Hanger or Rack in Boxes</field>
+        </record>
+        <record id="unit_description_edi_segment_HRK" model="unit.description.edi.segment">
+            <field name="edi_id">HRK</field>
+            <field name="label">Half-standard Rack</field>
+        </record>
+        <record id="unit_description_edi_segment_HTB" model="unit.description.edi.segment">
+            <field name="edi_id">HTB</field>
+            <field name="label">Half-Standard Tote Bin</field>
+        </record>
+        <record id="unit_description_edi_segment_JAR" model="unit.description.edi.segment">
+            <field name="edi_id">JAR</field>
+            <field name="label">Jar</field>
+        </record>
+        <record id="unit_description_edi_segment_JUG" model="unit.description.edi.segment">
+            <field name="edi_id">JUG</field>
+            <field name="label">Jug - A bottle (usually 1/2 gallon or larger) fitted with a handle</field>
+        </record>
+        <record id="unit_description_edi_segment_KEG" model="unit.description.edi.segment">
+            <field name="edi_id">KEG</field>
+            <field name="label">Keg</field>
+        </record>
+        <record id="unit_description_edi_segment_KIT" model="unit.description.edi.segment">
+            <field name="edi_id">KIT</field>
+            <field name="label">Kit</field>
+        </record>
+        <record id="unit_description_edi_segment_KRK" model="unit.description.edi.segment">
+            <field name="edi_id">KRK</field>
+            <field name="label">Knockdown Rack</field>
+        </record>
+        <record id="unit_description_edi_segment_KTB" model="unit.description.edi.segment">
+            <field name="edi_id">KTB</field>
+            <field name="label">Knockdown Tote Bin</field>
+        </record>
+        <record id="unit_description_edi_segment_LBK" model="unit.description.edi.segment">
+            <field name="edi_id">LBK</field>
+            <field name="label">Liquid Bulk</field>
+        </record>
+        <record id="unit_description_edi_segment_LIF" model="unit.description.edi.segment">
+            <field name="edi_id">LIF</field>
+            <field name="label">Lifts</field>
+        </record>
+        <record id="unit_description_edi_segment_LOG" model="unit.description.edi.segment">
+            <field name="edi_id">LOG</field>
+            <field name="label">Log</field>
+        </record>
+        <record id="unit_description_edi_segment_LSE" model="unit.description.edi.segment">
+            <field name="edi_id">LSE</field>
+            <field name="label">Loose</field>
+        </record>
+        <record id="unit_description_edi_segment_LUG" model="unit.description.edi.segment">
+            <field name="edi_id">LUG</field>
+            <field name="label">Lug</field>
+        </record>
+        <record id="unit_description_edi_segment_LVN" model="unit.description.edi.segment">
+            <field name="edi_id">LVN</field>
+            <field name="label">Lift Van</field>
+        </record>
+        <record id="unit_description_edi_segment_MLV" model="unit.description.edi.segment">
+            <field name="edi_id">MLV</field>
+            <field name="label">MILVAN - Military Van - A 20-foot transportation van that conforms to ISO standards</field>
+        </record>
+        <record id="unit_description_edi_segment_MRP" model="unit.description.edi.segment">
+            <field name="edi_id">MRP</field>
+            <field name="label">Multi-Roll Pack</field>
+        </record>
+        <record id="unit_description_edi_segment_MSV" model="unit.description.edi.segment">
+            <field name="edi_id">MSV</field>
+            <field name="label">MSCVAN - Military Sealift Command Van - A 35-foot transportation van</field>
+        </record>
+        <record id="unit_description_edi_segment_MXD" model="unit.description.edi.segment">
+            <field name="edi_id">MXD</field>
+            <field name="label">Mixed Type Pack</field>
+        </record>
+        <record id="unit_description_edi_segment_NOL" model="unit.description.edi.segment">
+            <field name="edi_id">NOL</field>
+            <field name="label">Noil</field>
+        </record>
+        <record id="unit_description_edi_segment_OVW" model="unit.description.edi.segment">
+            <field name="edi_id">OVW</field>
+            <field name="label">Overwrap - A cardboard bottom is put down on a pallet; the bags are stacked in layers; the top of the cardboard slides down over the bags to meet the bottom; if any of the bags tear, the product always stays inside the cardboard</field>
+        </record>
+        <record id="unit_description_edi_segment_PAL" model="unit.description.edi.segment">
+            <field name="edi_id">PAL</field>
+            <field name="label">Pail</field>
+        </record>
+        <record id="unit_description_edi_segment_PCK" model="unit.description.edi.segment">
+            <field name="edi_id">PCK</field>
+            <field name="label">Packed - not otherwise specified</field>
+        </record>
+        <record id="unit_description_edi_segment_PCS" model="unit.description.edi.segment">
+            <field name="edi_id">PCS</field>
+            <field name="label">Pieces</field>
+        </record>
+        <record id="unit_description_edi_segment_PIR" model="unit.description.edi.segment">
+            <field name="edi_id">PIR</field>
+            <field name="label">Pims</field>
+        </record>
+        <record id="unit_description_edi_segment_PKG" model="unit.description.edi.segment">
+            <field name="edi_id">PKG</field>
+            <field name="label">Package</field>
+        </record>
+        <record id="unit_description_edi_segment_PLF" model="unit.description.edi.segment">
+            <field name="edi_id">PLF</field>
+            <field name="label">Platform</field>
+        </record>
+        <record id="unit_description_edi_segment_PLL" model="unit.description.edi.segment">
+            <field name="edi_id">PLL</field>
+            <field name="label">463L Air Pallet</field>
+        </record>
+        <record id="unit_description_edi_segment_PLN" model="unit.description.edi.segment">
+            <field name="edi_id">PLN</field>
+            <field name="label">Pipeline</field>
+        </record>
+        <record id="unit_description_edi_segment_PLT" model="unit.description.edi.segment">
+            <field name="edi_id">PLT</field>
+            <field name="label">Pallet</field>
+        </record>
+        <record id="unit_description_edi_segment_POV" model="unit.description.edi.segment">
+            <field name="edi_id">POV</field>
+            <field name="label">Private Vehicle</field>
+        </record>
+        <record id="unit_description_edi_segment_PRK" model="unit.description.edi.segment">
+            <field name="edi_id">PRK</field>
+            <field name="label">Pipe Rack</field>
+        </record>
+        <record id="unit_description_edi_segment_QTR" model="unit.description.edi.segment">
+            <field name="edi_id">QTR</field>
+            <field name="label">Quarter of Beef</field>
+        </record>
+        <record id="unit_description_edi_segment_RAL" model="unit.description.edi.segment">
+            <field name="edi_id">RAL</field>
+            <field name="label">Rail (Semiconductor)</field>
+        </record>
+        <record id="unit_description_edi_segment_RCK" model="unit.description.edi.segment">
+            <field name="edi_id">RCK</field>
+            <field name="label">Rack</field>
+        </record>
+        <record id="unit_description_edi_segment_REL" model="unit.description.edi.segment">
+            <field name="edi_id">REL</field>
+            <field name="label">Reel</field>
+        </record>
+        <record id="unit_description_edi_segment_ROL" model="unit.description.edi.segment">
+            <field name="edi_id">ROL</field>
+            <field name="label">Roll</field>
+        </record>
+        <record id="unit_description_edi_segment_RVR" model="unit.description.edi.segment">
+            <field name="edi_id">RVR</field>
+            <field name="label">Reverse Reel</field>
+        </record>
+        <record id="unit_description_edi_segment_SAK" model="unit.description.edi.segment">
+            <field name="edi_id">SAK</field>
+            <field name="label">Sack</field>
+        </record>
+        <record id="unit_description_edi_segment_SBC" model="unit.description.edi.segment">
+            <field name="edi_id">SBC</field>
+            <field name="label">Liner Bag Dry - A plastic liner used in container designed for the carriage of dry free-flowing material</field>
+        </record>
+        <record id="unit_description_edi_segment_SCS" model="unit.description.edi.segment">
+            <field name="edi_id">SCS</field>
+            <field name="label">Suitcase</field>
+        </record>
+        <record id="unit_description_edi_segment_SHK" model="unit.description.edi.segment">
+            <field name="edi_id">SHK</field>
+            <field name="label">Shook</field>
+        </record>
+        <record id="unit_description_edi_segment_SHT" model="unit.description.edi.segment">
+            <field name="edi_id">SHT</field>
+            <field name="label">Sheet</field>
+        </record>
+        <record id="unit_description_edi_segment_SID" model="unit.description.edi.segment">
+            <field name="edi_id">SID</field>
+            <field name="label">Side of Beef</field>
+        </record>
+        <record id="unit_description_edi_segment_SKD" model="unit.description.edi.segment">
+            <field name="edi_id">SKD</field>
+            <field name="label">Skid</field>
+        </record>
+        <record id="unit_description_edi_segment_SKE" model="unit.description.edi.segment">
+            <field name="edi_id">SKE</field>
+            <field name="label">Skid, elevating or lift truck</field>
+        </record>
+        <record id="unit_description_edi_segment_SLP" model="unit.description.edi.segment">
+            <field name="edi_id">SLP</field>
+            <field name="label">Slip Sheet - Shipping containers utilizing slip sheets, which are cardboard platforms used to hold product for storage or transportation</field>
+        </record>
+        <record id="unit_description_edi_segment_SLV" model="unit.description.edi.segment">
+            <field name="edi_id">SLV</field>
+            <field name="label">Sleeve</field>
+        </record>
+        <record id="unit_description_edi_segment_SPI" model="unit.description.edi.segment">
+            <field name="edi_id">SPI</field>
+            <field name="label">Spin Cylinders</field>
+        </record>
+        <record id="unit_description_edi_segment_SPL" model="unit.description.edi.segment">
+            <field name="edi_id">SPL</field>
+            <field name="label">Spool</field>
+        </record>
+        <record id="unit_description_edi_segment_SVN" model="unit.description.edi.segment">
+            <field name="edi_id">SVN</field>
+            <field name="label">SEAVAN - Sea Van - A commercial or military 40-foot transportation container that conforms to ISO standards</field>
+        </record>
+        <record id="unit_description_edi_segment_TBE" model="unit.description.edi.segment">
+            <field name="edi_id">TBE</field>
+            <field name="label">Tube</field>
+        </record>
+        <record id="unit_description_edi_segment_TBN" model="unit.description.edi.segment">
+            <field name="edi_id">TBN</field>
+            <field name="label">Tote Bin</field>
+        </record>
+        <record id="unit_description_edi_segment_TKR" model="unit.description.edi.segment">
+            <field name="edi_id">TKR</field>
+            <field name="label">Tank Car</field>
+        </record>
+        <record id="unit_description_edi_segment_TKT" model="unit.description.edi.segment">
+            <field name="edi_id">TKT</field>
+            <field name="label">Tank Truck</field>
+        </record>
+        <record id="unit_description_edi_segment_TLD" model="unit.description.edi.segment">
+            <field name="edi_id">TLD</field>
+            <field name="label">Intermodal Trailer/Container Load (Rail)</field>
+        </record>
+        <record id="unit_description_edi_segment_TNK" model="unit.description.edi.segment">
+            <field name="edi_id">TNK</field>
+            <field name="label">Tank</field>
+        </record>
+        <record id="unit_description_edi_segment_TRC" model="unit.description.edi.segment">
+            <field name="edi_id">TRC</field>
+            <field name="label">Tierce</field>
+        </record>
+        <record id="unit_description_edi_segment_TRI" model="unit.description.edi.segment">
+            <field name="edi_id">TRI</field>
+            <field name="label">Triwall Box - A sturdy box made of three-ply cardboard</field>
+        </record>
+        <record id="unit_description_edi_segment_TRK" model="unit.description.edi.segment">
+            <field name="edi_id">TRK</field>
+            <field name="label">Trunk and Chest</field>
+        </record>
+        <record id="unit_description_edi_segment_TRU" model="unit.description.edi.segment">
+            <field name="edi_id">TRU</field>
+            <field name="label">Truck</field>
+        </record>
+        <record id="unit_description_edi_segment_TRY" model="unit.description.edi.segment">
+            <field name="edi_id">TRY</field>
+            <field name="label">Tray</field>
+        </record>
+        <record id="unit_description_edi_segment_TSS" model="unit.description.edi.segment">
+            <field name="edi_id">TSS</field>
+            <field name="label">Trunk, Salesmen Sample</field>
+        </record>
+        <record id="unit_description_edi_segment_TTC" model="unit.description.edi.segment">
+            <field name="edi_id">TTC</field>
+            <field name="label">Tote Can - A reusable stainless steel container with handles; used for liquid material</field>
+        </record>
+        <record id="unit_description_edi_segment_TUB" model="unit.description.edi.segment">
+            <field name="edi_id">TUB</field>
+            <field name="label">Tub</field>
+        </record>
+        <record id="unit_description_edi_segment_UNP" model="unit.description.edi.segment">
+            <field name="edi_id">UNP</field>
+            <field name="label">Unpacked</field>
+        </record>
+        <record id="unit_description_edi_segment_UNT" model="unit.description.edi.segment">
+            <field name="edi_id">UNT</field>
+            <field name="label">Unit</field>
+        </record>
+        <record id="unit_description_edi_segment_VEH" model="unit.description.edi.segment">
+            <field name="edi_id">VEH</field>
+            <field name="label">Vehicles</field>
+        </record>
+        <record id="unit_description_edi_segment_VPK" model="unit.description.edi.segment">
+            <field name="edi_id">VPK</field>
+            <field name="label">Van Pack</field>
+        </record>
+        <record id="unit_description_edi_segment_WHE" model="unit.description.edi.segment">
+            <field name="edi_id">WHE</field>
+            <field name="label">On Own Wheel</field>
+        </record>
+        <record id="unit_description_edi_segment_WLC" model="unit.description.edi.segment">
+            <field name="edi_id">WLC</field>
+            <field name="label">Wheeled Carrier</field>
+        </record>
+        <record id="unit_description_edi_segment_WRP" model="unit.description.edi.segment">
+            <field name="edi_id">WRP</field>
+            <field name="label">Wrapped</field>
+        </record>
+
+        <!-- Model: weight.rate.charges.edi.segment -->
+        <record id="weight_rate_charges_edi_segment_A" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A</field>
+            <field name="label">Consolidated Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_A1" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A1</field>
+            <field name="label">Dimensional Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_A2" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A2</field>
+            <field name="label">Reweighed By Carrier</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_A3" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A3</field>
+            <field name="label">Shippers Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_A4" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A4</field>
+            <field name="label">Average Weight per Load</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_A5" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A5</field>
+            <field name="label">Average Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_A6" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">A6</field>
+            <field name="label">SOLAS (Safety of Life at Sea) Verified Container Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_B" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">B</field>
+            <field name="label">Billed Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_C" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">C</field>
+            <field name="label">Actual Net Repeated for Combination</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_CD" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">CD</field>
+            <field name="label">Chargeable Dunnage - The weight of material used to protect material in transit for which a charge is paid</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_CE" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">CE</field>
+            <field name="label">Certified Weight of Cargo</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_D" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">D</field>
+            <field name="label">Destination Weight Agreement</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_DR" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">DR</field>
+            <field name="label">Drained Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_E" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">E</field>
+            <field name="label">Estimated Net Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_F" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">F</field>
+            <field name="label">Deficit Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_FR" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">FR</field>
+            <field name="label">Freight Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_G" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">G</field>
+            <field name="label">Gross Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_H" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">H</field>
+            <field name="label">Weight Per 100 Feet</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_I" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">I</field>
+            <field name="label">Weight Per 1000 Feet</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_J" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">J</field>
+            <field name="label">Light Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_K" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">K</field>
+            <field name="label">Clean Out</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_L" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">L</field>
+            <field name="label">Legal Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_LC" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">LC</field>
+            <field name="label">Maximum Lading Capacity</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_M" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">M</field>
+            <field name="label">Minimum Weight (for rate)</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_N" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">N</field>
+            <field name="label">Actual Net Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_ND" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">ND</field>
+            <field name="label">Nonchargeable Dunnage - The weight of material used to protect material in transit for which there is no charge</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_NI" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">NI</field>
+            <field name="label">Non-Temporary Storage Weight In</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_NR" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">NR</field>
+            <field name="label">Non-Temporary Storage Weight Re-handled</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_NT" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">NT</field>
+            <field name="label">Non-Temporary Storage Weight Out</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_O" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">O</field>
+            <field name="label">Excess Weight Over Maximum</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_P" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">P</field>
+            <field name="label">Weight Per 100 Units</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_PA" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">PA</field>
+            <field name="label">Pallet Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_Q" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">Q</field>
+            <field name="label">Weight Per 1000 Units</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_R" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">R</field>
+            <field name="label">Per Unit Dunnage</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_RG" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">RG</field>
+            <field name="label">Reweigh Gross Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_RN" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">RN</field>
+            <field name="label">Reweigh Net Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_RT" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">RT</field>
+            <field name="label">Reweigh Tare Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_S" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">S</field>
+            <field name="label">State Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_SF" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">SF</field>
+            <field name="label">Storage in Transit Final Weight Out</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_SI" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">SI</field>
+            <field name="label">Storage in Transit Weight in</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_SK" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">SK</field>
+            <field name="label">Skid Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_SO" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">SO</field>
+            <field name="label">Storage in Transit Weight Out</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_T" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">T</field>
+            <field name="label">Tare Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_U" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">U</field>
+            <field name="label">Weight Per Unit</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_V" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">V</field>
+            <field name="label">Non Transit Weight (On Transit Bills Only)</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_W" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">W</field>
+            <field name="label">Transit Weight (On Transit Bills Only)</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_WA" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">WA</field>
+            <field name="label">Administrative Weight Allowance</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_WB" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">WB</field>
+            <field name="label">Unaccompanied Baggage Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_WG" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">WG</field>
+            <field name="label">Professional Gear Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_WJ" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">WJ</field>
+            <field name="label">Joint Travel Regulation Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_WX" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">WX</field>
+            <field name="label">Net Explosive Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_X" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">X</field>
+            <field name="label">Maximum Weight (for Rate)</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_Y" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">Y</field>
+            <field name="label">Theoretical Weight</field>
+        </record>
+        <record id="weight_rate_charges_edi_segment_Z" model="weight.rate.charges.edi.segment">
+            <field name="edi_id">Z</field>
+            <field name="label">Mutually Defined</field>
+        </record>
+
+        <!-- Model: scheduling.edi.segment -->
+        <record id="scheduling_edi_segment_appointment_required" model="scheduling.edi.segment">
+            <field name="edi_id">Appointment Required</field>
+            <field name="label">Appointment Required</field>
+        </record>
+        <record id="scheduling_edi_segment_eta_required" model="scheduling.edi.segment">
+            <field name="edi_id">ETA Required</field>
+            <field name="label">ETA Required</field>
+        </record>
+        <record id="scheduling_edi_segment_fcfs" model="scheduling.edi.segment">
+            <field name="edi_id">FCFS</field>
+            <field name="label">First Come, First Served (FCFS)</field>
+        </record>
+        <record id="scheduling_edi_segment_other" model="scheduling.edi.segment">
+            <field name="edi_id">OTH</field>
+            <field name="label">Other</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="group_restrict_accounting_details" model="res.groups">
+        <field name="name">Restrict Accounting Details</field>
+    </record>
+
+    <record id="group_manage_credit_limit" model="res.groups">
+        <field name="name">Manage Credit Limit</field>
+    </record>
+
+     <record id="group_manage_company_create" model="res.groups">
+        <field name="name">Company Create</field>
+    </record>
+
+    <!--    <record id="make_invisible_menuitem" model="res.groups">-->
+    <!--        <field name="name">Invisible Menu</field>-->
+    <!--    </record>-->
+
+    <record id="default_account_visible" model="res.groups">
+        <field name="name">Specific User Group For Default account</field>
+        <field name="category_id" ref="base.module_category_accounting"/>
+    </record>
+
+    <record model="ir.module.category" id="module_category_optimize">
+        <field name="name">Optimize Superuser</field>
+    </record>
+
+    <record id="group_optimize_admin" model="res.groups">
+        <field name="name">Optimize Superuser</field>
+        <field name="category_id" ref="accounting_extend.module_category_optimize"/>
+    </record>
+</odoo>

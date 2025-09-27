@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_report_remittance_table" model="ir.actions.report">
+        <field name="name">Remittance Table</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">tms_journal_checkbook.report_remittance_table</field>
+        <field name="report_file">tms_journal_checkbook.report_remittance_table</field>
+        <field name="binding_model_id" ref="model_account_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

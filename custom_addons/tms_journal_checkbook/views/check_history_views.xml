@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2015-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : https://store.webkul.com/license.html/ -->
+<odoo>
+    <data>
+        <!-- views and menus -->
+        <record id="bank_check_history_view_form" model="ir.ui.view">
+            <field name="name">bank.check.history.form.view</field>
+            <field name="model">issued.bank.check.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="print_check" string="Print Check" icon="fa-print" type="object" invisible="state in ['cancelled', 'printed']"/>
+                        <button name="re_print_check" string="Re-Print Check" icon="fa-print" type="object"  invisible="state in ['cancelled']"/>
+                        <button name="do_cancel_check" string="Cancel now" icon="fa-times" type="object" invisible="state == 'cancelled'"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="id" invisible="1"/>
+                        <group>
+                            <group>
+                                <field name="bank_check_book_id" invisible="1"/>
+                                <field name="check_number" readonly="issued"/>
+                                <field name="paid_to"  readonly="issued"/>
+                                <field name="customer_id"  readonly="issued"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="issue_date"  readonly="issued"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="issued" readonly="1"/>
+                                <field name="payment_id" readonly="1"/>
+                                <field name="batch_id" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Remittance Table" name="remittance_table">
+                                <field name="remittance_table_ids" readonly="1">
+                                    <tree string="Remittance Table">
+                                        <field name="invoice_date"/>
+                                        <field name="move_id"/>
+                                        <field name="amount_total"/>
+                                        <field name="payment_amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bank_check_history_view_tree" model="ir.ui.view">
+            <field name="name">bank.check.history.tree.view</field>
+            <field name="model">issued.bank.check.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id" invisible="1" column_invisible="1"/>
+                    <field name="bank_check_book_id" invisible="1" column_invisible="1"/>
+                    <field name="check_number" readonly="issued" required="1"/>
+                    <field name="state" readonly="1" invisible="0"/>
+                    <field name="paid_to" readonly="issued" required="1"/>
+                    <field name="issue_date" readonly="issued" required="1"/>
+                    <field name="amount" widget="monetary" readonly="issued" required="1"/>
+                    <field name="currency_id" invisible="1" readonly="issued" column_invisible="1"/>
+                    <field name="issued" readonly="1" invisible="1" column_invisible="1"/>
+                    <button name="print_check" string="Print Check" icon="fa-print" type="object" invisible="state in ['cancelled', 'printed']"/>
+                    <button name="re_print_check" string="Re-Print Check" icon="fa-print" type="object"  invisible="state in ['cancelled']"/>
+                    <button name="do_cancel_check" string="Cancel now" icon="fa-times" type="object" invisible="state == 'cancelled'"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- actions -->
+        <record id="bank_check_history_action" model="ir.actions.act_window">
+            <field name="name">Checks</field>
+            <field name="res_model">issued.bank.check.history</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

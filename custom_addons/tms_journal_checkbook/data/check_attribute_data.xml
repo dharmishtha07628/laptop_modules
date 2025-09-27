@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="attribute_remittance_table_ids" model="bank.check.attribute">
+            <field name="name">Remittance Table</field>
+            <field name="attribute">remittance_table_ids</field>
+        </record>
+
+        <record id="attribute_check_number" model="bank.check.attribute">
+            <field name="name">Check Number</field>
+            <field name="attribute">check_number</field>
+        </record>
+
+        <record id="attribute_company_address_label" model="bank.check.attribute">
+            <field name="name">Company Address</field>
+            <field name="attribute">company_address</field>
+            <field name="demo_data">Company Address</field>
+        </record>
+        <record id="attribute_company_name_label" model="bank.check.attribute">
+            <field name="name">Company Name</field>
+            <field name="attribute">company_name</field>
+            <field name="demo_data">Company Name</field>
+        </record>
+         <record id="attribute_signature_label" model="bank.check.attribute">
+            <field name="name">Signature</field>
+            <field name="attribute">signature</field>
+            <field name="demo_data">Signature</field>
+        </record>
+          <record id="attribute_date_label" model="bank.check.attribute">
+            <field name="name">Date Label</field>
+            <field name="attribute">date_label</field>
+            <field name="demo_data">Date Label</field>
+        </record>
+        <record id="attribute_order_label" model="bank.check.attribute">
+            <field name="name">Order Label</field>
+            <field name="attribute">order_label</field>
+            <field name="demo_data">Order Label</field>
+        </record>
+         <record id="attribute_vendor_address_line_1_label" model="bank.check.attribute">
+            <field name="name">Address Line 1</field>
+            <field name="attribute">address_line_1</field>
+            <field name="demo_data">Address Line 1</field>
+        </record>
+
+        <record id="attribute_vendor_address_line_2_label" model="bank.check.attribute">
+            <field name="name">Address Line 2</field>
+            <field name="attribute">address_line_2</field>
+            <field name="demo_data">Address Line 2</field>
+        </record>
+        <record id="attribute_vendor_address_line_3_label" model="bank.check.attribute">
+            <field name="name">Address Line 3</field>
+            <field name="attribute">address_line_3</field>
+            <field name="demo_data">Address Line 3</field>
+        </record>
+
+          <record id="attribute_under_line_1_label" model="bank.check.attribute">
+            <field name="name">Under Line </field>
+            <field name="attribute">underline</field>
+            <field name="demo_data">________________________</field>
+        </record>
+
+
+    </data>
+</odoo>

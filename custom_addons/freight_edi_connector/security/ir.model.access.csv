@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_edi_order,access.edi.order,model_edi_order,base.group_user,1,1,1,1
+access_edi_order_notes,access.edi.order.notes,model_edi_order_notes,base.group_user,1,1,1,1
+access_edi_contact,access.edi.contact,model_edi_contact,base.group_user,1,1,1,1
+access_edi_location,access.edi.location,model_edi_location,base.group_user,1,1,1,1
+access_edi_order_reference,access.edi.order.reference,model_edi_order_reference,base.group_user,1,1,1,1
+access_edi_order_stops,access.edi.order.stops,model_edi_order_stops,base.group_user,1,1,1,1
+access_edi_order_summary,access.edi.order.summary,model_edi_order_summary,base.group_user,1,1,1,1
+access_edi_stop_detail,access.edi.stop.detail,model_edi_stop_detail,base.group_user,1,1,1,1

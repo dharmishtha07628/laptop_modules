@@ -1,0 +1,8 @@
+"id","name","code","type","currency_id:id","default_account_id:id","suspense_account_id:id"
+"customer_invoice_journal","Customer Invoices","INV","sale","","chart_of_account_custom.income",""
+"vendor_bill_journal","Vendor Bills","BILL","purchase","","chart_of_account_custom.expense",""
+"miscellaneous_operations_journal","Journal Entry","JE","miscellaneous","","",""
+"exchange_difference_journal","Exchange Difference","EXCH","miscellaneous","","",""
+"cash_basis_tax_journal","Cash Basis Taxes","CABA","miscellaneous","","",""
+"bank_journal","Bank","BNK1","bank","","chart_of_account_custom.bank_account",chart_of_account_custom.bank_suspense_account
+"cash_journal","Cash","CSH1","cash","","chart_of_account_custom.cash",chart_of_account_custom.bank_suspense_account

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="tms_settings.template_tms_settings" owl="1">
+        <div class="container-fluid p-5 overflow-y-scroll h-100">
+            <div class="header-body">
+                <h1><t t-esc="state.infos.display_name"/></h1>
+
+                <div class="row  pt-3 w-150">
+                    <t t-foreach="state.infos.setting_main_menu" t-key="main_menu.id" t-as="main_menu">
+                        <div class="col-md-3 pt-4">
+                            <h3><t t-esc="main_menu.name"/></h3>
+
+                            <t t-foreach="main_menu.setting_sub_menu" t-key="sub_menu.id" t-as="sub_menu">
+                                <div>
+                                    <span>
+                                        <button class="btn" type="action" role="alert"
+                                                t-att-data-action-id="sub_menu.xml_id"
+                                                t-att-data-action-name="sub_menu.name" t-on-click="call_action">
+                                            <t t-esc="sub_menu.name"/>
+                                        </button>
+                                    </span>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

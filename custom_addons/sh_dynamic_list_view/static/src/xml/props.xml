@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+    <t
+        t-name="sh_view_manager.Listcontroller"
+        t-inherit="web.ListView"
+        t-inherit-mode="extension"
+        owl="1">
+
+        <xpath expr="//t[@t-component='props.Renderer']" position="attributes">
+            <attribute name="sh_update_field_data.bind">sh_update_field_data</attribute>
+            <attribute name="sh_initialize_lvm_data.bind">sh_initialize_lvm_data</attribute>
+            <attribute name="list_data">list_data</attribute>
+
+        </xpath>
+    </t>
+</template>
